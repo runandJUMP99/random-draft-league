@@ -1,27 +1,40 @@
-import React, {useState} from "react";
-import {useDispatch} from "react-redux";
+import React, {useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
 
 import {Button, Paper, TextField, Typography} from "@material-ui/core";
 import FileBase from "react-file-base64";
 
 import classes from "./AddSelection.module.css";
-import {addSelection} from "../../../store/actions/selections";
+import {addSelection, editSelection} from "../../../store/actions/selections";
 
-const AddSelection = () => {
+const AddSelection = ({selectionId, setSelectionId}) => {
     const [selectionData, setSelectionData] = useState({
         name: "",
         description: "",
         img: ""
     });
+    const selection = useSelector(state => selectionId ? state.selections.find(s => s.id === selectionId) : null);
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        if (selection) {
+            setSelectionData(selection);
+        }
+    }, [selection]);
     
     function handleSubmit(event) {
         event.preventDefault();
-        dispatch(addSelection(selectionData));
+
+        if (selectionId) {
+            dispatch(editSelection(selectionId, selectionData));
+        } else {
+            dispatch(addSelection(selectionData));
+        }
         clear();
     }
 
     function clear() {
+        setSelectionId(null);
         setSelectionData({
             name: "",
             description: "",

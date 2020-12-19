@@ -7,7 +7,7 @@ export default (selections = [], action) => {
         case actionTypes.GET_SELECTIONS:
             return action.payload;
         case actionTypes.EDIT_SELECTION:
-            return;
+            return selections.map(selection => selection.id === action.payload.id ? action.payload : selection);
         case actionTypes.DELETE_SELECTION:
             return;   
         default:
