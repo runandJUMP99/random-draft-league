@@ -32,13 +32,43 @@ export const getSelections = () => async(dispatch) => {
     } catch(err) {
         console.log(err);
     }
-}
+};
 
 export const editSelection = (id, selection) => async(dispatch) => {
     try {
         const {data} = await api.editSelection(id, selection);
 
         dispatch({type: actionTypes.EDIT_SELECTION, payload: data});
+    } catch(err) {
+        console.log(err);
+    }
+};
+
+export const deleteSelection = (id) => (dispatch) => {
+    try {
+        api.deleteSelection(id);
+
+        dispatch({type: actionTypes.DELETE_SELECTION, payload: id});
+    } catch(err) {
+        console.log(err);
+    }
+};
+
+export const deleteSelections = (selections) => (dispatch) => {
+    try {
+        selections.forEach(selection => {
+            api.deleteSelection(selection.id);
+        });
+
+        dispatch({type: actionTypes.DELETE_SELECTIONS});
+    } catch(err) {
+        console.log(err);
+    }
+};
+
+export const setSelectionId = (id) => (dispatch) => {
+    try {
+        dispatch({type: actionTypes.SET_SELECTION_ID, payload: id});
     } catch(err) {
         console.log(err);
     }

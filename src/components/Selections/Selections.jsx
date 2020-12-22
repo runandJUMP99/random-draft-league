@@ -1,15 +1,13 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 
-import AddSelection from "./AddSelection/AddSelection";
 import Selection from "./Selection/Selection";
 
 import classes from "./Selections.module.css";
 import {getSelections} from "../../store/actions/selections";
 
-const Selections = () => {
-    const [selectionId, setSelectionId] = useState("");
-    const selections = useSelector(state => state.selections);
+const Selections = ({showModal, handleSelection}) => {
+    const selections = useSelector(state => state.selections.selections);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -18,9 +16,14 @@ const Selections = () => {
 
     return (
         <div className={classes.Selections}>
-            <AddSelection selectionId={selectionId} setSelectionId={setSelectionId} />
             {selections.map(selection => (
-                <Selection key={selection.id} selectionData={selection} setSelectionId={setSelectionId} />
+                <div key={selection.id} onClick={() => handleSelection(selection.id)}>
+                    <Selection 
+                        selectionData={selection} 
+                        showModal={showModal}
+                        handleSelection={handleSelection}
+                    />
+                </div>
             ))}
         </div>
     );

@@ -1,16 +1,43 @@
 import * as actionTypes from "../actions/actionTypes";
 
-export default (selections = [], action) => {
+const initialState = {
+    selections: [],
+    setSelectionId: null
+}
+
+export default (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.ADD_SELECTION:
-            return [...selections, action.payload]; 
+            return {
+                ...state,
+                selections: [...state.selections, action.payload]
+            }; 
         case actionTypes.GET_SELECTIONS:
-            return action.payload;
+            return {
+                ...state,
+                selections: action.payload
+            };
         case actionTypes.EDIT_SELECTION:
-            return selections.map(selection => selection.id === action.payload.id ? action.payload : selection);
+            return {
+                ...state,
+                selections: state.selections.map(selection => selection.id === action.payload.id ? action.payload : selection)
+            };
         case actionTypes.DELETE_SELECTION:
-            return;   
+            return {
+                ...state,
+                selections: state.selections.filter(selection => selection.id !== action.payload)
+            };   
+        case actionTypes.DELETE_SELECTIONS:
+            return {
+                selections: [],
+                setSelectionId: null
+            };   
+        case actionTypes.SET_SELECTION_ID:
+            return {
+                ...state,
+                setSelectionId: action.payload
+            }
         default:
-            return selections;
+            return state;
     }
 }

@@ -5,20 +5,25 @@ import {Button, Paper, TextField, Typography} from "@material-ui/core";
 import FileBase from "react-file-base64";
 
 import classes from "./AddSelection.module.css";
-import {addSelection, editSelection} from "../../../store/actions/selections";
+import {addSelection, editSelection, setSelectionId} from "../../store/actions/selections";
 
-const AddSelection = ({selectionId, setSelectionId}) => {
+const AddSelection = ({setShowModal}) => {
     const [selectionData, setSelectionData] = useState({
         name: "",
         description: "",
         img: ""
     });
-    const selection = useSelector(state => selectionId ? state.selections.find(s => s.id === selectionId) : null);
+    const selectionId = useSelector(state => state.selections.setSelectionId);
+    const selection = useSelector(state => {
+        return selectionId && state.selections.selections.find(s => s.id === selectionId);
+    });
     const dispatch = useDispatch();
 
     useEffect(() => {
         if (selection) {
             setSelectionData(selection);
+        } else {
+            clear();
         }
     }, [selection]);
     
@@ -30,11 +35,13 @@ const AddSelection = ({selectionId, setSelectionId}) => {
         } else {
             dispatch(addSelection(selectionData));
         }
+
+        setShowModal(null);
         clear();
     }
 
     function clear() {
-        setSelectionId(null);
+        dispatch(setSelectionId(null));
         setSelectionData({
             name: "",
             description: "",
