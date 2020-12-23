@@ -2,4 +2,39 @@
     background: darkblue;
     color: white;
     height: 100vh;
+    overflow: hidden;
+}
+
+.Button {
+    align-items: center;
+    background: #020264;
+    border-radius: 50%;
+    bottom: 1.5rem;
+    cursor: pointer;
+    display: inline-block;
+    left: 50%;
+    margin: auto;
+    padding: 1rem;
+    position: fixed;
+    transition: all 0.3s ease-out;
+    transform: translateX(-50%);
+}
+
+.AddButton {
+    align-items: center;
+    background: #020264;
+    border-radius: 50%;
+    bottom: 1.5rem;
+    cursor: pointer;
+    display: inline-block;
+    margin: auto;
+    padding: 1rem;
+    position: fixed;
+    right: 1.5rem;
+    transition: all 0.3s ease-out;
+}
+
+.Button:hover,
+.AddButton:hover {
+    box-shadow: 0 0 8px 4px rgba(0, 0, 0, 0.3) inset;
 }

@@ -22,10 +22,12 @@ export const getSelections = () => async(dispatch) => {
         const {data} = await api.getSelections();
 
         for (let key in data) {
-            fetchedSelections.push({
-                ...data[key],
-                id: key
-            });
+            if (key !== "chart") {
+                fetchedSelections.push({
+                    ...data[key],
+                    id: key
+                });
+            }
         }
         
         dispatch({type: actionTypes.GET_SELECTIONS, payload: fetchedSelections});

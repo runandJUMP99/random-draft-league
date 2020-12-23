@@ -52,7 +52,7 @@ const AddSelection = ({setShowModal}) => {
     return (
         <Paper className={classes.Paper}>
             <form autoComplete="off" className={classes.Form} noValidate onSubmit={handleSubmit}>
-                <Typography variant="h6">Heading</Typography>
+                <Typography align="center" variant="h6">Add Entry</Typography>
                 <TextField 
                     fullWidth 
                     label="Name" 

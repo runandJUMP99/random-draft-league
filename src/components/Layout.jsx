@@ -1,6 +1,10 @@
 import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 
+import AddIcon from '@material-ui/icons/Add';
+import CallToActionIcon from '@material-ui/icons/CallToAction';
+import TableChartIcon from '@material-ui/icons/TableChart';
+
 import AddSelection from "./AddSelection/AddSelection";
 import Backdrop from "./UI/Backdrop/Backdrop";
 import Board from "./Board/Board";
@@ -9,12 +13,13 @@ import Modal from "./UI/Modal/Modal";
 import Selection from "./Selections/Selection/Selection";
 
 import classes from "./Layout.module.css";
-import {deleteSelections, setSelectionId} from "../store/actions/selections";
+import {setSelectionId} from "../store/actions/selections";
+import {addToChart} from "../store/actions/chart";
 
 const Layout = () => {
     const [showModal, setShowModal] = useState(false);
     const [modalContent, setModalContent] = useState(null);
-    const [chart, setChart] = useState([]);
+    const [display, setDisplay] = useState(true)
     const selections = useSelector(state => state.selections.selections);
     const dispatch = useDispatch();
 
@@ -35,8 +40,12 @@ const Layout = () => {
     function lockInSelection(id) {
         const newSelection = selections.find(selection => selection.id === id);
 
-        setChart(prevChart => [...prevChart, newSelection]);
+        dispatch(addToChart(newSelection));
         setShowModal(false);
+    }
+
+    function handleDisplay() {
+        setDisplay(prevDisplay => !prevDisplay);
     }
 
     return (
@@ -45,10 +54,18 @@ const Layout = () => {
             <Modal showModal={showModal}>
                 {modalContent}
             </Modal>
-            <Board handleSelection={handleSelection} />
-            <Chart chart={chart} />
-            <button className={classes.Button} onClick={handleAddSelection}>Add Selection</button>
-            <button onClick={() => dispatch(deleteSelections(selections))}>Clear Board</button>
+            <div style={{transform: !display && "translateX(-100%", transition: "all 0.75s ease-in-out"}}>
+                <Board handleAddSelection={handleAddSelection} handleSelection={handleSelection} selections={selections} /> 
+            </div>
+            <div style={{transform: display && "translateX(100%", transition: "all 0.75s ease-in-out"}}>
+                <Chart />
+            </div>
+            {
+                display 
+                    ? <span className={classes.Button} onClick={handleDisplay}><CallToActionIcon fontSize="large" /></span> 
+                    : <span className={classes.Button} onClick={handleDisplay}><TableChartIcon fontSize="large" /></span>
+            }
+            <span className={classes.AddButton} onClick={handleAddSelection}><AddIcon fontSize="large" /></span>
         </div>
     );
 }

@@ -1,15 +1,15 @@
-import React, {useState} from "react";
+import React from "react";
 
 import Players from "./Players/Players";
 import Rounds from "./Rounds/Rounds";
 
 import classes from "./Chart.module.css";
 
-const Chart = ({chart}) => {
+const Chart = () => {
     return (
         <div className={classes.Chart}>
             <Players />
-            <Rounds chart={chart} />
+            <Rounds />
         </div>
     );
 }

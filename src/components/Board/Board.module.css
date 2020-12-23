@@ -4,3 +4,11 @@
     box-shadow: 0 0 8px 4px rgba(0, 0, 0, 0.5);
     margin: 1rem auto;
 }
+
+.Buttons {
+    text-align: center;
+}
+
+.Buttons button {
+    margin: 1rem;
+}

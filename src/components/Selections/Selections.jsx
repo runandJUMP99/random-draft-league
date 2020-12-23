@@ -13,11 +13,11 @@ const Selections = ({showModal, handleSelection}) => {
     useEffect(() => {
         dispatch(getSelections());
     }, [dispatch]);
-
+    
     return (
         <div className={classes.Selections}>
             {selections.map(selection => (
-                <div key={selection.id} onClick={() => handleSelection(selection.id)}>
+                <div className={classes.Selection} key={selection.id} onClick={() => handleSelection(selection.id)}>
                     <Selection 
                         selectionData={selection} 
                         showModal={showModal}

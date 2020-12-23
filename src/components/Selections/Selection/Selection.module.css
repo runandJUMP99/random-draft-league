@@ -3,18 +3,25 @@
     border-radius: 8px;
     box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.5);
     cursor: pointer;
-    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+    padding: 0.25rem;
     transition: all 0.5s ease-out;
+    width: 8rem;
 }
 
 .Selection:hover {
     box-shadow: 0 0 8px 4px rgba(0, 0, 0, 0.5);
 }
 
-.Selection h3 {
+.Selection h3,
+.Selection p {
     margin: 0;
 }
 
 .Selection img {
+    margin: 1rem auto;
     width: 4rem;
 }

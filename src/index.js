@@ -7,9 +7,11 @@ import thunk from "redux-thunk";
 import './index.css';
 import App from './App';
 
+import chartReducer from "./store/reducers/chart";
 import selectionsReducer from "./store/reducers/selections";
 
 const reducers = combineReducers({
+  chart: chartReducer,
   selections: selectionsReducer
 });
 
