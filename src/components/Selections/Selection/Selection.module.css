@@ -1,19 +1,21 @@
 .Selection {
-    border: 2px solid #eee;
+    background: #585757;
+    border: 1px solid #eee;
     border-radius: 8px;
-    box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 12px 6px rgba(0, 0, 0, 0.5) inset;
     cursor: pointer;
     display: flex;
     flex-direction: column;
     height: 100%;
     justify-content: space-between;
-    padding: 0.25rem;
+    padding: 0.5rem;
+    text-align: center;
     transition: all 0.5s ease-out;
     width: 8rem;
 }
 
 .Selection:hover {
-    box-shadow: 0 0 8px 4px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 16px 8px rgba(0, 0, 0, 0.7) inset;
 }
 
 .Selection h3,
@@ -22,6 +24,28 @@
 }
 
 .Selection img {
-    margin: 1rem auto;
-    width: 4rem;
+    box-shadow: 0 1px 4px 2px rgba(0, 0, 0, 0.5);
+    margin: 0.5rem auto;
+    width: 50%;
+}
+
+.EditDeleteButtons {
+    bottom: 2.25rem;
+    position: absolute;
+    right: 2.5rem;
+}
+
+.LockIn {
+    background: #19c519;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 2rem;
+    margin-bottom: 3rem;
+    padding: 0.5rem 1rem;
+    transition: all 0.25s ease-out;
+}
+
+.LockIn:hover {
+    background: #0d970d;
 }

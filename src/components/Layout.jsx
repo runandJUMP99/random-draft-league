@@ -8,6 +8,7 @@ import TableChartIcon from '@material-ui/icons/TableChart';
 import AddSelection from "./AddSelection/AddSelection";
 import Backdrop from "./UI/Backdrop/Backdrop";
 import Board from "./Board/Board";
+import Button from "./UI/Button/Button";
 import Chart from "./Chart/Chart";
 import Modal from "./UI/Modal/Modal";
 import Selection from "./Selections/Selection/Selection";
@@ -55,17 +56,29 @@ const Layout = () => {
                 {modalContent}
             </Modal>
             <div style={{transform: !display && "translateX(-100%", transition: "all 0.75s ease-in-out"}}>
-                <Board handleAddSelection={handleAddSelection} handleSelection={handleSelection} selections={selections} /> 
+                <Board 
+                    handleAddSelection={handleAddSelection} 
+                    handleSelection={handleSelection} 
+                    selections={selections} 
+                    setModalContent={setModalContent} 
+                    setShowModal={setShowModal} 
+                /> 
             </div>
             <div style={{transform: display && "translateX(100%", transition: "all 0.75s ease-in-out"}}>
-                <Chart />
+                <Chart setModalContent={setModalContent} setShowModal={setShowModal}/>
             </div>
             {
                 display 
-                    ? <span className={classes.Button} onClick={handleDisplay}><CallToActionIcon fontSize="large" /></span> 
-                    : <span className={classes.Button} onClick={handleDisplay}><TableChartIcon fontSize="large" /></span>
+                    ? <Button onClick={handleDisplay} style={{left: "50%", transform: "translateX(-50%)"}}>
+                        <CallToActionIcon fontSize="large" />
+                    </Button> 
+                    : <Button onClick={handleDisplay} style={{left: "50%", transform: "translateX(-50%)"}}>
+                        <TableChartIcon fontSize="large" />
+                    </Button>
             }
-            <span className={classes.AddButton} onClick={handleAddSelection}><AddIcon fontSize="large" /></span>
+            <Button onClick={handleAddSelection} style={{right: "1.5rem"}}>
+                <AddIcon fontSize="large" />
+            </Button>
         </div>
     );
 }

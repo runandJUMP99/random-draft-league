@@ -8,10 +8,12 @@ import './index.css';
 import App from './App';
 
 import chartReducer from "./store/reducers/chart";
+import playersReducer from "./store/reducers/players";
 import selectionsReducer from "./store/reducers/selections";
 
 const reducers = combineReducers({
   chart: chartReducer,
+  players: playersReducer,
   selections: selectionsReducer
 });
 

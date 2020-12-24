@@ -9,3 +9,8 @@ export const ADD_TO_CHART = "ADD_TO_CHART";
 export const GET_CHART = "GET_CHART";
 export const REMOVE_FROM_CHART = "REMOVE_FROM_CHART";
 export const CLEAR_CHART = "CLEAR_CHART";
+
+export const ADD_PLAYER = "ADD_PLAYER";
+export const GET_PLAYERS = "GET_PLAYERS";
+export const REMOVE_PLAYER = "REMOVE_PLAYER";
+export const CLEAR_PLAYERS = "CLEAR_PLAYERS";

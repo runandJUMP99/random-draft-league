@@ -2,13 +2,17 @@
     border: 4px solid #ccc;
     border-radius: 8px;
     box-shadow: 0 0 8px 4px rgba(0, 0, 0, 0.5);
-    margin: 1rem auto;
+    left: 50%;
+    position: absolute;
+    top: 2rem;
+    transform: translateX(-50%);
+    width: 90%;
 }
 
-.Buttons {
+.Button {
     text-align: center;
 }
 
-.Buttons button {
+.Button button {
     margin: 1rem;
 }
