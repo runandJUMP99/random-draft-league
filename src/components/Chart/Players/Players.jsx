@@ -13,7 +13,7 @@ const Players = ({setModalContent, setShowModal}) => {
     
     useEffect(() => {
         dispatch(getPlayers());
-    }, []);
+    }, [dispatch]);
     
     function handleAddPlayer() {
         setModalContent(<AddPlayer setShowModal={setShowModal} />);
@@ -24,7 +24,12 @@ const Players = ({setModalContent, setShowModal}) => {
         <div className={classes.Players}>
             <h2>Players</h2>
             {players.map(player => (
-                <Player key={player.playerId} name={player.name} />
+                <Player 
+                    key={player.playerId} 
+                    player={player} 
+                    setModalContent={setModalContent} 
+                    setShowModal={setShowModal} 
+                />
             ))}
             <button onClick={handleAddPlayer}>Add Player</button>
         </div>

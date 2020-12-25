@@ -7,7 +7,7 @@ export default (players = [], action) => {
         case actionTypes.GET_PLAYERS:
             return action.payload;
         case actionTypes.REMOVE_PLAYER:
-            return players.filter(player => player.id !== action.payload);
+            return players.filter(player => player.playerId !== action.payload);
         case actionTypes.CLEAR_PLAYERS:
             return [];
         default:

@@ -21,9 +21,12 @@ const Layout = () => {
     const [showModal, setShowModal] = useState(false);
     const [modalContent, setModalContent] = useState(null);
     const [display, setDisplay] = useState(true)
+    const [playerTurn, setPlayerTurn] = useState(0);
+    const [forward, setForward] = useState(true);
+    const players = useSelector(state => state.players);
     const selections = useSelector(state => state.selections.selections);
     const dispatch = useDispatch();
-
+    
     function handleAddSelection() {
         setModalContent(<AddSelection setShowModal={setShowModal} />);           
         dispatch(setSelectionId(null));
@@ -40,9 +43,25 @@ const Layout = () => {
     
     function lockInSelection(id) {
         const newSelection = selections.find(selection => selection.id === id);
+        const playerId = players[playerTurn].playerId;
 
-        dispatch(addToChart(newSelection));
+        if (forward) {            
+            if (playerTurn === players.length - 1) {
+                setForward(false);
+            } else {
+                setPlayerTurn(prevTurn => prevTurn + 1);
+            }
+        } else {
+            if (playerTurn === 0) {
+                setForward(true);
+            } else {
+                setPlayerTurn(prevTurn => prevTurn - 1);                
+            }
+        }
+
+        dispatch(addToChart(playerId, newSelection));
         setShowModal(false);
+        handleDisplay();
     }
 
     function handleDisplay() {

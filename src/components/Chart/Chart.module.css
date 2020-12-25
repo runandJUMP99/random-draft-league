@@ -1,8 +1,11 @@
 .Chart {
+    background: #eee;
+    color: black;
     display: flex;
-    justify-content: space-around;
     left: 50%;
+    padding: 1rem;
     position: absolute;
     top: 2rem;
     transform: translateX(-50%);
+    width: 95%;
 }

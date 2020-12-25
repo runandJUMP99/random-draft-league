@@ -22,7 +22,7 @@ export const getSelections = () => async(dispatch) => {
         const {data} = await api.getSelections();
 
         for (let key in data) {
-            if (key !== "chart") {
+            if (key !== "chart" && key !== "players") {
                 fetchedSelections.push({
                     ...data[key],
                     id: key
