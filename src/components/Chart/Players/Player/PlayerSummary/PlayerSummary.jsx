@@ -1,0 +1,23 @@
+import React from "react";
+import {useSelector} from "react-redux";
+
+import Selection from "../../../../Selections/Selection/Selection";
+
+import classes from "./PlayerSummary.module.css";
+
+const PlayerSummary = ({player}) => {
+    const chart = useSelector(state => state.chart);
+    const playerSummary = chart.filter(selection => selection.player === player.playerId);
+    console.log(playerSummary);
+
+    return (
+        <div className={classes.PlayerSummary}>
+            <h3>{player.name}</h3>
+            {playerSummary.map(selection => (
+                <Selection key={selection.chartId} selectionData={selection} />
+            ))}
+        </div>
+    );
+}
+
+export default PlayerSummary;

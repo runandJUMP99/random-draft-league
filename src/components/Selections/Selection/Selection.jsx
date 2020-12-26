@@ -12,15 +12,18 @@ import {deleteSelection} from "../../../store/actions/selections";
 const Selection = ({selectionData, showModal, lockInSelection}) => {
     const dispatch = useDispatch();
     const description = selectionData.description || "";
-    console.log()
     const truncatedDescription = description.length > 8 ? description.substring(0, 8) + "..." : description;
+    const selectedStyles = {
+        background: selectionData.isSelected && "#444343",
+        boxShadow: selectionData.isSelected && "0 0 0 0",
+        color: selectionData.isSelected && "ccc",
+        cursor: showModal && "initial",
+        height: showModal && "100%",
+        width: showModal && "100%"
+    };
 
     return (
-        <div className={classes.Selection} style={{
-            cursor: showModal && "initial",
-            height: showModal && "100%",
-            width: showModal && "100%"
-        }}>
+        <div className={classes.Selection} style={selectedStyles}>
             <h3>{selectionData.name}</h3>
             <img src={selectionData.img} alt="Selection"/>
             <p>{showModal ? description : truncatedDescription}</p>

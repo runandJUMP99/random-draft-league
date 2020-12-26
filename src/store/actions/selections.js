@@ -7,7 +7,8 @@ export const addSelection = (selection) => async(dispatch) => {
 
         const newSelection = {
             ...selection,
-            id: data.name
+            id: data.name,
+            isSelected: false
         }
         
         dispatch({type: actionTypes.ADD_SELECTION, payload: newSelection});

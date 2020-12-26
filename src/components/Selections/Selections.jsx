@@ -7,8 +7,32 @@ import classes from "./Selections.module.css";
 import {getSelections} from "../../store/actions/selections";
 
 const Selections = ({showModal, handleSelection}) => {
-    const selections = useSelector(state => state.selections.selections);
     const dispatch = useDispatch();
+    let selections = useSelector(state => state.selections.selections);
+    let selectedSelections = selections.filter(selection => selection.isSelected);
+    let notSelectedSelections = selections.filter(selection => !selection.isSelected);
+
+    selectedSelections.sort((a, b) => {
+        if (a.name < b.name) {
+            return -1;
+        } else if (a.name > b.name) {
+            return 1;
+        } else {
+            return 0;
+        }
+    });
+
+    notSelectedSelections.sort((a, b) => {
+        if (a.name < b.name) {
+            return -1;
+        } else if (a.name > b.name) {
+            return 1;
+        } else {
+            return 0;
+        }
+    });
+
+    selections = notSelectedSelections.concat(selectedSelections);
 
     useEffect(() => {
         dispatch(getSelections());
@@ -21,7 +45,6 @@ const Selections = ({showModal, handleSelection}) => {
                     <Selection 
                         selectionData={selection} 
                         showModal={showModal}
-                        handleSelection={handleSelection}
                     />
                 </div>
             ))}

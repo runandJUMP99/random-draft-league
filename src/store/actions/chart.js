@@ -1,14 +1,13 @@
 import * as actionTypes from "../actions/actionTypes";
 import * as api from "./api";
 
-export const addToChart = (playerId, selection) => async(dispatch) => {
+export const addToChart = (selection) => async(dispatch) => {
     try {
         const {data} = await api.addToChart(selection);
         
         const newSelection = {
             ...selection,
-            chartId: data.name,
-            player: playerId
+            chartId: data.name
         }
         
         dispatch({type: actionTypes.ADD_TO_CHART, payload: newSelection});

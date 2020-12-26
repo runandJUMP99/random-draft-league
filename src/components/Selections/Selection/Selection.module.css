@@ -1,8 +1,8 @@
 .Selection {
     background: #585757;
-    border: 1px solid #eee;
+    border: 2px solid #eee;
     border-radius: 8px;
-    box-shadow: 0 0 12px 6px rgba(0, 0, 0, 0.5) inset;
+    box-shadow: 0 2px 0 6px #585757;
     color: white;
     cursor: pointer;
     display: flex;
@@ -16,7 +16,8 @@
 }
 
 .Selection:hover {
-    box-shadow: 0 0 16px 8px rgba(0, 0, 0, 0.7) inset;
+    background: #444343;
+    box-shadow: 0 2px 0 6px #444343;
 }
 
 .Selection h3,

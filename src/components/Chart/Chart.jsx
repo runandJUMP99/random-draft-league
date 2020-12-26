@@ -5,11 +5,11 @@ import Rounds from "./Rounds/Rounds";
 
 import classes from "./Chart.module.css";
 
-const Chart = ({setModalContent, setShowModal}) => {
+const Chart = ({handleSelection, setModalContent, setShowModal}) => {
     return (
         <div className={classes.Chart}>
             <Players setModalContent={setModalContent} setShowModal={setShowModal} />
-            <Rounds />
+            <Rounds handleSelection={handleSelection} />
         </div>
     );
 }

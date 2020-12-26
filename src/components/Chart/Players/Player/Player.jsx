@@ -4,11 +4,17 @@ import DeleteIcon from '@material-ui/icons/Delete';
 
 import Button from "../../../UI/Button/Button";
 import ConfirmDelete from "../../../UI/ConfirmDelete/ConfirmDelete";
+import PlayerSummary from "./PlayerSummary/PlayerSummary";
 
 import classes from "./Player.module.css";
 
 const Player = ({player, setModalContent, setShowModal}) => {
     function handleClick() {
+        setModalContent(<PlayerSummary player={player} />);
+        setShowModal(true);
+    }
+
+    function handleDelete() {
         setModalContent(
             <ConfirmDelete 
                 item="player" 
@@ -20,9 +26,9 @@ const Player = ({player, setModalContent, setShowModal}) => {
     }
 
     return (
-        <div className={classes.Player}>
+        <div className={classes.Player} onClick={handleClick}>
             {player.name}
-            <Button onClick={handleClick} style={{
+            <Button onClick={handleDelete} style={{
                 background: "#b9b8b8",
                 margin: "0.25rem",
                 padding: "0.5rem",

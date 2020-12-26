@@ -31,7 +31,7 @@ const Players = ({setModalContent, setShowModal}) => {
                     setShowModal={setShowModal} 
                 />
             ))}
-            <button onClick={handleAddPlayer}>Add Player</button>
+            {/* <button onClick={handleAddPlayer}>Add Player</button> */}
         </div>
     );
 }

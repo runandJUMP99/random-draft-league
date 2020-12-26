@@ -16,6 +16,7 @@ import Selection from "./Selections/Selection/Selection";
 import classes from "./Layout.module.css";
 import {setSelectionId} from "../store/actions/selections";
 import {addToChart} from "../store/actions/chart";
+import {editSelection} from "../store/actions/selections";
 
 const Layout = () => {
     const [showModal, setShowModal] = useState(false);
@@ -42,8 +43,14 @@ const Layout = () => {
     }
     
     function lockInSelection(id) {
-        const newSelection = selections.find(selection => selection.id === id);
         const playerId = players[playerTurn].playerId;
+        let newSelection = selections.find(selection => selection.id === id);
+
+        newSelection = {
+            ...newSelection,
+            isSelected: true,
+            player: playerId
+        }
 
         if (forward) {            
             if (playerTurn === players.length - 1) {
@@ -59,7 +66,8 @@ const Layout = () => {
             }
         }
 
-        dispatch(addToChart(playerId, newSelection));
+        dispatch(addToChart(newSelection));
+        dispatch(editSelection(newSelection.id, newSelection))
         setShowModal(false);
         handleDisplay();
     }
@@ -84,7 +92,11 @@ const Layout = () => {
                 /> 
             </div>
             <div style={{transform: display && "translateX(100%", transition: "all 0.75s ease-in-out"}}>
-                <Chart setModalContent={setModalContent} setShowModal={setShowModal}/>
+                <Chart 
+                    handleSelection={handleSelection}
+                    setModalContent={setModalContent} 
+                    setShowModal={setShowModal}
+                />
             </div>
             {
                 display 
