@@ -26,13 +26,16 @@ const Player = ({player, setModalContent, setShowModal}) => {
     }
 
     return (
-        <div className={classes.Player} onClick={handleClick}>
-            {player.name}
+        <div className={classes.Container}>
+            <div className={classes.Player} onClick={handleClick}>
+                {player.name}
+            </div>
             <Button onClick={handleDelete} style={{
                 background: "#b9b8b8",
                 margin: "0.25rem",
-                padding: "0.5rem",
-                position: "initial"
+                padding: "0.3rem 0.25rem 0.2rem",
+                position: "absolute",
+                right: 0
             }}>
                 <DeleteIcon fontSize="small" />
             </Button>

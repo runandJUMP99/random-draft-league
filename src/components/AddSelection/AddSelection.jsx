@@ -17,9 +17,7 @@ const AddSelection = ({setShowModal}) => {
         img: ""
     });
     const selectionId = useSelector(state => state.selections.setSelectionId);
-    const selection = useSelector(state => {
-        return selectionId && state.selections.selections.find(s => s.id === selectionId);
-    });
+    const selection = useSelector(state => selectionId && state.selections.selections.find(s => s.id === selectionId));
     const dispatch = useDispatch();
 
     useEffect(() => {

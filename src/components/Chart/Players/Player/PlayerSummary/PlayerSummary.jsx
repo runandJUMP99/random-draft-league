@@ -13,9 +13,11 @@ const PlayerSummary = ({player}) => {
     return (
         <div className={classes.PlayerSummary}>
             <h3>{player.name}</h3>
-            {playerSummary.map(selection => (
-                <Selection key={selection.chartId} selectionData={selection} />
-            ))}
+            <div className={classes.Selections}>
+                {playerSummary.map(selection => (
+                    <Selection key={selection.chartId} selectionData={selection} />
+                ))}
+            </div>
         </div>
     );
 }

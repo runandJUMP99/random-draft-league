@@ -8,11 +8,3 @@
     transform: translateX(-50%);
     width: 90%;
 }
-
-.Button {
-    text-align: center;
-}
-
-.Button button {
-    margin: 1rem;
-}

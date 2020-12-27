@@ -1,0 +1,8 @@
+.Players {
+    background: #ccc;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0.25rem;
+    width: 12rem;
+}

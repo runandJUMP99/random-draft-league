@@ -1,3 +1,11 @@
+.Container {
+    cursor: pointer;
+    position: relative;
+}
+
 .Player {
+    border: 1px solid black;
     height: 135px;
+    margin: 0.25rem 0;
+    padding: 0.5rem;
 }

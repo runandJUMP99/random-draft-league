@@ -1,17 +1,15 @@
 import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 
-import AddIcon from '@material-ui/icons/Add';
-import CallToActionIcon from '@material-ui/icons/CallToAction';
-import TableChartIcon from '@material-ui/icons/TableChart';
-
+import AddPlayer from "./Chart/Players/AddPlayer/AddPlayer";
 import AddSelection from "./AddSelection/AddSelection";
 import Backdrop from "./UI/Backdrop/Backdrop";
 import Board from "./Board/Board";
-import Button from "./UI/Button/Button";
 import Chart from "./Chart/Chart";
+import Controls from "./Controls/Controls";
 import Modal from "./UI/Modal/Modal";
 import Selection from "./Selections/Selection/Selection";
+import Timer from "./Timer/Timer";
 
 import classes from "./Layout.module.css";
 import {setSelectionId} from "../store/actions/selections";
@@ -28,9 +26,13 @@ const Layout = () => {
     const selections = useSelector(state => state.selections.selections);
     const dispatch = useDispatch();
     
-    function handleAddSelection() {
+    function handleAddSelection(edit) {
         setModalContent(<AddSelection setShowModal={setShowModal} />);           
-        dispatch(setSelectionId(null));
+
+        if (!edit) {
+            dispatch(setSelectionId(null));
+        }
+        
         setShowModal(true);
     }
     
@@ -39,7 +41,14 @@ const Layout = () => {
         
         dispatch(setSelectionId(id));
         setShowModal(true);
-        setModalContent(<Selection lockInSelection={lockInSelection} selectionData={selectionData[0]} showModal={!showModal}/>);
+        setModalContent(
+            <Selection 
+                handleAddSelection={handleAddSelection}
+                lockInSelection={lockInSelection} 
+                selectionData={selectionData[0]} 
+                showModal={!showModal} 
+            />
+        );
     }
     
     function lockInSelection(id) {
@@ -71,6 +80,11 @@ const Layout = () => {
         setShowModal(false);
         handleDisplay();
     }
+ 
+    function handleAddPlayer() {
+        setModalContent(<AddPlayer setShowModal={setShowModal} />);
+        setShowModal(true);
+    }
 
     function handleDisplay() {
         setDisplay(prevDisplay => !prevDisplay);
@@ -78,6 +92,7 @@ const Layout = () => {
 
     return (
         <div className={classes.Layout}>
+            <div className={classes.Background}></div>
             <Backdrop showModal={showModal} setShowModal={setShowModal} />
             <Modal showModal={showModal}>
                 {modalContent}
@@ -98,18 +113,13 @@ const Layout = () => {
                     setShowModal={setShowModal}
                 />
             </div>
-            {
-                display 
-                    ? <Button onClick={handleDisplay} style={{left: "50%", transform: "translateX(-50%)"}}>
-                        <CallToActionIcon fontSize="large" />
-                    </Button> 
-                    : <Button onClick={handleDisplay} style={{left: "50%", transform: "translateX(-50%)"}}>
-                        <TableChartIcon fontSize="large" />
-                    </Button>
-            }
-            <Button onClick={handleAddSelection} style={{right: "1.5rem"}}>
-                <AddIcon fontSize="large" />
-            </Button>
+            <Controls 
+                display={display} 
+                handleDisplay={handleDisplay} 
+                handleAddSelection={handleAddSelection}
+                handleAddPlayer= {handleAddPlayer} 
+            />
+            <Timer />
         </div>
     );
 }

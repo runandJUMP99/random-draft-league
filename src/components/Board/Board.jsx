@@ -21,9 +21,14 @@ const Board = ({handleSelection, selections, setModalContent, setShowModal}) => 
     return (
         <div className={classes.Board}>
             <Selections handleSelection={handleSelection} />
-            <div className={classes.Button}>
-                <Button onClick={handleClick} style={{position: "initial"}}><DeleteSweepIcon /></Button>
-            </div>
+            <Button onClick={handleClick} style={{
+                bottom: "0.25rem",
+                left: "0.25rem",
+                padding: "0.5rem",
+                position: "absolute"
+            }}>
+                <DeleteSweepIcon fontSize="small" />
+            </Button>
         </div>
     );
 }

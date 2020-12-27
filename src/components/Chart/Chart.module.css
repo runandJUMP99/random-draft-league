@@ -3,9 +3,9 @@
     color: black;
     display: flex;
     left: 50%;
+    margin: 2rem 0;
     padding: 1rem;
     position: absolute;
-    top: 2rem;
     transform: translateX(-50%);
     width: 95%;
 }

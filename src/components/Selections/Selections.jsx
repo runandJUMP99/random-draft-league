@@ -12,6 +12,10 @@ const Selections = ({showModal, handleSelection}) => {
     let selectedSelections = selections.filter(selection => selection.isSelected);
     let notSelectedSelections = selections.filter(selection => !selection.isSelected);
 
+    useEffect(() => {
+        dispatch(getSelections());
+    }, [dispatch]);
+
     selectedSelections.sort((a, b) => {
         if (a.name < b.name) {
             return -1;
@@ -33,10 +37,6 @@ const Selections = ({showModal, handleSelection}) => {
     });
 
     selections = notSelectedSelections.concat(selectedSelections);
-
-    useEffect(() => {
-        dispatch(getSelections());
-    }, [dispatch]);
     
     return (
         <div className={classes.Selections}>

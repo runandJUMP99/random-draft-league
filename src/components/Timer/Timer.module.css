@@ -1,0 +1,24 @@
+.Timer {
+    bottom: 0;
+    left: 0;
+    opacity: 0.6;
+    position: fixed;
+    transition: all 0.5s ease-out;
+}
+
+.Timer:hover {
+    opacity: 1;
+}
+
+.Time {
+    background: #1b1b1b;
+    padding: 0.25rem;
+    text-align: center;
+    width: 104px;
+}
+
+.TimerPaused {
+    background: lightgreen;
+    cursor: pointer;
+    padding: 0.25rem;
+}

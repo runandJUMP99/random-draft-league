@@ -1,14 +1,13 @@
 .Selection {
     background: #585757;
-    border: 2px solid #eee;
-    border-radius: 8px;
-    box-shadow: 0 2px 0 6px #585757;
+    box-shadow: 0 2px 0 3px #444343;
     color: white;
     cursor: pointer;
     display: flex;
     flex-direction: column;
     height: 135px;
     justify-content: space-between;
+    margin: 0.25rem 0;
     padding: 0.5rem;
     text-align: center;
     transition: all 0.5s ease-out;
@@ -28,13 +27,14 @@
 .Selection img {
     box-shadow: 0 1px 4px 2px rgba(0, 0, 0, 0.5);
     margin: 0.5rem auto;
+    overflow: hidden;
     width: 50%;
 }
 
 .EditDeleteButtons {
-    bottom: 2.25rem;
+    bottom: 1.75rem;
     position: absolute;
-    right: 2.5rem;
+    right: 2rem;
 }
 
 .LockIn {
@@ -43,7 +43,7 @@
     color: white;
     cursor: pointer;
     font-size: 2rem;
-    margin-bottom: 3rem;
+    margin: 1rem;
     padding: 0.5rem 1rem;
     transition: all 0.25s ease-out;
 }

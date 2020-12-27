@@ -1,7 +1,6 @@
 import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 
-import AddPlayer from "./AddPlayer/AddPlayer";
 import Player from "./Player/Player";
 
 import classes from "./Players.module.css";
@@ -14,11 +13,6 @@ const Players = ({setModalContent, setShowModal}) => {
     useEffect(() => {
         dispatch(getPlayers());
     }, [dispatch]);
-    
-    function handleAddPlayer() {
-        setModalContent(<AddPlayer setShowModal={setShowModal} />);
-        setShowModal(true);
-    }
 
     return (
         <div className={classes.Players}>
@@ -31,7 +25,6 @@ const Players = ({setModalContent, setShowModal}) => {
                     setShowModal={setShowModal} 
                 />
             ))}
-            {/* <button onClick={handleAddPlayer}>Add Player</button> */}
         </div>
     );
 }
