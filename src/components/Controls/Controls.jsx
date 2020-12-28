@@ -13,10 +13,10 @@ const Controls = ({display, handleDisplay, handleAddSelection, handleAddPlayer})
     return (
         <div className={classes.Controls}>
             {display 
-                ? <Button onClick={handleDisplay} style={{left: "50%", transform: "translateX(-50%)"}}>
+                ? <Button onClick={handleDisplay} style={{right: "5.5rem"}}>
                     <CallToActionIcon fontSize="large" />
                 </Button> 
-                : <Button onClick={handleDisplay} style={{left: "50%", transform: "translateX(-50%)"}}>
+                : <Button onClick={handleDisplay} style={{right: "5.5rem"}}>
                     <TableChartIcon fontSize="large" />
                 </Button>
             }

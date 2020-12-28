@@ -32,7 +32,7 @@ const Timer = () => {
     return (
         <div className={classes.Timer} onClick={() => setStartTimer(true)}>
             {!startTimer
-                ? <h1 className={classes.TimerPaused}>START</h1>
+                ? <h1 className={classes.TimerPaused}>START DRAFT</h1>
                 : <h1 className={classes.Time}>{minutes} : {seconds < 10 ? String(seconds).padStart(2, "0") : seconds}</h1>
             }
         </div>

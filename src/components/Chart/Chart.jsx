@@ -9,7 +9,7 @@ const Chart = ({handleSelection, setModalContent, setShowModal}) => {
     return (
         <div className={classes.Chart}>
             <Players setModalContent={setModalContent} setShowModal={setShowModal} />
-            <Rounds handleSelection={handleSelection} />
+            <Rounds handleSelection={handleSelection} setModalContent={setModalContent} setShowModal={setShowModal} />
         </div>
     );
 }

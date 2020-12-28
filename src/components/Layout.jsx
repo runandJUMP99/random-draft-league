@@ -10,6 +10,7 @@ import Controls from "./Controls/Controls";
 import Modal from "./UI/Modal/Modal";
 import Selection from "./Selections/Selection/Selection";
 import Timer from "./Timer/Timer";
+import Webcam from "./Webcam/Webcam";
 
 import classes from "./Layout.module.css";
 import {setSelectionId} from "../store/actions/selections";
@@ -17,11 +18,12 @@ import {addToChart} from "../store/actions/chart";
 import {editSelection} from "../store/actions/selections";
 
 const Layout = () => {
-    const [showModal, setShowModal] = useState(false);
-    const [modalContent, setModalContent] = useState(null);
     const [display, setDisplay] = useState(true)
+    const [modalContent, setModalContent] = useState(null);
+    const [showModal, setShowModal] = useState(false);
     const [playerTurn, setPlayerTurn] = useState(0);
     const [forward, setForward] = useState(true);
+    const [round, setRound] = useState(1);
     const players = useSelector(state => state.players);
     const selections = useSelector(state => state.selections.selections);
     const dispatch = useDispatch();
@@ -58,17 +60,20 @@ const Layout = () => {
         newSelection = {
             ...newSelection,
             isSelected: true,
-            player: playerId
+            player: playerId,
+            roundSelected: round
         }
 
         if (forward) {            
             if (playerTurn === players.length - 1) {
+                setRound(prevRound => prevRound + 1);
                 setForward(false);
             } else {
                 setPlayerTurn(prevTurn => prevTurn + 1);
             }
         } else {
             if (playerTurn === 0) {
+                setRound(prevRound => prevRound + 1);
                 setForward(true);
             } else {
                 setPlayerTurn(prevTurn => prevTurn - 1);                
@@ -101,7 +106,6 @@ const Layout = () => {
                 <Board 
                     handleAddSelection={handleAddSelection} 
                     handleSelection={handleSelection} 
-                    selections={selections} 
                     setModalContent={setModalContent} 
                     setShowModal={setShowModal} 
                 /> 
@@ -119,6 +123,7 @@ const Layout = () => {
                 handleAddSelection={handleAddSelection}
                 handleAddPlayer= {handleAddPlayer} 
             />
+            <Webcam />
             <Timer />
         </div>
     );

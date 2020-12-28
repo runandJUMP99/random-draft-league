@@ -1,5 +1,4 @@
 import React from "react";
-import {useDispatch} from "react-redux";
 
 import DeleteSweepIcon from '@material-ui/icons/DeleteSweep';
 
@@ -8,13 +7,10 @@ import ClearBoard from "./ClearBoard/ClearBoard";
 import Selections from "../Selections/Selections";
 
 import classes from "./Board.module.css";
-import {deleteSelections} from "../../store/actions/selections";
 
-const Board = ({handleSelection, selections, setModalContent, setShowModal}) => {
-    const dispatch = useDispatch();
-
+const Board = ({handleSelection, setModalContent, setShowModal}) => {
     function handleClick() {
-        setModalContent(<ClearBoard onClick={() => dispatch(deleteSelections(selections))} setShowModal={setShowModal} />);
+        setModalContent(<ClearBoard setShowModal={setShowModal} />);
         setShowModal(true);
     }
 

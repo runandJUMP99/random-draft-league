@@ -2,10 +2,10 @@
     background: #eee;
     color: black;
     display: flex;
-    left: 50%;
-    margin: 2rem 0;
-    padding: 1rem;
+    left: 0;
+    max-height: 90%;
+    overflow: auto;
     position: absolute;
-    transform: translateX(-50%);
-    width: 95%;
+    top: 0;
+    width: 75%;
 }

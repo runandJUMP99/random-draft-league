@@ -6,7 +6,7 @@ import Round from "./Round/Round";
 import classes from "./Rounds.module.css";
 import {getChart} from "../../../store/actions/chart";
 
-const Rounds = ({handleSelection}) => {
+const Rounds = ({handleSelection, setModalContent, setShowModal}) => {
     const chart = useSelector(state => state.chart);
     const players = useSelector(state => state.players);
     const dispatch = useDispatch();
@@ -45,6 +45,8 @@ const Rounds = ({handleSelection}) => {
                     handleSelection={handleSelection}
                     round={round[round.length - 1]} 
                     selections={round} 
+                    setModalContent={setModalContent}
+                    setShowModal={setShowModal}
                 />
             ))}
         </div>

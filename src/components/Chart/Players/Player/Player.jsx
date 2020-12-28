@@ -28,7 +28,7 @@ const Player = ({player, setModalContent, setShowModal}) => {
     return (
         <div className={classes.Container}>
             <div className={classes.Player} onClick={handleClick}>
-                {player.name}
+                <h4>{player.name}</h4>
             </div>
             <Button onClick={handleDelete} style={{
                 background: "#b9b8b8",

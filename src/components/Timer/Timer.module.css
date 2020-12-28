@@ -1,9 +1,10 @@
 .Timer {
-    bottom: 0;
-    left: 0;
     opacity: 0.6;
     position: fixed;
+    right: 0;
+    top: 250px;
     transition: all 0.5s ease-out;
+    width: 25%;
 }
 
 .Timer:hover {
@@ -14,11 +15,11 @@
     background: #1b1b1b;
     padding: 0.25rem;
     text-align: center;
-    width: 104px;
 }
 
 .TimerPaused {
     background: lightgreen;
     cursor: pointer;
     padding: 0.25rem;
+    text-align: center;
 }
