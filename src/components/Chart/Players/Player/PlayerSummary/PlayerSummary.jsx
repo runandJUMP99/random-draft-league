@@ -8,7 +8,6 @@ import classes from "./PlayerSummary.module.css";
 const PlayerSummary = ({player}) => {
     const chart = useSelector(state => state.chart);
     const playerSummary = chart.filter(selection => selection.player === player.playerId);
-    console.log(playerSummary);
 
     return (
         <div className={classes.PlayerSummary}>
