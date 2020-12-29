@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 
 import AddPlayer from "./Chart/Players/AddPlayer/AddPlayer";
@@ -25,9 +25,58 @@ const Layout = () => {
     const [playerTurn, setPlayerTurn] = useState(0);
     const [forward, setForward] = useState(true);
     const [round, setRound] = useState(1);
+    const chart = useSelector(state => state.chart);
     const players = useSelector(state => state.players);
     const selections = useSelector(state => state.selections.selections);
     const dispatch = useDispatch();
+    
+    useEffect(() => {
+        if (chart.length !== 0) {
+            const currentRound = Math.floor(chart.length / players.length) + 1; //checks what round the game is currently on
+            setRound(currentRound);
+            
+            const currentPlayerTurn = chart.length % players.length; //checks which player's turn it is
+
+            if (currentRound % 2 === 0) {
+                switch (currentPlayerTurn) {
+                    case 0:
+                        setPlayerTurn(players.length - 1);
+                        break;
+                    case 1:
+                        setPlayerTurn(players.length - 2);
+                        break;
+                    case 2:
+                        setPlayerTurn(players.length - 3);
+                        break;
+                    case 3:
+                        setPlayerTurn(players.length - 4);
+                        break;
+                    case 4:
+                        setPlayerTurn(players.length - 5);
+                        break;
+                    case 5:
+                        setPlayerTurn(players.length - 6);
+                        break;
+                    case 6:
+                        setPlayerTurn(players.length - 7);
+                        break;
+                    case 7:
+                        setPlayerTurn(players.length - 8);
+                        break;
+                    case 8:
+                        setPlayerTurn(players.length - 9);
+                        break;
+                    case 9:
+                        setPlayerTurn(players.length - 10);
+                        break;
+                    default:
+                        break;
+                }
+            } else {
+                setPlayerTurn(currentPlayerTurn);
+            }
+        }
+    }, [chart, players]);
     
     function handleAddSelection(edit) {
         setModalContent(<AddSelection setShowModal={setShowModal} />);           
@@ -83,7 +132,7 @@ const Layout = () => {
         }
 
         dispatch(addToChart(newSelection));
-        dispatch(editSelection(newSelection.id, newSelection))
+        // dispatch(editSelection(newSelection.id, newSelection))
         setShowModal(false);
         handleDisplay();
     }

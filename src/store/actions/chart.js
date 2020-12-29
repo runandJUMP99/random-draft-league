@@ -1,5 +1,6 @@
 import * as actionTypes from "../actions/actionTypes";
 import * as api from "./api";
+import {editSelection} from "./selections";
 
 export const addToChart = (selection) => async(dispatch) => {
     try {
@@ -9,7 +10,8 @@ export const addToChart = (selection) => async(dispatch) => {
             ...selection,
             chartId: data.name
         }
-        
+
+        dispatch(editSelection(newSelection.id, newSelection));
         dispatch({type: actionTypes.ADD_TO_CHART, payload: newSelection});
     } catch(err) {
         console.log(err);

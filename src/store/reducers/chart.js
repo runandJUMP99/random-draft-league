@@ -7,7 +7,7 @@ export default (chart = [], action) => {
         case actionTypes.GET_CHART:
             return action.payload;
         case actionTypes.REMOVE_FROM_CHART:
-            return chart.filter(selection => selection.id !== action.payload);
+            return chart.filter(selection => selection.chartId !== action.payload);
         case actionTypes.CLEAR_CHART:
             return [];
         default:

@@ -39,6 +39,7 @@ export const getSelections = () => async(dispatch) => {
 
 export const editSelection = (id, selection) => async(dispatch) => {
     try {
+        console.log("edit selection");
         const {data} = await api.editSelection(id, selection);
 
         dispatch({type: actionTypes.EDIT_SELECTION, payload: data});

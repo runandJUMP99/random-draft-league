@@ -10,7 +10,7 @@ const Round = ({handleSelection, round, selections, setModalContent, setShowModa
         setModalContent(<RoundSummary round={round} selections={selections} />);
         setShowModal(true);
     }
-    
+  
     return (
         <div className={classes.Round} style={{
             background: round % 2 === 0 && "#ccc",
