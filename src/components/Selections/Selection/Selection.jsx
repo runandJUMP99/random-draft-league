@@ -9,22 +9,29 @@ import Button from "../../UI/Button/Button";
 import classes from "./Selection.module.css";
 import {deleteSelection} from "../../../store/actions/selections";
 
-const Selection = ({selectionData, showModal, lockInSelection, handleAddSelection}) => {
+const Selection = ({selectionData, showModal, lockInSelection, handleAddSelection, setShowModal}) => {
     const dispatch = useDispatch();
+    const name = selectionData.name;
+    const truncatedName = name.length > 15 ? name.substring(0, 15) + "..." : name;
     const description = selectionData.description || "";
     const truncatedDescription = description.length > 8 ? description.substring(0, 8) + "..." : description;
     const selectedStyles = {
-        background: selectionData.isSelected && "#444343",
+        background: selectionData.isSelected && "#000120",
         boxShadow: selectionData.isSelected && "0 0 0 0",
-        color: selectionData.isSelected && "ccc",
         cursor: showModal && "initial",
         height: showModal && "100%",
+        margin: showModal && 0,
         width: showModal && "100%"
     };
 
+    function handleDelete() {
+        dispatch(deleteSelection(selectionData.id));
+        setShowModal(false);
+    }
+
     return (
         <div className={classes.Selection} style={selectedStyles}>
-            <h3>{selectionData.name}</h3>
+            <h3>{showModal ? name : truncatedName}</h3>
             <img src={selectionData.img} alt="Selection"/>
             <p>{showModal ? description : truncatedDescription}</p>
             <div className={classes.Buttons} style={{display: !showModal && "none"}}>
@@ -34,18 +41,19 @@ const Selection = ({selectionData, showModal, lockInSelection, handleAddSelectio
                     LOCK IN
                 </button>
                 <div className={classes.EditDeleteButtons}>
-                    <Button style={{
-                        background: "#3f3f3f",
+                    <div className={classes.EditButton}>
+                        <Button style={{
+                            background: "#01023a",
+                            margin: "0.25rem",
+                            padding: "0.25rem"
+                        }}>
+                            <EditIcon onClick={() => handleAddSelection(true)} fontSize="small" />
+                        </Button>
+                    </div>
+                    <Button onClick={handleDelete} style={{
+                        background: "#01023a",
                         margin: "0.25rem",
-                        padding: "0.5rem",
-                        position: "initial"
-                    }}>
-                        <EditIcon onClick={() => handleAddSelection(true)} fontSize="small" />
-                    </Button>
-                    <Button onClick={() => dispatch(deleteSelection(selectionData.id))} style={{
-                        background: "#3f3f3f",
-                        margin: "0.25rem",
-                        padding: "0.5rem",
+                        padding: "0.25rem",
                         position: "initial"
                     }}>
                         <DeleteIcon fontSize="small" />

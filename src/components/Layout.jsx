@@ -7,6 +7,7 @@ import Backdrop from "./UI/Backdrop/Backdrop";
 import Board from "./Board/Board";
 import Chart from "./Chart/Chart";
 import Controls from "./Controls/Controls";
+import DraftTitle from "./DraftTitle/DraftTitle";
 import Modal from "./UI/Modal/Modal";
 import Selection from "./Selections/Selection/Selection";
 import Timer from "./Timer/Timer";
@@ -49,6 +50,7 @@ const Layout = () => {
                 lockInSelection={lockInSelection} 
                 selectionData={selectionData[0]} 
                 showModal={!showModal} 
+                setShowModal={setShowModal}
             />
         );
     }
@@ -102,15 +104,12 @@ const Layout = () => {
             <Modal showModal={showModal}>
                 {modalContent}
             </Modal>
-            <div style={{transform: !display && "translateX(-100%", transition: "all 0.75s ease-in-out"}}>
-                <Board 
-                    handleAddSelection={handleAddSelection} 
-                    handleSelection={handleSelection} 
-                    setModalContent={setModalContent} 
-                    setShowModal={setShowModal} 
+            <div style={{transform: !display && "translateX(-100%)", transition: "all 0.75s ease-in-out"}}>
+                <Board
+                    handleSelection={handleSelection}
                 /> 
             </div>
-            <div style={{transform: display && "translateX(100%", transition: "all 0.75s ease-in-out"}}>
+            <div style={{transform: display && "translateX(100%)", transition: "all 0.75s ease-in-out"}}>
                 <Chart 
                     handleSelection={handleSelection}
                     setModalContent={setModalContent} 
@@ -122,9 +121,12 @@ const Layout = () => {
                 handleDisplay={handleDisplay} 
                 handleAddSelection={handleAddSelection}
                 handleAddPlayer= {handleAddPlayer} 
+                setModalContent={setModalContent}
+                setShowModal={setShowModal}
             />
             <Webcam />
             <Timer />
+            <DraftTitle />
         </div>
     );
 }

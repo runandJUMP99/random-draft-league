@@ -15,6 +15,7 @@
     background: #1b1b1b;
     padding: 0.25rem;
     text-align: center;
+    transition: box-shadow 1s ease-out;
 }
 
 .TimerPaused {

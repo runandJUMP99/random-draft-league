@@ -1,11 +1,13 @@
 .Chart {
     background: #eee;
+    border-bottom: 2px solid #3f3f3f;
+    border-right: 2px solid #3f3f3f;
     color: black;
     display: flex;
     left: 0;
-    max-height: 90%;
-    overflow: auto;
-    position: absolute;
+    max-height: 90vh;
+    overflow: auto; 
+    position: fixed;
     top: 0;
     width: 75%;
 }

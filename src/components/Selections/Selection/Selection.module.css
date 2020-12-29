@@ -1,13 +1,13 @@
 .Selection {
-    background: #585757;
-    box-shadow: 0 2px 0 3px #444343;
+    background: #05075e;
+    box-shadow: 0 1px 0 2px #01023a;
     color: white;
     cursor: pointer;
     display: flex;
     flex-direction: column;
     height: 135px;
     justify-content: space-between;
-    margin: 0.25rem 0;
+    margin: 0.25rem;
     padding: 0.5rem;
     text-align: center;
     transition: all 0.5s ease-out;
@@ -15,13 +15,14 @@
 }
 
 .Selection:hover {
-    background: #444343;
-    box-shadow: 0 2px 0 6px #444343;
+    background: #0b0d77;
+    box-shadow: 0 2px 0 3px #04064e;
 }
 
 .Selection h3,
 .Selection p {
     margin: 0;
+    word-wrap: break-word
 }
 
 .Selection img {
@@ -32,14 +33,20 @@
 }
 
 .EditDeleteButtons {
-    bottom: 1.75rem;
+    bottom: 2rem;
     position: absolute;
     right: 2rem;
 }
 
+.EditButton {
+    top: 0.75rem;
+    position: absolute;
+}
+
 .LockIn {
-    background: #19c519;
+    background: #28df28;
     border: none;
+    box-shadow: 0 1px 0 2px #0fad0f;
     color: white;
     cursor: pointer;
     font-size: 2rem;
@@ -49,5 +56,5 @@
 }
 
 .LockIn:hover {
-    background: #0d970d;
+    background: #56ff56;
 }

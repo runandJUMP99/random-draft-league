@@ -1,8 +1,8 @@
 .Round {
     display: flex;
     flex-direction: column;
-    margin: 0 0.25rem;
-    padding: 0.25rem;
+    padding: 0 0.25rem;
+    position: relative;
 }
 
 .Round h2 {

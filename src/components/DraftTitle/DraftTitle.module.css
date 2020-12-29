@@ -1,0 +1,17 @@
+.DraftTitle {
+    position: fixed;
+    right: 0;
+    text-align: center;
+    top: 310px;
+    width: 25%;
+}
+
+.DraftTitle h1 {
+    word-wrap: break-word;
+}
+
+.DraftTitle input {
+    font-size: 1rem;
+    padding: 0.5rem;
+    width: 100%;
+}

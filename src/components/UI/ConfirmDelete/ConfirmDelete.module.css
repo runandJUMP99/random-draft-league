@@ -1,16 +1,16 @@
 .ConfirmDelete {
-    color: black;
-    left: 50%;
-    margin: auto;
-    position: absolute;
-    top: 50%;
+    align-items: center;
+    background: white;
+    box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+    color: initial;
+    display: flex;
+    height: 100%;
+    padding: 0.5rem;
     text-align: center;
-    transform: translate(-50%, -50%);
-    width: 90%;
 }
 
-.ConfirmDelete h2 {
-    font-size: 2.5rem;
+.ConfirmDelete h1 {
     margin: 0 auto 2rem;
 }
 

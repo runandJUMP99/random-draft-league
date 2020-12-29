@@ -8,4 +8,13 @@
     height: 135px;
     margin: 0.25rem 0;
     padding: 0.5rem;
+    transition: all 0.25s ease-out;
+}
+
+.Player:hover {
+    background: #979797;
+}
+
+.Player h4 {
+    font-size: 1.35rem;
 }
