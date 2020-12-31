@@ -1,6 +1,8 @@
 .Paper {
     align-items: center;
     display: flex;
+    justify-content: center;
+    max-width: 25rem;
     padding: 2rem;
     position: absolute;
     right: 2rem;
@@ -22,7 +24,6 @@
 @media (max-width: 1200px) {
     .Paper {
         margin: auto;
-        max-width: 25rem;
         position: static;
         width: 100%;
     }
