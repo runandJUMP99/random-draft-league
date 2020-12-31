@@ -1,0 +1,13 @@
+.Login {
+    background-image: -webkit-linear-gradient(0deg, blue 50%, green 50%);
+    height: 100vh;
+    padding-top: 5rem;
+}
+
+.Paper {
+    border-radius: 16px;
+    margin: auto;
+    padding: 2rem;
+    max-width: 30rem;
+    width: 90%;
+}

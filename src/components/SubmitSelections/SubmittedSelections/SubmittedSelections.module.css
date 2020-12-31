@@ -1,0 +1,14 @@
+.SubmittedSelections {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 2rem;
+    width: 70%;
+}
+
+@media (max-width: 1200px) {
+    .SubmittedSelections {
+        padding: 1rem;
+        width: 100%;
+    }
+}

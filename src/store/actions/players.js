@@ -1,9 +1,9 @@
 import * as actionTypes from "../actions/actionTypes";
 import * as api from "./api";
 
-export const addPlayer = (player) => async(dispatch) => {
+export const addPlayer = (player, token) => async(dispatch) => {
     try {
-        const {data} = await api.addPlayer(player);
+        const {data} = await api.addPlayer(player, token);
 
         const newPlayer = {
             ...player,
@@ -34,9 +34,19 @@ export const getPlayers = () => async(dispatch) => {
     }
 };
 
-export const removePlayer = (id) => (dispatch) => {
+export const editPlayer = (id, player, token) => async(dispatch) => {
     try {
-        api.removePlayer(id);
+        const {data} = await api.editPlayer(id, player, token);
+
+        dispatch({type: actionTypes.EDIT_PLAYER, payload: data});
+    } catch(err) {
+        console.log(err);
+    }
+};
+
+export const removePlayer = (id, token) => (dispatch) => {
+    try {
+        api.removePlayer(id, token);
 
         dispatch({type: actionTypes.REMOVE_PLAYER, payload: id});
     } catch(err) {
@@ -44,10 +54,10 @@ export const removePlayer = (id) => (dispatch) => {
     }
 };
 
-export const clearPlayers = (players) => (dispatch) => {
+export const clearPlayers = (players, token) => (dispatch) => {
     try {
         players.forEach(player => {
-            api.removePlayer(player.playerId);
+            api.removePlayer(player.playerId, token);
         });
 
         dispatch({type: actionTypes.CLEAR_PLAYERS});
@@ -55,3 +65,11 @@ export const clearPlayers = (players) => (dispatch) => {
         console.log(err);
     }
 };
+
+export const setPlayerId = (id) => (dispatch) => {
+    try {
+        dispatch({type: actionTypes.SET_PLAYER_ID, payload: id});
+    } catch(err) {
+        console.log(err);
+    }
+}

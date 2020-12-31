@@ -39,7 +39,7 @@ const Controls = ({display, handleDisplay, handleAddSelection, handleAddPlayer, 
                 ? <Button onClick={() => handleAddSelection(false)} style={{right: "1.5rem"}}>
                     <AddIcon />
                 </Button>
-                : <Button onClick={handleAddPlayer} style={{right: "1.5rem"}}>
+                : <Button onClick={() => handleAddPlayer(false)} style={{right: "1.5rem"}}>
                     <PersonAddIcon />
                 </Button>
             }

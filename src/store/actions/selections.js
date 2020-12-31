@@ -1,9 +1,9 @@
 import * as actionTypes from "../actions/actionTypes";
 import * as api from "./api";
 
-export const addSelection = (selection) => async(dispatch) => {
+export const addSelection = (selection, token) => async(dispatch) => {
     try {
-        const {data} = await api.addSelection(selection);
+        const {data} = await api.addSelection(selection, token);
 
         const newSelection = {
             ...selection,
@@ -23,7 +23,7 @@ export const getSelections = () => async(dispatch) => {
         const {data} = await api.getSelections();
 
         for (let key in data) {
-            if (key !== "chart" && key !== "players") {
+            if (key !== "chart" && key !== "players" && key !== "submittedselections") {
                 fetchedSelections.push({
                     ...data[key],
                     id: key
@@ -37,20 +37,19 @@ export const getSelections = () => async(dispatch) => {
     }
 };
 
-export const editSelection = (id, selection) => async(dispatch) => {
+export const editSelection = (id, selection, token) => async(dispatch) => {
     try {
-        console.log("edit selection");
-        const {data} = await api.editSelection(id, selection);
-
+        const {data} = await api.editSelection(id, selection, token);
+        
         dispatch({type: actionTypes.EDIT_SELECTION, payload: data});
     } catch(err) {
         console.log(err);
     }
 };
 
-export const deleteSelection = (id) => (dispatch) => {
+export const deleteSelection = (id, token) => (dispatch) => {
     try {
-        api.deleteSelection(id);
+        api.deleteSelection(id, token);
 
         dispatch({type: actionTypes.DELETE_SELECTION, payload: id});
     } catch(err) {
@@ -58,10 +57,10 @@ export const deleteSelection = (id) => (dispatch) => {
     }
 };
 
-export const deleteSelections = (selections) => (dispatch) => {
+export const deleteSelections = (selections, token) => (dispatch) => {
     try {
         selections.forEach(selection => {
-            api.deleteSelection(selection.id);
+            api.deleteSelection(selection.id, token);
         });
 
         dispatch({type: actionTypes.DELETE_SELECTIONS});

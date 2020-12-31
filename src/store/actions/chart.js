@@ -2,16 +2,16 @@ import * as actionTypes from "../actions/actionTypes";
 import * as api from "./api";
 import {editSelection} from "./selections";
 
-export const addToChart = (selection) => async(dispatch) => {
+export const addToChart = (selection, token) => async(dispatch) => {
     try {
-        const {data} = await api.addToChart(selection);
+        const {data} = await api.addToChart(selection, token);
         
         const newSelection = {
             ...selection,
             chartId: data.name
         }
 
-        dispatch(editSelection(newSelection.id, newSelection));
+        dispatch(editSelection(newSelection.id, newSelection, token));
         dispatch({type: actionTypes.ADD_TO_CHART, payload: newSelection});
     } catch(err) {
         console.log(err);
@@ -36,9 +36,9 @@ export const getChart = () => async(dispatch) => {
     }
 };
 
-export const removeFromChart = (id) => (dispatch) => {
+export const removeFromChart = (id, token) => (dispatch) => {
     try {
-        api.removeFromChart(id);
+        api.removeFromChart(id, token);
 
         dispatch({type: actionTypes.REMOVE_FROM_CHART, payload: id});
     } catch(err) {
@@ -46,10 +46,10 @@ export const removeFromChart = (id) => (dispatch) => {
     }
 };
 
-export const clearChart = (selections) => (dispatch) => {
+export const clearChart = (selections, token) => (dispatch) => {
     try {
         selections.forEach(selection => {
-            api.removeFromChart(selection.chartId);
+            api.removeFromChart(selection.chartId, token);
         });
 
         dispatch({type: actionTypes.CLEAR_CHART});

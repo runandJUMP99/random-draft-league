@@ -8,7 +8,7 @@ import {getChart} from "../../../store/actions/chart";
 
 const Rounds = ({handleSelection, setModalContent, setShowModal}) => {
     const chart = useSelector(state => state.chart);
-    const players = useSelector(state => state.players);
+    const players = useSelector(state => state.players.players);
     const dispatch = useDispatch();
     let rounds = [];
     let round = [];

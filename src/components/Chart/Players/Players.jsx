@@ -7,7 +7,7 @@ import classes from "./Players.module.css";
 import {getPlayers} from "../../../store/actions/players";
 
 const Players = ({setModalContent, setShowModal}) => {
-    const players = useSelector(state => state.players);
+    const players = useSelector(state => state.players.players);
     const dispatch = useDispatch();
     
     useEffect(() => {
@@ -16,7 +16,7 @@ const Players = ({setModalContent, setShowModal}) => {
 
     return (
         <div className={classes.Players}>
-            <h2>Players</h2>
+            <h2>Drafters</h2>
             {players.map(player => (
                 <Player 
                     key={player.playerId} 

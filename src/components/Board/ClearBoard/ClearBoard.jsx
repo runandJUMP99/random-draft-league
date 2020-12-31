@@ -1,21 +1,29 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 
 import classes from "./ClearBoard.module.css";
 import {deleteSelections} from "../../../store/actions/selections";
 import {clearChart} from "../../../store/actions/chart";
 import {clearPlayers} from "../../../store/actions/players";
+import {clearSubmittedSelections, getSubmittedSelections} from "../../../store/actions/submittedSelections";
 
 const ClearBoard = ({setShowModal}) => {
     const selections = useSelector(state => state.selections.selections);
     const chartSelections = useSelector(state => state.chart);
-    const players = useSelector(state => state.players);
+    const players = useSelector(state => state.players.players);
+    const submittedSelections = useSelector(state => state.submittedSelections);
+    const token = useSelector(state => state.auth.token);
     const dispatch = useDispatch();
 
+    useEffect(() => {
+        dispatch(getSubmittedSelections());
+    }, [dispatch]);
+
     function handleClick() {
-        dispatch(deleteSelections(selections));
-        dispatch(clearChart(chartSelections));
-        dispatch(clearPlayers(players));
+        dispatch(deleteSelections(selections, token));
+        dispatch(clearChart(chartSelections, token));
+        dispatch(clearPlayers(players, token));
+        dispatch(clearSubmittedSelections(submittedSelections, token));
         setShowModal(false);
     }
 

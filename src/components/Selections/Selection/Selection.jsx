@@ -1,5 +1,5 @@
 import React from "react";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
@@ -11,6 +11,7 @@ import {deleteSelection} from "../../../store/actions/selections";
 import {removeFromChart} from "../../../store/actions/chart";
 
 const Selection = ({selectionData, showModal, lockInSelection, handleAddSelection, setShowModal}) => {
+    const token = useSelector(state => state.auth.token);
     const dispatch = useDispatch();
     const name = selectionData.name || "";
     const truncatedName = name.length > 15 ? name.substring(0, 15) + "..." : name;
@@ -26,10 +27,10 @@ const Selection = ({selectionData, showModal, lockInSelection, handleAddSelectio
     };
 
     function handleDelete() {
-        dispatch(deleteSelection(selectionData.id));
+        dispatch(deleteSelection(selectionData.id, token));
         
         if (selectionData.isSelected) {
-            dispatch(removeFromChart(selectionData.chartId));
+            dispatch(removeFromChart(selectionData.chartId, token));
         }
 
         setShowModal(false);

@@ -1,0 +1,11 @@
+.SubmitSelections {
+    background: #111111;
+    height: 100%;
+    min-height: 100vh;
+}
+
+@media (max-width: 1200px) {
+    .Logo {
+        display: none;
+    }
+}

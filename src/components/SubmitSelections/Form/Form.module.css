@@ -1,0 +1,29 @@
+.Paper {
+    align-items: center;
+    display: flex;
+    padding: 2rem;
+    position: absolute;
+    right: 2rem;
+    top: 2rem;
+    width: 30%;
+}
+
+.Captcha {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+}
+
+.ButtonSubmit {
+    margin: 1rem auto 0.5rem !important;
+}
+
+@media (max-width: 1200px) {
+    .Paper {
+        margin: auto;
+        max-width: 25rem;
+        position: static;
+        width: 100%;
+    }
+}

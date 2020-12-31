@@ -1,16 +1,25 @@
 import axios from "axios";
 
 const url = "https://randomdraftleague-f6d6d-default-rtdb.firebaseio.com/";
+const authUrl = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=" + process.env.REACT_APP_FIREBASE_KEY;
 
-export const addSelection = (newSelection) => axios.post(`${url}.json`, newSelection);
+
+export const addSelection = (newSelection, token) => axios.post(`${url}.json?auth=${token}`, newSelection);
 export const getSelections = () => axios.get(`${url}.json`);
-export const editSelection = (id, updatedSelection) => axios.patch(`${url}/${id}.json`, updatedSelection);
-export const deleteSelection = (id) => axios.delete(`${url}/${id}.json`);
+export const editSelection = (id, updatedSelection, token) => axios.patch(`${url}/${id}.json?auth=${token}`, updatedSelection);
+export const deleteSelection = (id, token) => axios.delete(`${url}/${id}.json?auth=${token}`);
 
-export const addToChart = (newAddition) => axios.post(`${url}/chart.json`, newAddition);
+export const addToChart = (newAddition, token) => axios.post(`${url}/chart.json?auth=${token}`, newAddition);
 export const getChart = () => axios.get(`${url}/chart.json`);
-export const removeFromChart = (id) => axios.delete(`${url}/chart/${id}.json`);
+export const removeFromChart = (id, token) => axios.delete(`${url}/chart/${id}.json?auth=${token}`);
 
-export const addPlayer = (player) => axios.post(`${url}/players.json`, player);
+export const addPlayer = (player, token) => axios.post(`${url}/players.json?auth=${token}`, player);
 export const getPlayers = () => axios.get(`${url}/players.json`);
-export const removePlayer = (id) => axios.delete(`${url}/players/${id}.json`);
+export const editPlayer = (id, updatedPlayer, token) => axios.patch(`${url}/players/${id}.json?auth=${token}`, updatedPlayer);
+export const removePlayer = (id, token) => axios.delete(`${url}/players/${id}.json?auth=${token}`);
+
+export const auth = (authData) => axios.post(authUrl, authData);
+
+export const addSubmittedSelection = (newSelection) => axios.post(`${url}/submittedselections.json`, newSelection);
+export const getSubmittedSelections = () => axios.get(`${url}/submittedselections.json`);
+export const deleteSubmittedSelection = (id) => axios.delete(`${url}/submittedselections/${id}.json`);

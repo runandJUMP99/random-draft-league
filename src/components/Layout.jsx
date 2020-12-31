@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
+import {Redirect} from "react-router-dom";
 
 import AddPlayer from "./Chart/Players/AddPlayer/AddPlayer";
 import AddSelection from "./AddSelection/AddSelection";
@@ -8,6 +9,7 @@ import Board from "./Board/Board";
 import Chart from "./Chart/Chart";
 import Controls from "./Controls/Controls";
 import DraftTitle from "./DraftTitle/DraftTitle";
+import Logo from "./UI/Logo/Logo";
 import Modal from "./UI/Modal/Modal";
 import Selection from "./Selections/Selection/Selection";
 import Timer from "./Timer/Timer";
@@ -16,7 +18,7 @@ import Webcam from "./Webcam/Webcam";
 import classes from "./Layout.module.css";
 import {setSelectionId} from "../store/actions/selections";
 import {addToChart} from "../store/actions/chart";
-import {editSelection} from "../store/actions/selections";
+import {setPlayerId} from "../store/actions/players";
 
 const Layout = () => {
     const [display, setDisplay] = useState(true)
@@ -26,11 +28,13 @@ const Layout = () => {
     const [forward, setForward] = useState(true);
     const [round, setRound] = useState(1);
     const chart = useSelector(state => state.chart);
-    const players = useSelector(state => state.players);
+    const isAuthenticated = useSelector(state =>  state.auth.token !== null);
+    const players = useSelector(state => state.players.players);
     const selections = useSelector(state => state.selections.selections);
+    const token = useSelector(state => state.auth.token);
     const dispatch = useDispatch();
-    
-    useEffect(() => {
+
+    useEffect(() => { //find what the current round is and who's turn it is if page reloads
         if (chart.length !== 0) {
             const currentRound = Math.floor(chart.length / players.length) + 1; //checks what round the game is currently on
             setRound(currentRound);
@@ -131,14 +135,18 @@ const Layout = () => {
             }
         }
 
-        dispatch(addToChart(newSelection));
-        // dispatch(editSelection(newSelection.id, newSelection))
+        dispatch(addToChart(newSelection, token));
         setShowModal(false);
         handleDisplay();
     }
  
-    function handleAddPlayer() {
+    function handleAddPlayer(edit) {
         setModalContent(<AddPlayer setShowModal={setShowModal} />);
+
+        if (!edit) {
+            dispatch(setPlayerId(null));
+        }
+        
         setShowModal(true);
     }
 
@@ -148,6 +156,7 @@ const Layout = () => {
 
     return (
         <div className={classes.Layout}>
+            {!isAuthenticated && <Redirect to="/login" />}
             <div className={classes.Background}></div>
             <Backdrop showModal={showModal} setShowModal={setShowModal} />
             <Modal showModal={showModal}>
@@ -175,6 +184,7 @@ const Layout = () => {
             />
             <Webcam />
             <Timer />
+            <Logo />
             <DraftTitle />
         </div>
     );

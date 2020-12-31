@@ -1,15 +1,15 @@
 .Timer {
-    opacity: 0.6;
+    /* opacity: 0.6; */
     position: fixed;
     right: 0;
-    top: 250px;
+    top: 300px;
     transition: all 0.5s ease-out;
     width: 25%;
 }
 
-.Timer:hover {
+/* .Timer:hover {
     opacity: 1;
-}
+} */
 
 .Time {
     background: #1b1b1b;
@@ -23,4 +23,8 @@
     cursor: pointer;
     padding: 0.25rem;
     text-align: center;
+}
+
+.TimerPaused svg {
+    margin-top: 0.5rem;
 }

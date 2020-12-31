@@ -1,0 +1,11 @@
+.LogoContainer {
+    bottom: 4rem;
+    right: 0;
+    position: absolute;
+    width: 25%;
+}
+
+.Logo {
+    display: block;
+    margin: auto;
+}

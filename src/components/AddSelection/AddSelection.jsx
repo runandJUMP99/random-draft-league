@@ -18,6 +18,7 @@ const AddSelection = ({setShowModal}) => {
     });
     const selectionId = useSelector(state => state.selections.setSelectionId);
     const selection = useSelector(state => selectionId && state.selections.selections.find(s => s.id === selectionId));
+    const token = useSelector(state => state.auth.token);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -32,9 +33,9 @@ const AddSelection = ({setShowModal}) => {
         event.preventDefault();
 
         if (selectionId) {
-            dispatch(editSelection(selectionId, selectionData));
+            dispatch(editSelection(selectionId, selectionData, token));
         } else {
-            dispatch(addSelection(selectionData));
+            dispatch(addSelection(selectionData, token));
         }
 
         setContinueAdding(false);
@@ -85,7 +86,7 @@ const AddSelection = ({setShowModal}) => {
                     <Button className={classes.ButtonSubmit} color="primary" fullWidth size="large" type="submit" variant="contained">Submit</Button>
                     <Button color="secondary" fullWidth onClick={clear} size="small" variant="contained">Clear</Button>
                 </form>
-                : <Continue setContinueAdding={setContinueAdding} setShowModal={setShowModal} heading="Entires" />}
+                : <Continue setContinueAdding={setContinueAdding} setShowModal={setShowModal} heading="Entries" />}
         </Paper>
     );
 }

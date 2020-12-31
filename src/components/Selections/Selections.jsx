@@ -9,9 +9,9 @@ import {getSelections} from "../../store/actions/selections";
 const Selections = ({showModal, handleSelection}) => {
     const dispatch = useDispatch();
     let selections = useSelector(state => state.selections.selections);
-    let selectedSelections = selections.filter(selection => selection.isSelected);
-    let notSelectedSelections = selections.filter(selection => !selection.isSelected);
-
+    const selectedSelections = selections.filter(selection => selection.isSelected);
+    const notSelectedSelections = selections.filter(selection => !selection.isSelected);
+    
     useEffect(() => {
         dispatch(getSelections());
     }, [dispatch]);

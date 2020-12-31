@@ -1,24 +1,42 @@
-import React, {useState} from "react";
-import {useDispatch} from "react-redux";
+import React, {useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
 
 import {Button, Paper, TextField, Typography} from "@material-ui/core";
 
 import Continue from "../../../UI/Continue/Continue";
 
 import classes from "./AddPlayer.module.css";
-import {addPlayer} from "../../../../store/actions/players";
+import {addPlayer, editPlayer, setPlayerId} from "../../../../store/actions/players";
 
 const AddPlayer = ({setShowModal}) => {
     const [continueAdding, setContinueAdding] = useState(true);
     const [player, setPlayer] = useState({name: ""});
+    const playerId = useSelector(state => state.players.setPlayerId);
+    const selectedPlayer = useSelector(state => playerId && state.players.players.find(p => p.playerId === playerId));
+    const token = useSelector(state => state.auth.token);
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        if (selectedPlayer) {
+            setContinueAdding(true);
+            setPlayer(selectedPlayer);
+        } else {
+            dispatch(setPlayerId(null));
+            setPlayer({name: ""});
+        }
+    }, [dispatch, selectedPlayer]);
 
     function handleSubmit(event) {
         event.preventDefault();
 
-        dispatch(addPlayer(player));
+        if (playerId) {
+            dispatch(editPlayer(playerId, player, token));
+        } else {
+            dispatch(addPlayer(player, token));
+        }
 
         setContinueAdding(false);
+        dispatch(setPlayerId(null));
         setPlayer({name: ""});
     }
 
@@ -32,7 +50,7 @@ const AddPlayer = ({setShowModal}) => {
                         label="Name"
                         margin="normal" 
                         name="name"
-                        onChange={(event) => setPlayer({name: event.target.value})} 
+                        onChange={(event) => setPlayer({...player, name: event.target.value})} 
                         required
                         value={player.name}
                         variant="outlined" 
