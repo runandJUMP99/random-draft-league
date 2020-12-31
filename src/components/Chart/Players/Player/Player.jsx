@@ -1,5 +1,5 @@
 import React from "react";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
@@ -13,6 +13,7 @@ import classes from "./Player.module.css";
 import {setPlayerId} from "../../../../store/actions/players";
 
 const Player = ({player, setModalContent, setShowModal}) => {
+    const chart = useSelector(state => state.chart);
     const dispatch = useDispatch();
 
     function handleClick() {
@@ -42,22 +43,24 @@ const Player = ({player, setModalContent, setShowModal}) => {
             <div className={classes.Player} onClick={handleClick}>
                 <h4>{player.name}</h4>
             </div>
-            <Button onClick={handleEdit} style={{
-                background: "#b9b8b8",
-                margin: "0.25rem",
-                padding: "0.3rem 0.25rem 0.2rem",
-                right: "2rem"
-            }}>
-                <EditIcon fontSize="small" />
-            </Button>
-            <Button onClick={handleDelete} style={{
-                background: "#b9b8b8",
-                margin: "0.25rem",
-                padding: "0.3rem 0.25rem 0.2rem",
-                right: 0
-            }}>
-                <DeleteIcon fontSize="small" />
-            </Button>
+            <div style={{display: chart.length > 0 && "none"}}>
+                <Button onClick={handleEdit} style={{
+                    background: "#b9b8b8",
+                    margin: "0.25rem",
+                    padding: "0.3rem 0.25rem 0.2rem",
+                    right: "2rem"
+                }}>
+                    <EditIcon fontSize="small" />
+                </Button>
+                <Button onClick={handleDelete} style={{
+                    background: "#b9b8b8",
+                    margin: "0.25rem",
+                    padding: "0.3rem 0.25rem 0.2rem",
+                    right: 0
+                }}>
+                    <DeleteIcon fontSize="small" />
+                </Button>
+            </div>
         </div>
     );
 }

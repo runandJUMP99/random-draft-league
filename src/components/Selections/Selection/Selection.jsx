@@ -9,8 +9,10 @@ import Button from "../../UI/Button/Button";
 import classes from "./Selection.module.css";
 import {deleteSelection} from "../../../store/actions/selections";
 import {removeFromChart} from "../../../store/actions/chart";
+import logo from "../../../assets/images/logo.png";
 
 const Selection = ({selectionData, showModal, lockInSelection, handleAddSelection, setShowModal}) => {
+    const players = useSelector(state => state.players.players);
     const token = useSelector(state => state.auth.token);
     const dispatch = useDispatch();
     const name = selectionData.name || "";
@@ -38,14 +40,14 @@ const Selection = ({selectionData, showModal, lockInSelection, handleAddSelectio
 
     return (
         <div className={classes.Selection} style={selectedStyles}>
-            <h3>{showModal ? name : truncatedName}</h3>
-            <img src={selectionData.img} alt="Selection"/>
+            <h3 style={{fontSize: showModal && "2rem"}}>{showModal ? name : truncatedName}</h3>
+            <img src={selectionData.img ? selectionData.img : logo} alt="Selection"/>
             <p style={{padding: showModal && "0 1rem"}}>{showModal ? description : truncatedDescription}</p>
             <div className={classes.Buttons} style={{display: !showModal && "none"}}>
-                <button className={classes.LockIn} onClick={() => lockInSelection(selectionData.id)} style={{
+                <button className={classes.LockIn} disabled={players.length === 0} onClick={() => lockInSelection(selectionData.id)} style={{
                     display: selectionData.isSelected && "none"
                 }}>
-                    LOCK IN
+                    {players.length === 0 ? "PLEASE ADD PLAYERS" : "LOCK IN"}
                 </button>
                 <div className={classes.EditDeleteButtons}>
                     <div className={classes.EditButton}>

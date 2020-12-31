@@ -8,8 +8,9 @@ import Continue from "../UI/Continue/Continue";
 
 import classes from "./AddSelection.module.css";
 import {addSelection, editSelection, setSelectionId} from "../../store/actions/selections";
+import {editSubmittedSelection} from "../../store/actions/submittedSelections";
 
-const AddSelection = ({setShowModal}) => {
+const AddSelection = ({submittedSelection, setShowModal}) => {
     const [continueAdding, setContinueAdding] = useState(true);
     const [selectionData, setSelectionData] = useState({
         name: "",
@@ -24,10 +25,16 @@ const AddSelection = ({setShowModal}) => {
     useEffect(() => {
         if (selection) {
             setSelectionData(selection);
+        } else if (submittedSelection) {
+            setSelectionData({
+                name: submittedSelection.name,
+                description: "",
+                img: ""
+            })
         } else {
             clear();
         }
-    }, [selection]);
+    }, [selection, submittedSelection]);
     
     function handleSubmit(event) {
         event.preventDefault();
@@ -35,6 +42,15 @@ const AddSelection = ({setShowModal}) => {
         if (selectionId) {
             dispatch(editSelection(selectionId, selectionData, token));
         } else {
+            if (submittedSelection) {
+                const newSelection = {
+                    ...submittedSelection,
+                    isSelected: true
+                };
+                console.log(newSelection.id);
+                dispatch(editSubmittedSelection(newSelection.id, newSelection, token));
+            }
+            
             dispatch(addSelection(selectionData, token));
         }
 

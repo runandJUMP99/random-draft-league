@@ -8,7 +8,10 @@
 }
 
 .Selections {
+    align-items: center;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    height: 400px;
+    justify-content: center;
+    overflow: auto;
 }

@@ -2,13 +2,16 @@
     color: black;
 }
 
-.RoundSummary h3 {
+.RoundSummary h2 {
     margin-bottom: 0.5rem;
     text-align: center;
 }
 
 .Selections {
+    align-items: center;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    height: 400px;
+    justify-content: center;
+    overflow: auto;
 }

@@ -28,8 +28,9 @@
 .Selection img {
     box-shadow: 0 1px 4px 2px rgba(0, 0, 0, 0.5);
     margin: 0.5rem auto;
+    object-fit: contain;
     overflow: hidden;
-    width: 50%;
+    max-width: 50%;
 }
 
 .EditDeleteButtons {
@@ -51,10 +52,23 @@
     cursor: pointer;
     font-size: 2rem;
     margin: 1rem;
+    outline: none;
     padding: 0.5rem 1rem;
-    transition: all 0.25s ease-out;
+    transition: all 0.15s ease-out;
 }
 
 .LockIn:hover {
     background: #56ff56;
+}
+
+.LockIn:active {
+    background: #19a319;
+    box-shadow: 0 0 0 0;
+}
+
+.LockIn[disabled] {
+    background: #ccc;
+    box-shadow: none;
+    cursor: not-allowed;
+    opacity: 0.8;
 }

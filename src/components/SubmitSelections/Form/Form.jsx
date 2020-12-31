@@ -24,9 +24,8 @@ const AddSelection = () => {
             name: "",
             from: ""
         });
-        console.log(captcha);
+
         setCaptcha(false);
-        console.log(recaptchaRef.current);
         recaptchaRef.current.reset();
     }
 
@@ -36,9 +35,9 @@ const AddSelection = () => {
                     <Typography align="center" variant="h6">Submit Entry</Typography>
                     <TextField 
                         fullWidth 
-                        label="Name"
+                        label="Entry Name"
                         margin="normal" 
-                        name="name"
+                        name="entryname"
                         onChange={(event) => setSelectionData({...selectionData, name: event.target.value})} 
                         required
                         value={selectionData.name}
@@ -46,9 +45,9 @@ const AddSelection = () => {
                     />
                     <TextField 
                         fullWidth 
-                        label="From"
+                        label="Submitted By"
                         margin="normal" 
-                        name="from"
+                        name="submittedby"
                         onChange={(event) => setSelectionData({...selectionData, from: event.target.value})} 
                         required
                         value={selectionData.from}

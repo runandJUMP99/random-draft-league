@@ -11,7 +11,7 @@ export const auth = (user) => async(dispatch) => {
 
         const {data} = await api.auth(authData);
 
-        const expirationDate = new Date(new Date().getTime() + data.expiresIn * 3000);
+        const expirationDate = new Date(new Date().getTime() + data.expiresIn * 1000);
 
         localStorage.setItem("token", data.idToken);
         localStorage.setItem("expirationDate", expirationDate);

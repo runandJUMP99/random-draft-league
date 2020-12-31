@@ -1,4 +1,5 @@
 import React from "react";
+import {useSelector} from "react-redux";
 
 import DeleteSweepIcon from '@material-ui/icons/DeleteSweep';
 import AddIcon from '@material-ui/icons/Add';
@@ -12,6 +13,8 @@ import ClearBoard from "../Board/ClearBoard/ClearBoard";
 import classes from "./Controls.module.css";
 
 const Controls = ({display, handleDisplay, handleAddSelection, handleAddPlayer, setModalContent, setShowModal}) => {
+    const chart = useSelector(state => state.chart);
+    
     function handleClick() {
         setModalContent(<ClearBoard setShowModal={setShowModal} />);
         setShowModal(true);
@@ -28,18 +31,21 @@ const Controls = ({display, handleDisplay, handleAddSelection, handleAddPlayer, 
                 <DeleteSweepIcon fontSize="small" />
             </Button>
             {display 
-                ? <Button onClick={handleDisplay} style={{right: "5.5rem"}}>
+                ? <Button onClick={handleDisplay} style={{right: "1.5rem"}}>
                     <CallToActionIcon />
                 </Button> 
-                : <Button onClick={handleDisplay} style={{right: "5.5rem"}}>
+                : <Button onClick={handleDisplay} style={{right: "1.5rem"}}>
                     <TableChartIcon />
                 </Button>
             }
             {display
-                ? <Button onClick={() => handleAddSelection(false)} style={{right: "1.5rem"}}>
+                ? <Button onClick={() => handleAddSelection(false)} style={{right: "5.5rem"}}>
                     <AddIcon />
                 </Button>
-                : <Button onClick={() => handleAddPlayer(false)} style={{right: "1.5rem"}}>
+                : <Button onClick={() => handleAddPlayer(false)} style={{
+                    display: chart.length > 0 && "none",
+                    right: "5.5rem"
+                }}>
                     <PersonAddIcon />
                 </Button>
             }

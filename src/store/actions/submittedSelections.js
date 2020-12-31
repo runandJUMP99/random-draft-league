@@ -7,7 +7,8 @@ export const addSubmittedSelection = (selection) => async(dispatch) => {
 
         const newSelection = {
             ...selection,
-            id: data.name
+            id: data.name,
+            isSelected: false
         }
         
         dispatch({type: actionTypes.ADD_SUBMITTED_SELECTION, payload: newSelection});
@@ -29,6 +30,16 @@ export const getSubmittedSelections = () => async(dispatch) => {
         }
         
         dispatch({type: actionTypes.GET_SUBMITTED_SELECTIONS, payload: fetchedSelections});
+    } catch(err) {
+        console.log(err);
+    }
+};
+
+export const editSubmittedSelection = (id, selection, token) => async(dispatch) => {
+    try {
+        const {data} = await api.editSubmittedSelection(id, selection, token);
+
+        dispatch({type: actionTypes.EDIT_SUBMITTED_SELECTION, payload: data});
     } catch(err) {
         console.log(err);
     }
