@@ -23,7 +23,7 @@ export const getSelections = () => async(dispatch) => {
         const {data} = await api.getSelections();
 
         for (let key in data) {
-            if (key !== "chart" && key !== "players" && key !== "submittedselections") {
+            if (key !== "chart" && key !== "players" && key !== "submittedselections" && key !== "subject") {
                 fetchedSelections.push({
                     ...data[key],
                     id: key
@@ -76,3 +76,43 @@ export const setSelectionId = (id) => (dispatch) => {
         console.log(err);
     }
 }
+
+export const getSelectionSubject = () => async(dispatch) => {
+    try {
+        const {data} = await api.getSelectionSubject();
+        let name;
+
+        for (let key in data) {
+            name = {
+                ...data[key],
+                id: key
+            };
+        }
+
+        dispatch({type: actionTypes.SET_SELECTION_SUBJECT, payload: name});
+    } catch(err) {
+        console.log(err);
+    }
+};
+
+export const setSelectionSubject = (id, subject, token) => async(dispatch) => {
+    try {
+        let response;
+        
+        if (id) {   
+            const {data} = await api.setSelectionSubject(id, subject, token);
+            response = data;
+        } else {  
+            const {data} = await api.addSelectionSubject(subject, token);
+
+            response = {
+                ...subject,
+                id: data.name
+            };
+        }
+
+        dispatch({type: actionTypes.SET_SELECTION_SUBJECT, payload: response});
+    } catch(err) {
+        console.log(err);
+    }
+};

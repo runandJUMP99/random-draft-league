@@ -11,3 +11,15 @@
 .SubmittedSelection:hover {
     box-shadow: 0 1px 4px 2px rgba(255, 255, 255, 0.5);
 }
+
+@media (max-width: 1200px) {
+    .SubmittedSelection {
+        width: 47%;
+    }
+}
+
+@media (max-width: 585px) {
+    .SubmittedSelection {
+        width: 100%;
+    }
+}

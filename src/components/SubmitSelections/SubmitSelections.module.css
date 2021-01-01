@@ -2,6 +2,13 @@
     background: #111111;
     height: 100%;
     min-height: 100vh;
+    padding: 1rem;
+}
+
+.MainContent {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
 }
 
 @media (max-width: 1200px) {

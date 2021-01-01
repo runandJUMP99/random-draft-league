@@ -2,7 +2,8 @@ import * as actionTypes from "../actions/actionTypes";
 
 const initialState = {
     selections: [],
-    setSelectionId: null
+    setSelectionId: null,
+    subject: null
 }
 
 export default (state = initialState, action) => {
@@ -36,7 +37,12 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 setSelectionId: action.payload
-            }
+            };
+        case actionTypes.SET_SELECTION_SUBJECT:
+            return {
+                ...state,
+                subject: action.payload
+            };
         default:
             return state;
     }

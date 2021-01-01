@@ -16,7 +16,7 @@ const Selection = ({selectionData, showModal, lockInSelection, handleAddSelectio
     const token = useSelector(state => state.auth.token);
     const dispatch = useDispatch();
     const name = selectionData.name || "";
-    const truncatedName = name.length > 15 ? name.substring(0, 15) + "..." : name;
+    const truncatedName = name.length > 12 ? name.substring(0, 12) + "..." : name;
     const description = selectionData.description || "";
     const truncatedDescription = description.length > 8 ? description.substring(0, 8) + "..." : description;
     const selectedStyles = {
@@ -40,7 +40,7 @@ const Selection = ({selectionData, showModal, lockInSelection, handleAddSelectio
 
     return (
         <div className={classes.Selection} style={selectedStyles}>
-            <h3 style={{fontSize: showModal && "2rem"}}>{showModal ? name : truncatedName}</h3>
+            <h3 style={{fontSize: showModal ? "2rem" : "1.5rem"}}>{showModal ? name : truncatedName}</h3>
             <img src={selectionData.img ? selectionData.img : logo} alt="Selection"/>
             <p style={{padding: showModal && "0 1rem"}}>{showModal ? description : truncatedDescription}</p>
             <div className={classes.Buttons} style={{display: !showModal && "none"}}>

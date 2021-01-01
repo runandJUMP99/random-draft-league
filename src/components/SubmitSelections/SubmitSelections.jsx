@@ -2,6 +2,7 @@ import React, {useState} from "react";
 
 import Backdrop from "../UI/Backdrop/Backdrop";
 import Form from "./Form/Form";
+import Header from "./Header/Header";
 import Logo from "../UI/Logo/Logo";
 import Modal from "../UI/Modal/Modal";
 import SubmittedSelections from "./SubmittedSelections/SubmittedSelections";
@@ -18,7 +19,10 @@ const SubmitSelections = () => {
             <Modal showModal={showModal}>
                 {modalContent}
             </Modal>
-            <SubmittedSelections setModalContent={setModalContent} setShowModal={setShowModal} />
+            <div className={classes.MainContent}>
+                <Header />
+                <SubmittedSelections setModalContent={setModalContent} setShowModal={setShowModal} />
+            </div>
             <Form />
             <div className={classes.Logo}>
                 <Logo />

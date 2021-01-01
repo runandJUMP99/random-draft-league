@@ -2,13 +2,13 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    padding: 2rem;
+    padding: 2rem 0;
     width: 70%;
 }
 
 @media (max-width: 1200px) {
     .SubmittedSelections {
-        padding: 1rem;
+        padding: 1rem 0;
         width: 100%;
     }
 }

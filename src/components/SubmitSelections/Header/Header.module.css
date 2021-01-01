@@ -1,0 +1,47 @@
+.Header {
+    background: #eee;
+    border-radius: 4px;
+    padding: 0.5rem;
+    text-align: center;
+    width: 70%;
+}
+
+.Subject {
+    display: inline-block;
+    margin-left: 0.5rem;
+}
+
+.Socials {
+    display: flex;
+    justify-content: center;
+}
+
+.Socials a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.Twitch,
+.Twitter {
+    cursor: pointer;
+    margin: 0 0.5rem;
+}
+
+.Twitch i,
+.Twitter i {
+    margin-right: 0.25rem;
+}
+
+.Twitch:hover {
+    color: #9900ad;
+}
+
+.Twitter:hover {
+    color: #13b1e0;
+}
+
+@media (max-width: 1200px) {
+    .Header {
+        width: 100%;
+    }
+}
