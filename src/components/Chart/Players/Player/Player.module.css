@@ -4,8 +4,9 @@
 }
 
 .Player {
+    background: #6b6b6b;
     border: 1px solid black;
-    height: 135px;
+    height: 150px;
     margin: 0.25rem 0;
     padding: 0.5rem;
     transition: all 0.25s ease-out;

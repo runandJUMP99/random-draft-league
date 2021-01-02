@@ -22,13 +22,15 @@
 }
 
 .Twitch,
-.Twitter {
+.Twitter,
+.Facebook {
     cursor: pointer;
     margin: 0 0.5rem;
 }
 
 .Twitch i,
-.Twitter i {
+.Twitter i,
+.Facebook i {
     margin-right: 0.25rem;
 }
 
@@ -38,6 +40,10 @@
 
 .Twitter:hover {
     color: #13b1e0;
+}
+
+.Facebook:hover {
+    color: #2424f1;
 }
 
 @media (max-width: 1200px) {

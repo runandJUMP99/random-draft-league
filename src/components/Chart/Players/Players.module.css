@@ -1,5 +1,4 @@
 .Players {
-    background: #6b6b6b;
     color: white;
     display: flex;
     flex-direction: column;
@@ -10,5 +9,8 @@
 }
 
 .Players h2 {
+    background: #6b6b6b;
+    border: 1px solid black;
+    font-size: 1.75rem;
     padding: 0 0.5rem;
 }

@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
+import StarIcon from '@material-ui/icons/Star';
 
 import Button from "../../UI/Button/Button";
 
@@ -18,7 +19,6 @@ const Selection = ({selectionData, showModal, lockInSelection, handleAddSelectio
     const name = selectionData.name || "";
     const truncatedName = name.length > 12 ? name.substring(0, 12) + "..." : name;
     const description = selectionData.description || "";
-    const truncatedDescription = description.length > 8 ? description.substring(0, 8) + "..." : description;
     const selectedStyles = {
         background: selectionData.isSelected && "#000120",
         boxShadow: selectionData.isSelected && "0 0 0 0",
@@ -42,7 +42,7 @@ const Selection = ({selectionData, showModal, lockInSelection, handleAddSelectio
         <div className={classes.Selection} style={selectedStyles}>
             <h3 style={{fontSize: showModal ? "2rem" : "1.5rem"}}>{showModal ? name : truncatedName}</h3>
             <img src={selectionData.img ? selectionData.img : logo} alt="Selection"/>
-            <p style={{padding: showModal && "0 1rem"}}>{showModal ? description : truncatedDescription}</p>
+            <p style={{padding: showModal && "0 1rem"}}>{showModal && description}</p>
             <div className={classes.Buttons} style={{display: !showModal && "none"}}>
                 <button className={classes.LockIn} disabled={players.length === 0} onClick={() => lockInSelection(selectionData.id)} style={{
                     display: selectionData.isSelected && "none"
@@ -50,15 +50,22 @@ const Selection = ({selectionData, showModal, lockInSelection, handleAddSelectio
                     {players.length === 0 ? "PLEASE ADD PLAYERS" : "LOCK IN"}
                 </button>
                 <div className={classes.EditDeleteButtons}>
-                    <div className={classes.EditButton}>
-                        <Button style={{
-                            background: "#01023a",
-                            margin: "0.25rem",
-                            padding: "0.25rem"
-                        }}>
-                            <EditIcon onClick={() => handleAddSelection(true)} fontSize="small" />
-                        </Button>
-                    </div>
+                    <Button onClick={() => lockInSelection(selectionData.id, true)} style={{
+                        background: "#01023a",
+                        margin: "0.25rem",
+                        padding: "0.25rem",
+                        position: "initial"
+                    }}>
+                        <StarIcon fontSize="small" />
+                    </Button>
+                    <Button onClick={() => handleAddSelection(true)} style={{
+                        background: "#01023a",
+                        margin: "0.25rem",
+                        padding: "0.25rem",
+                        position: "initial"
+                    }}>
+                        <EditIcon fontSize="small" />
+                    </Button>
                     <Button onClick={handleDelete} style={{
                         background: "#01023a",
                         margin: "0.25rem",

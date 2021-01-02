@@ -1,14 +1,15 @@
 .Round {
     display: flex;
     flex-direction: column;
-    padding: 0 0.25rem;
+    padding: 0 0.5rem;
     position: relative;
 }
 
 .Round h2 {
     border-radius: 4px;
     cursor: pointer;
-    padding: 0 0.25rem;
+    font-size: 1.75rem;
+    padding: 0 0.25rem 2px;
     transition: all 0.25s ease-out;
 }
 

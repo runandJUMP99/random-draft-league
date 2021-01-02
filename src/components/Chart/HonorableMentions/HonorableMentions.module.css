@@ -1,0 +1,41 @@
+.HonorableMentions {
+    display: flex;
+}
+
+.HonorableMentions h4 {
+    border: 1px solid black;
+    cursor: pointer;
+    height: 150px;
+    font-size: 1.35rem;
+    margin: 0.25rem 0;
+    max-width: 12rem;
+    min-width: 12rem;
+    padding: 0.5rem;
+    transition: all 0.25s ease-out;
+    word-break: break-word;
+}
+
+.HonorableMentions h4:hover {
+    background: #cfcfcf;
+}
+
+.Selections {
+    display: flex;
+}
+
+.Selection {
+    padding: 0 0.5rem;
+}
+
+.ModalContent h2 {
+    color: black;   
+    margin: 0 auto 1rem;
+    text-align: center;
+}
+
+.ModalContent .Selections {
+    flex-wrap: wrap;
+    height: 500px;
+    justify-content: center;
+    overflow: auto;
+}

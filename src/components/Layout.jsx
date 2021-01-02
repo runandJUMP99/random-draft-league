@@ -108,30 +108,41 @@ const Layout = () => {
         );
     }
     
-    function lockInSelection(id) {
+    function lockInSelection(id, honorableMention) {
         const playerId = players[playerTurn].playerId;
         let newSelection = selections.find(selection => selection.id === id);
 
-        newSelection = {
-            ...newSelection,
-            isSelected: true,
-            player: playerId,
-            roundSelected: round
-        }
-
-        if (forward) {            
-            if (playerTurn === players.length - 1) {
-                setRound(prevRound => prevRound + 1);
-                setForward(false);
-            } else {
-                setPlayerTurn(prevTurn => prevTurn + 1);
+        if (honorableMention) {
+            newSelection = {
+                ...newSelection,
+                honorableMention: true,
+                isSelected: true,
+                player: null,
+                roundSelected: null
             }
         } else {
-            if (playerTurn === 0) {
-                setRound(prevRound => prevRound + 1);
-                setForward(true);
+            newSelection = {
+                ...newSelection,
+                honorableMention: false,
+                isSelected: true,
+                player: playerId,
+                roundSelected: round
+            }
+    
+            if (forward) {            
+                if (playerTurn === players.length - 1) {
+                    setRound(prevRound => prevRound + 1);
+                    setForward(false);
+                } else {
+                    setPlayerTurn(prevTurn => prevTurn + 1);
+                }
             } else {
-                setPlayerTurn(prevTurn => prevTurn - 1);                
+                if (playerTurn === 0) {
+                    setRound(prevRound => prevRound + 1);
+                    setForward(true);
+                } else {
+                    setPlayerTurn(prevTurn => prevTurn - 1);                
+                }
             }
         }
 
@@ -172,6 +183,7 @@ const Layout = () => {
                     handleSelection={handleSelection}
                     setModalContent={setModalContent} 
                     setShowModal={setShowModal}
+                    showModal={showModal}
                 />
             </div>
             <Controls 

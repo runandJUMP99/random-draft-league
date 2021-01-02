@@ -7,7 +7,7 @@ import classes from "./Rounds.module.css";
 import {getChart} from "../../../store/actions/chart";
 
 const Rounds = ({handleSelection, setModalContent, setShowModal}) => {
-    const chart = useSelector(state => state.chart);
+    const chart = useSelector(state => state.chart.filter(selection => !selection.honorableMention));
     const players = useSelector(state => state.players.players);
     const dispatch = useDispatch();
     let rounds = [];

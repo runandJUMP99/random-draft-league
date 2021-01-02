@@ -36,7 +36,8 @@ const Header = () => {
             let updatedSubject = {
                 ...subject,
                 id: id
-            }
+            };
+
             setUpdating(false);
             dispatch(setSelectionSubject(id, updatedSubject, token));
         }
@@ -62,6 +63,7 @@ const Header = () => {
             <div className={classes.Socials}>
                 <p className={classes.Twitch}><a target="_blank" rel="noopener noreferrer" href="https://twitch.com/heathypoop"><i className="fab fa-twitch"></i>Twitch</a></p>
                 <p className={classes.Twitter}><a target="_blank" rel="noopener noreferrer" href="https://twitter.com/draft_random"><i className="fab fa-twitter"></i>Twitter</a></p>
+                <p className={classes.Facebook}><a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/RandomDraftLeague"><i className="fab fa-facebook"></i>Facebook</a></p>
             </div>
         </div>
     );

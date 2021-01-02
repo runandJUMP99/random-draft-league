@@ -1,17 +1,18 @@
 .Selection {
     background: #13158d;
+    border-radius: 4px;
     box-shadow: 0 1px 0 2px #02045f;
     color: white;
     cursor: pointer;
     display: flex;
     flex-direction: column;
-    height: 135px;
+    height: 150px;
     justify-content: space-between;
     margin: 0.25rem;
     padding: 0.5rem;
     text-align: center;
     transition: all 0.5s ease-out;
-    width: 8rem;
+    width: 10rem;
 }
 
 .Selection:hover {
@@ -26,22 +27,18 @@
 }
 
 .Selection img {
-    box-shadow: 0 1px 4px 2px rgba(0, 0, 0, 0.5);
     margin: 0.5rem auto;
     object-fit: contain;
     overflow: hidden;
-    max-width: 50%;
+    max-width: 60%;
 }
 
 .EditDeleteButtons {
     bottom: 2rem;
+    display: flex;
+    flex-direction: column;
     position: absolute;
     right: 2rem;
-}
-
-.EditButton {
-    top: 0.75rem;
-    position: absolute;
 }
 
 .LockIn {
