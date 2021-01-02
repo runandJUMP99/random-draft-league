@@ -12,7 +12,7 @@
     display: flex;
     flex-wrap: wrap;
     height: 500px;
-    justify-content: space-between;
+    justify-content: center;
     overflow: auto;
 }
 
