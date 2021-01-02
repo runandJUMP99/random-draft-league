@@ -28,9 +28,11 @@
 
 .Selection img {
     margin: 0.5rem auto;
+    max-height: 400px;
+    max-width: 300px;
     object-fit: contain;
     overflow: hidden;
-    max-width: 60%;
+    width: 60%;
 }
 
 .EditDeleteButtons {
