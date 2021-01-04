@@ -8,7 +8,7 @@ import Continue from "../UI/Continue/Continue";
 
 import classes from "./AddSelection.module.css";
 import {addSelection, editSelection, setSelectionId} from "../../store/actions/selections";
-import {editSubmittedSelection} from "../../store/actions/submittedSelections";
+import {deleteSubmittedSelection, editSubmittedSelection} from "../../store/actions/submittedSelections";
 
 const AddSelection = ({submittedSelection, setShowModal}) => {
     const [continueAdding, setContinueAdding] = useState(true);
@@ -47,7 +47,7 @@ const AddSelection = ({submittedSelection, setShowModal}) => {
                     ...submittedSelection,
                     isSelected: true
                 };
-                console.log(newSelection.id);
+
                 dispatch(editSubmittedSelection(newSelection.id, newSelection, token));
             }
             
@@ -56,6 +56,10 @@ const AddSelection = ({submittedSelection, setShowModal}) => {
 
         setContinueAdding(false);
         clear();
+    }
+
+    function handleDelete() {
+        dispatch(deleteSubmittedSelection(submittedSelection.id, token));
     }
 
     function clear() {
@@ -101,6 +105,7 @@ const AddSelection = ({submittedSelection, setShowModal}) => {
                     </div>
                     <Button className={classes.ButtonSubmit} color="primary" fullWidth size="large" type="submit" variant="contained">Submit</Button>
                     <Button color="secondary" fullWidth onClick={clear} size="small" variant="contained">Clear</Button>
+                    <Button fullWidth onClick={handleDelete} size="small" variant="contained" style={{display: !submittedSelection && "none", marginTop: "0.3rem !important"}}>Delete</Button>
                 </form>
                 : <Continue setContinueAdding={setContinueAdding} setShowModal={setShowModal} heading="Entries" />}
         </Paper>

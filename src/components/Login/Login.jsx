@@ -27,7 +27,7 @@ const Login = () => {
             {isAuthenticated && <Redirect to="/" />}
             <Paper className={classes.Paper}>
                 <form autoComplete="off" className={classes.Form} noValidate onSubmit={handleSubmit}>
-                    <Typography align="center" variant="h6">
+                    <Typography align="center" variant="h6" style={{color: error && "red"}}>
                         {!error ? "Random Draft League  " : "Invalid Login. Please Try Again"}
                     </Typography>
                     <TextField 

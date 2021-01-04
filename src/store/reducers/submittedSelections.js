@@ -8,6 +8,8 @@ export default (submittedSelections = [], action) => {
             return action.payload;
         case actionTypes.EDIT_SUBMITTED_SELECTION:
             return submittedSelections.map(selection => selection.id === action.payload.id ? action.payload : selection);
+        case actionTypes.DELETE_SUBMITTED_SELECTION:
+            return submittedSelections.filter(selection => selection.id !== action.payload);  
         case actionTypes.CLEAR_SUBMITTED_SELECTIONS:
             return [];
         default:

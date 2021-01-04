@@ -17,23 +17,11 @@ const Selections = ({showModal, handleSelection}) => {
     }, [dispatch]);
 
     selectedSelections.sort((a, b) => {
-        if (a.name < b.name) {
-            return -1;
-        } else if (a.name > b.name) {
-            return 1;
-        } else {
-            return 0;
-        }
+        return a.name.localeCompare(b.name, 'en', {'sensitivity': 'base'});
     });
 
     notSelectedSelections.sort((a, b) => {
-        if (a.name < b.name) {
-            return -1;
-        } else if (a.name > b.name) {
-            return 1;
-        } else {
-            return 0;
-        }
+        return a.name.localeCompare(b.name, 'en', {'sensitivity': 'base'});
     });
 
     selections = notSelectedSelections.concat(selectedSelections);

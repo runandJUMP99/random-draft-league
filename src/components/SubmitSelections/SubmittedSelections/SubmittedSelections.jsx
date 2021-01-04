@@ -20,28 +20,15 @@ const SubmittedSelections = ({setModalContent, setShowModal}) => {
     }, [dispatch]);
 
     selectedSelections.sort((a, b) => {
-        if (a.name < b.name) {
-            return -1;
-        } else if (a.name > b.name) {
-            return 1;
-        } else {
-            return 0;
-        }
+        return a.name.localeCompare(b.name, 'en', {'sensitivity': 'base'});
     });
 
     notSelectedSelections.sort((a, b) => {
-        if (a.name < b.name) {
-            return -1;
-        } else if (a.name > b.name) {
-            return 1;
-        } else {
-            return 0;
-        }
+        return a.name.localeCompare(b.name, 'en', {'sensitivity': 'base'});
     });
 
     submittedSelections = notSelectedSelections.concat(selectedSelections);
-
-
+    
     function handleClick(id) {
         const selectedSubmission = submittedSelections.filter(selection => selection.id === id);
 

@@ -45,6 +45,16 @@ export const editSubmittedSelection = (id, selection, token) => async(dispatch) 
     }
 };
 
+export const deleteSubmittedSelection = (id, token) => (dispatch) => {
+    try {
+        api.deleteSubmittedSelection(id, token);
+
+        dispatch({type: actionTypes.DELETE_SUBMITTED_SELECTION, payload: id});
+    } catch(err) {
+        console.log(err);
+    }
+};
+
 export const clearSubmittedSelections = (selections) => (dispatch) => {
     try {
         selections.forEach(selection => {

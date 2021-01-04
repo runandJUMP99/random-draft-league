@@ -59,7 +59,8 @@ const Header = () => {
                     : <span className={classes.Subject}onClick={handleClick}>{currentSubject ? currentSubject.name : subject.name}</span>
                 }
             </h2>
-            <p>Follow us on Twitch and Twitter for updates on the next draft!</p>
+            <p style={{marginBottom: 0}}>Submit up to 3 entries per week. Make sure to provide a name to be eligible for prizes.</p>
+            <p>Follow us on Twitch, Twitter, and Facebook for updates on the next draft!</p>
             <div className={classes.Socials}>
                 <p className={classes.Twitch}><a target="_blank" rel="noopener noreferrer" href="https://twitch.com/heathypoop"><i className="fab fa-twitch"></i>Twitch</a></p>
                 <p className={classes.Twitter}><a target="_blank" rel="noopener noreferrer" href="https://twitter.com/draft_random"><i className="fab fa-twitter"></i>Twitter</a></p>

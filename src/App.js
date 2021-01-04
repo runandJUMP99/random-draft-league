@@ -20,16 +20,18 @@ function App() {
     <Switch>
       <Route path="/login" component={Login} />
       <Route path="/submitselections" component={SubmitSelections} />
+      <Route path="/submit" component={SubmitSelections} />
       <Redirect to="/login" />
     </Switch>
   );
-
+  
   if (isAuthenticated) {
     routes = (
       <Switch>
         <Route path="/" exact component={Layout} />
         <Route path="/login" component={Login} />
         <Route path="/submitselections" component={SubmitSelections} />
+        <Route path="/submit" component={SubmitSelections} />
       </Switch>
     );
   }

@@ -4,12 +4,18 @@
     font-weight: bold;
     margin: 0.5rem;
     padding: 0.25rem;
+    position: relative;
     transition: all 0.25s ease-out;
     width: 20%;
 }
 
 .SubmittedSelection:hover {
     box-shadow: 0 1px 4px 2px rgba(255, 255, 255, 0.5);
+}
+
+.SubmittedSelection p {
+    margin-bottom: 0.25rem;
+    word-wrap: break-word
 }
 
 @media (max-width: 1200px) {

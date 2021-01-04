@@ -23,7 +23,7 @@ export const auth = (authData) => axios.post(authUrl, authData);
 export const addSubmittedSelection = (newSelection) => axios.post(`${url}/submittedselections.json`, newSelection);
 export const getSubmittedSelections = () => axios.get(`${url}/submittedselections.json`);
 export const editSubmittedSelection = (id, updatedSelection, token) => axios.patch(`${url}/submittedselections/${id}.json?auth=${token}`, updatedSelection);
-export const deleteSubmittedSelection = (id) => axios.delete(`${url}/submittedselections/${id}.json`);
+export const deleteSubmittedSelection = (id, token) => axios.delete(`${url}/submittedselections/${id}.json?auth=${token}`);
 
 export const addSelectionSubject = (subject, token) => axios.post(`${url}/subject.json?auth=${token}`, subject);
 export const getSelectionSubject = () => axios.get(`${url}/subject.json`);
