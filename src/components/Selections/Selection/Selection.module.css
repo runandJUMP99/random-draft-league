@@ -9,7 +9,8 @@
     height: 150px;
     justify-content: space-between;
     margin: 0.25rem;
-    padding: 0.5rem;
+    max-height: 500px;
+    padding: 0.5rem 2rem;
     text-align: center;
     transition: all 0.5s ease-out;
     width: 10rem;
@@ -28,7 +29,6 @@
 
 .Selection img {
     margin: 0.5rem auto;
-    max-height: 400px;
     max-width: 300px;
     object-fit: contain;
     overflow: hidden;
