@@ -9,6 +9,10 @@ const RoundSummary = ({round, selections}) => {
     const players = useSelector(state => state.players.players);
     let count = -1;
 
+    if (round % 2 === 0) {
+        selections = selections.reverse();
+    }
+
     return (
         <div className={classes.RoundSummary}>
             <h2>Round {round}</h2>
