@@ -4,10 +4,10 @@ import {useDispatch, useSelector} from "react-redux";
 import Round from "./Round/Round";
 
 import classes from "./Rounds.module.css";
-import {getChart} from "../../../store/actions/chart";
+import {getChart, getRounds} from "../../../store/actions/chart";
 
 const Rounds = ({handleSelection, setModalContent, setShowModal}) => {
-    const chart = useSelector(state => state.chart.filter(selection => !selection.honorableMention));
+    const chart = useSelector(state => state.chart.chart.filter(selection => !selection.honorableMention));
     const players = useSelector(state => state.players.players);
     const dispatch = useDispatch();
     let rounds = [];
@@ -17,6 +17,7 @@ const Rounds = ({handleSelection, setModalContent, setShowModal}) => {
 
     useEffect(() => {
         dispatch(getChart());
+        dispatch(getRounds());
     }, [dispatch]);
 
     chart.forEach(selection => {

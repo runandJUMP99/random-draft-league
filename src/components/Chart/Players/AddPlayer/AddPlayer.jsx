@@ -6,11 +6,15 @@ import {Button, Paper, TextField, Typography} from "@material-ui/core";
 import Continue from "../../../UI/Continue/Continue";
 
 import classes from "./AddPlayer.module.css";
+import {setRounds} from "../../../../store/actions/chart";
 import {addPlayer, editPlayer, setPlayerId} from "../../../../store/actions/players";
 
 const AddPlayer = ({setShowModal}) => {
     const [continueAdding, setContinueAdding] = useState(true);
     const [player, setPlayer] = useState({name: ""});
+    const [totalRounds, setTotalRounds] = useState({total: ""});
+    const [roundsSet, setRoundsSet] = useState(false);
+    const players = useSelector(state => state.players.players);
     const playerId = useSelector(state => state.players.setPlayerId);
     const selectedPlayer = useSelector(state => playerId && state.players.players.find(p => p.playerId === playerId));
     const token = useSelector(state => state.auth.token);
@@ -29,10 +33,15 @@ const AddPlayer = ({setShowModal}) => {
     function handleSubmit(event) {
         event.preventDefault();
 
-        if (playerId) {
-            dispatch(editPlayer(playerId, player, token));
+        if (players.length === 0 && !roundsSet) {
+            dispatch(setRounds(totalRounds, token));
+            setRoundsSet(true);
         } else {
-            dispatch(addPlayer(player, token));
+            if (playerId) {
+                dispatch(editPlayer(playerId, player, token));
+            } else {
+                dispatch(addPlayer(player, token));
+            }
         }
 
         setContinueAdding(false);
@@ -42,7 +51,23 @@ const AddPlayer = ({setShowModal}) => {
 
     return (
         <Paper className={classes.Paper}>
-            {continueAdding
+            {players.length === 0 && !roundsSet
+                ? <form autoComplete="off" className={classes.Form} noValidate onSubmit={handleSubmit}>
+                    <Typography align="center" variant="h6">How Many Rounds?</Typography>
+                    <p>-Leave Blank To Have Unlimited Rounds-</p>
+                    <TextField 
+                        fullWidth 
+                        label="Total Rounds"
+                        margin="normal" 
+                        name="rounds"
+                        onChange={(event) => setTotalRounds({...totalRounds, total: event.target.value})} 
+                        required
+                        value={totalRounds.total}
+                        variant="outlined" 
+                    />
+                    <Button className={classes.ButtonSubmit} color="primary" fullWidth size="large" type="submit" variant="contained">Submit</Button>
+                </form>
+                : continueAdding
                 ? <form autoComplete="off" className={classes.Form} noValidate onSubmit={handleSubmit}>
                     <Typography align="center" variant="h6">Add Player</Typography>
                     <TextField 

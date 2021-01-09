@@ -24,10 +24,12 @@ export const getChart = () => async(dispatch) => {
         const {data} = await api.getChart();
 
         for (let key in data) {
-            fetchedChart.push({
-                ...data[key],
-                chartId: key
-            });
+            if (key !== "rounds") {
+                fetchedChart.push({
+                    ...data[key],
+                    chartId: key
+                });
+            }
         }
         
         dispatch({type: actionTypes.GET_CHART, payload: fetchedChart});
@@ -53,6 +55,38 @@ export const clearChart = (selections, token) => (dispatch) => {
         });
 
         dispatch({type: actionTypes.CLEAR_CHART});
+    } catch(err) {
+        console.log(err);
+    }
+};
+
+export const setRounds = (rounds, token) => async(dispatch) => {
+    try {
+        const {data} = await api.setRounds(rounds, token);
+        const setRounds = {
+            ...rounds,
+            id: data.name,                
+        };
+
+        dispatch({type: actionTypes.SET_ROUNDS, payload: setRounds});
+    } catch(err) {
+        console.log(err);
+    }
+};
+
+export const getRounds = () => async(dispatch) => {
+    try {
+        const {data} = await api.getRounds();
+        let fetchedRounds;
+
+        for (let key in data) {
+            fetchedRounds = {
+                ...data[key],
+                id: key  
+            };
+        }
+
+        dispatch({type: actionTypes.GET_ROUNDS, payload: fetchedRounds});
     } catch(err) {
         console.log(err);
     }

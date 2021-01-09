@@ -13,12 +13,15 @@ import {removeFromChart} from "../../../store/actions/chart";
 import logo from "../../../assets/images/logo.png";
 
 const Selection = ({selectionData, showModal, lockInSelection, handleAddSelection, setShowModal}) => {
+    const chart = useSelector(state => state.chart.chart);
     const players = useSelector(state => state.players.players);
+    const totalRounds = useSelector(state => state.chart.rounds.total);
     const token = useSelector(state => state.auth.token);
     const dispatch = useDispatch();
-    const name = selectionData.name || "";
-    const truncatedName = name.length > 12 ? name.substring(0, 12) + "..." : name;
     const description = selectionData.description || "";
+    const name = selectionData.name || "";
+    const totalSelections = players.length * totalRounds;
+    const truncatedName = name.length > 12 ? name.substring(0, 12) + "..." : name;
     const selectedStyles = {
         background: selectionData.isSelected && "#000120",
         boxShadow: selectionData.isSelected && "0 0 0 0",
@@ -37,14 +40,14 @@ const Selection = ({selectionData, showModal, lockInSelection, handleAddSelectio
 
         setShowModal(false);
     }
-
+    
     return (
         <div className={classes.Selection} style={selectedStyles}>
             <h3 style={{fontSize: showModal ? "2rem" : "1.5rem"}}>{showModal ? name : truncatedName}</h3>
             <img src={selectionData.img ? selectionData.img : logo} alt="Selection"/>
             <p style={{padding: showModal && "0 1rem"}}>{showModal && description}</p>
             <div className={classes.Buttons} style={{display: !showModal && "none"}}>
-                <button className={classes.LockIn} disabled={players.length === 0} onClick={() => lockInSelection(selectionData.id)} style={{
+                <button className={classes.LockIn} disabled={players.length === 0 || (totalSelections !== 0 && chart.length >= totalSelections)} onClick={() => lockInSelection(selectionData.id)} style={{
                     display: selectionData.isSelected && "none"
                 }}>
                     {players.length === 0 ? "PLEASE ADD PLAYERS" : "LOCK IN"}

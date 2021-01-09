@@ -12,6 +12,8 @@ export const deleteSelection = (id, token) => axios.delete(`${url}/${id}.json?au
 export const addToChart = (newAddition, token) => axios.post(`${url}/chart.json?auth=${token}`, newAddition);
 export const getChart = () => axios.get(`${url}/chart.json`);
 export const removeFromChart = (id, token) => axios.delete(`${url}/chart/${id}.json?auth=${token}`);
+export const setRounds = (rounds, token) => axios.post(`${url}/chart/rounds.json?auth=${token}`, rounds);
+export const getRounds = () => axios.get(`${url}/chart/rounds.json`);
 
 export const addPlayer = (player, token) => axios.post(`${url}/players.json?auth=${token}`, player);
 export const getPlayers = () => axios.get(`${url}/players.json`);
