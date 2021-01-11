@@ -55,10 +55,10 @@ export const deleteSubmittedSelection = (id, token) => (dispatch) => {
     }
 };
 
-export const clearSubmittedSelections = (selections) => (dispatch) => {
+export const clearSubmittedSelections = (selections, token) => (dispatch) => {
     try {
         selections.forEach(selection => {
-            api.deleteSubmittedSelection(selection.id);
+            api.deleteSubmittedSelection(selection.id, token);
         });
 
         dispatch({type: actionTypes.CLEAR_SUBMITTED_SELECTIONS});

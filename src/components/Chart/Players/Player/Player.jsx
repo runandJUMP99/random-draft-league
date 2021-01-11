@@ -13,7 +13,7 @@ import classes from "./Player.module.css";
 import {setPlayerId} from "../../../../store/actions/players";
 
 const Player = ({player, setModalContent, setShowModal}) => {
-    const chart = useSelector(state => state.chart.chart);
+    const chart = useSelector(state => state.selections.selections.filter(selection => selection.player));
     const dispatch = useDispatch();
 
     function handleClick() {

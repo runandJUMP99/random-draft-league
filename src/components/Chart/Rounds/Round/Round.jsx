@@ -13,7 +13,7 @@ const Round = ({handleSelection, round, selections, setModalContent, setShowModa
   
     return (
         <div className={classes.Round} style={{
-            background: round % 2 === 0 && "#ccc",
+            background: round % 2 === 0 && "#58585828",
             justifyContent: round % 2 === 0 && "space-between"
         }}>
             <h2 onClick={handleClick}>Round {round}</h2>
@@ -21,7 +21,7 @@ const Round = ({handleSelection, round, selections, setModalContent, setShowModa
                 {selections.map(selection => {
                     if (typeof selection === "object") {
                         return (
-                            <div key={selection.chartId} onClick={() => handleSelection(selection.id)}>
+                            <div key={selection.id} onClick={() => handleSelection(selection.id)}>
                                 <Selection selectionData={selection} />
                             </div>
                         )

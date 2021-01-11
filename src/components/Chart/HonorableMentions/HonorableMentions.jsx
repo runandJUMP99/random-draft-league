@@ -6,7 +6,7 @@ import Selection from "../../Selections/Selection/Selection";
 import classes from "./HonorableMentions.module.css";
 
 const HonorableMentions = ({handleSelection, setModalContent, setShowModal}) => {
-    let honorableMentions = useSelector(state => state.chart.chart.filter(selection => selection.honorableMention));
+    let honorableMentions = useSelector(state => state.selections.selections.filter(selection => selection.honorableMention));
     honorableMentions = honorableMentions.map(selection => (
         <div key={selection.chartId} className={classes.Selection} onClick={() => handleSelection(selection.id)}>
             <Selection selectionData={selection} />

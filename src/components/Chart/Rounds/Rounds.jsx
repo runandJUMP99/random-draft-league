@@ -1,24 +1,18 @@
-import React, {useEffect} from "react";
-import {useDispatch, useSelector} from "react-redux";
+import React from "react";
+import {useSelector} from "react-redux";
 
 import Round from "./Round/Round";
 
 import classes from "./Rounds.module.css";
-import {getChart, getRounds} from "../../../store/actions/chart";
-
 const Rounds = ({handleSelection, setModalContent, setShowModal}) => {
-    const chart = useSelector(state => state.chart.chart.filter(selection => !selection.honorableMention));
+    const chart = useSelector(state => state.selections.selections.filter(selection => selection.player));
     const players = useSelector(state => state.players.players);
-    const dispatch = useDispatch();
     let rounds = [];
     let round = [];
     let roundCount = 1;
     let count = 0;
 
-    useEffect(() => {
-        dispatch(getChart());
-        dispatch(getRounds());
-    }, [dispatch]);
+    chart.sort((a, b) => a.order - b.order);
 
     chart.forEach(selection => {
         round.push(selection);

@@ -13,7 +13,7 @@ import ClearBoard from "../Board/ClearBoard/ClearBoard";
 import classes from "./Controls.module.css";
 
 const Controls = ({display, handleDisplay, handleAddSelection, handleAddPlayer, setModalContent, setShowModal}) => {
-    const chart = useSelector(state => state.chart.chart);
+    const chart = useSelector(state => state.selections.selections.filter(selection => selection.player));
     
     function handleClick() {
         setModalContent(<ClearBoard setShowModal={setShowModal} />);

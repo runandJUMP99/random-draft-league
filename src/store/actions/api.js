@@ -9,10 +9,7 @@ export const getSelections = () => axios.get(`${url}.json`);
 export const editSelection = (id, updatedSelection, token) => axios.patch(`${url}/${id}.json?auth=${token}`, updatedSelection);
 export const deleteSelection = (id, token) => axios.delete(`${url}/${id}.json?auth=${token}`);
 
-export const addToChart = (newAddition, token) => axios.post(`${url}/chart.json?auth=${token}`, newAddition);
-export const getChart = () => axios.get(`${url}/chart.json`);
-export const removeFromChart = (id, token) => axios.delete(`${url}/chart/${id}.json?auth=${token}`);
-export const setRounds = (rounds, token) => axios.post(`${url}/chart/rounds.json?auth=${token}`, rounds);
+export const setRounds = (rounds, token) => axios.put(`${url}/chart/rounds.json?auth=${token}`, rounds);
 export const getRounds = () => axios.get(`${url}/chart/rounds.json`);
 
 export const addPlayer = (player, token) => axios.post(`${url}/players.json?auth=${token}`, player);

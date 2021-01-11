@@ -1,14 +1,21 @@
 .Chart {
-    background: #eee;
-    border-bottom: 2px solid #3f3f3f;
-    border-right: 2px solid #3f3f3f;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    background: #fcfafa;
+    border-radius: 0 0 32px 0;
+    box-shadow: 0 0 32px 8px rgba(0, 0, 0, 0.5) inset;
     color: black;
+    height: 90vh;
     left: 0;
-    max-height: 90vh;
-    overflow: auto; 
+    overflow: auto;
+    padding: 0.5rem;
     position: fixed;
     top: 0;
     width: 75%;
+}
+
+.Chart::-webkit-scrollbar {
+    display: none;
 }
 
 .PlayersAndRounds {

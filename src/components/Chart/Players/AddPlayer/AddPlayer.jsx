@@ -12,7 +12,7 @@ import {addPlayer, editPlayer, setPlayerId} from "../../../../store/actions/play
 const AddPlayer = ({setShowModal}) => {
     const [continueAdding, setContinueAdding] = useState(true);
     const [player, setPlayer] = useState({name: ""});
-    const [totalRounds, setTotalRounds] = useState({total: ""});
+    const [totalRounds, setTotalRounds] = useState("");
     const [roundsSet, setRoundsSet] = useState(false);
     const players = useSelector(state => state.players.players);
     const playerId = useSelector(state => state.players.setPlayerId);
@@ -60,7 +60,7 @@ const AddPlayer = ({setShowModal}) => {
                         label="Total Rounds"
                         margin="normal" 
                         name="rounds"
-                        onChange={(event) => setTotalRounds({...totalRounds, total: event.target.value})} 
+                        onChange={(event) => setTotalRounds(event.target.value)} 
                         required
                         value={totalRounds.total}
                         variant="outlined" 

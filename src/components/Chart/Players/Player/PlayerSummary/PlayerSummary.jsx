@@ -6,9 +6,11 @@ import Selection from "../../../../Selections/Selection/Selection";
 import classes from "./PlayerSummary.module.css";
 
 const PlayerSummary = ({player}) => {
-    const chart = useSelector(state => state.chart);
+    const chart = useSelector(state => state.selections.selections.filter(selection => selection.player));
     const playerSummary = chart.filter(selection => selection.player === player.playerId);
     let round = 0;
+
+    playerSummary.sort((a, b) => a.order - b.order);
 
     return (
         <div className={classes.PlayerSummary}>
@@ -17,7 +19,7 @@ const PlayerSummary = ({player}) => {
                 {playerSummary.map(selection => {
                     round++
                     return (
-                        <div key={selection.chartId} className={classes.Summary}>
+                        <div key={selection.id} className={classes.Summary}>
                             <h4>Round {round}:</h4>
                             <Selection selectionData={selection} />
                         </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -8,14 +8,15 @@ import StarIcon from '@material-ui/icons/Star';
 import Button from "../../UI/Button/Button";
 
 import classes from "./Selection.module.css";
+import {getRounds} from "../../../store/actions/chart";
 import {deleteSelection} from "../../../store/actions/selections";
-import {removeFromChart} from "../../../store/actions/chart";
 import logo from "../../../assets/images/logo.png";
 
 const Selection = ({selectionData, showModal, lockInSelection, handleAddSelection, setShowModal}) => {
-    const chart = useSelector(state => state.chart.chart);
+    const [isOver, setIsOver] = useState(false);
+    const chart = useSelector(state => state.selections.selections.filter(selection => selection.player));
     const players = useSelector(state => state.players.players);
-    const totalRounds = useSelector(state => state.chart.rounds.total);
+    const totalRounds = useSelector(state => state.chart.rounds);
     const token = useSelector(state => state.auth.token);
     const dispatch = useDispatch();
     const description = selectionData.description || "";
@@ -29,22 +30,20 @@ const Selection = ({selectionData, showModal, lockInSelection, handleAddSelectio
         height: showModal && "100%",
         margin: showModal && 0,
         width: showModal && "100%"
-    };
+    };    
+    useEffect(() => {
+        dispatch(getRounds());
+    }, [dispatch]);
 
     function handleDelete() {
         dispatch(deleteSelection(selectionData.id, token));
-        
-        if (selectionData.isSelected) {
-            dispatch(removeFromChart(selectionData.chartId, token));
-        }
-
         setShowModal(false);
     }
     
     return (
         <div className={classes.Selection} style={selectedStyles}>
-            <h3 style={{fontSize: showModal ? "2rem" : "1.5rem"}}>{showModal ? name : truncatedName}</h3>
-            <img src={selectionData.img ? selectionData.img : logo} alt="Selection"/>
+            <img src={selectionData.img ? selectionData.img : logo} alt="Selection" />
+            <h4 style={{fontSize: showModal ? "2rem" : "1.5rem"}}>{showModal ? name : truncatedName}</h4>
             <p style={{padding: showModal && "0 1rem"}}>{showModal && description}</p>
             <div className={classes.Buttons} style={{display: !showModal && "none"}}>
                 <button className={classes.LockIn} disabled={players.length === 0 || (totalSelections !== 0 && chart.length >= totalSelections)} onClick={() => lockInSelection(selectionData.id)} style={{
@@ -52,7 +51,7 @@ const Selection = ({selectionData, showModal, lockInSelection, handleAddSelectio
                 }}>
                     {players.length === 0 ? "PLEASE ADD PLAYERS" : "LOCK IN"}
                 </button>
-                <div className={classes.EditDeleteButtons}>
+                <div className={classes.EditDeleteButtons} style={{display: selectionData.isSelected && "none"}}>
                     <Button onClick={() => lockInSelection(selectionData.id, true)} style={{
                         background: "#01023a",
                         margin: "0.25rem",

@@ -16,18 +16,18 @@ import Timer from "./Timer/Timer";
 import Webcam from "./Webcam/Webcam";
 
 import classes from "./Layout.module.css";
-import {setSelectionId} from "../store/actions/selections";
-import {addToChart} from "../store/actions/chart";
+import {editSelection, setSelectionId} from "../store/actions/selections";
 import {setPlayerId} from "../store/actions/players";
 
 const Layout = () => {
     const [display, setDisplay] = useState(true)
-    const [modalContent, setModalContent] = useState(null);
-    const [showModal, setShowModal] = useState(false);
-    const [playerTurn, setPlayerTurn] = useState(0);
     const [forward, setForward] = useState(true);
+    const [modalContent, setModalContent] = useState(null);
+    const [order, setOrder] = useState(0);
+    const [playerTurn, setPlayerTurn] = useState(0);
     const [round, setRound] = useState(1);
-    const chart = useSelector(state => state.chart);
+    const [showModal, setShowModal] = useState(false);
+    const chart = useSelector(state => state.selections.selections.filter(selection => selection.player));
     const isAuthenticated = useSelector(state =>  state.auth.token !== null);
     const players = useSelector(state => state.players.players);
     const selections = useSelector(state => state.selections.selections);
@@ -37,9 +37,10 @@ const Layout = () => {
     useEffect(() => { //find what the current round is and who's turn it is if page reloads
         if (chart.length !== 0) {
             const currentRound = Math.floor(chart.length / players.length) + 1; //checks what round the game is currently on
-            setRound(currentRound);
-            
             const currentPlayerTurn = chart.length % players.length; //checks which player's turn it is
+            
+            setOrder(chart.length);
+            setRound(currentRound);
 
             if (currentRound % 2 === 0) {
                 switch (currentPlayerTurn) {
@@ -117,6 +118,7 @@ const Layout = () => {
                 ...newSelection,
                 honorableMention: true,
                 isSelected: true,
+                order: null,
                 player: null,
                 roundSelected: null
             }
@@ -125,6 +127,7 @@ const Layout = () => {
                 ...newSelection,
                 honorableMention: false,
                 isSelected: true,
+                order: order,
                 player: playerId,
                 roundSelected: round
             }
@@ -146,8 +149,9 @@ const Layout = () => {
             }
         }
 
-        dispatch(addToChart(newSelection, token));
+        dispatch(editSelection(id, newSelection, token));
         setShowModal(false);
+        setOrder(prevOrder => prevOrder + 1);
         handleDisplay();
     }
  
