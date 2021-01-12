@@ -2,6 +2,7 @@ import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 
 import Selection from "./Selection/Selection";
+import Spinner from "../UI/Spinner/Spinner";
 
 import classes from "./Selections.module.css";
 import {getSelections} from "../../store/actions/selections";
@@ -28,7 +29,7 @@ const Selections = ({showModal, handleSelection}) => {
     
     return (
         <div className={classes.Selections}>
-            {selections.map(selection => (
+            {selections.length === 0 ? <Spinner /> : selections.map(selection => (
                 <div className={classes.Selection} key={selection.id} onClick={() => handleSelection(selection.id)}>
                     <Selection 
                         selectionData={selection} 
