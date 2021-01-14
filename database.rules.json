@@ -1,6 +1,13 @@
 {
   "rules": {
-    ".read": "now < 1610773200000",  // 2021-1-16
-    ".write": "now < 1610773200000",  // 2021-1-16
+    ".read": "auth != null",
+    ".write": "auth != null",
+    "subject": {
+    	".read": "true"
+    },
+    "submittedselections": {
+      ".read": "true",
+      ".write": "true"
+    }
   }
 }

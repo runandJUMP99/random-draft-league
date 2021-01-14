@@ -17,10 +17,10 @@ export const addSelection = (selection, token) => async(dispatch) => {
     }
 };
 
-export const getSelections = () => async(dispatch) => {
+export const getSelections = (token) => async(dispatch) => {
     try {
         const fetchedSelections = [];
-        const {data} = await api.getSelections();
+        const {data} = await api.getSelections(token);
 
         for (let key in data) {
             if (key !== "chart" && key !== "players" && key !== "submittedselections" && key !== "subject") {

@@ -9,12 +9,14 @@ import {getSelections} from "../../store/actions/selections";
 
 const Selections = ({showModal, handleSelection}) => {
     const dispatch = useDispatch();
+    const token = useSelector(state => state.auth.token);
     let selections = useSelector(state => state.selections.selections);
+    
     const selectedSelections = selections.filter(selection => selection.isSelected);
     const notSelectedSelections = selections.filter(selection => !selection.isSelected);
     
     useEffect(() => {
-        dispatch(getSelections());
+        dispatch(getSelections(token));
     }, [dispatch]);
 
     selectedSelections.sort((a, b) => {

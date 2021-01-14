@@ -1,9 +1,9 @@
 import * as actionTypes from "../actions/actionTypes";
 import * as api from "./api";
 
-export const getRounds = () => async(dispatch) => {
+export const getRounds = (token) => async(dispatch) => {
     try {
-        const {data} = await api.getRounds();
+        const {data} = await api.getRounds(token);
 
         dispatch({type: actionTypes.GET_ROUNDS, payload: data});
     } catch(err) {

@@ -16,10 +16,10 @@ export const addPlayer = (player, token) => async(dispatch) => {
     }
 };
 
-export const getPlayers = () => async(dispatch) => {
+export const getPlayers = (token) => async(dispatch) => {
     try {
         const fetchedPlayers = [];
-        const {data} = await api.getPlayers();
+        const {data} = await api.getPlayers(token);
 
         for (let key in data) {
             fetchedPlayers.push({

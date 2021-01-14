@@ -8,11 +8,12 @@ import {getPlayers} from "../../../store/actions/players";
 
 const Players = ({setModalContent, setShowModal}) => {
     const players = useSelector(state => state.players.players);
+    const token = useSelector(state => state.auth.token);
     const dispatch = useDispatch();
     
     useEffect(() => {
-        dispatch(getPlayers());
-    }, [dispatch]);
+        dispatch(getPlayers(token));
+    }, [dispatch, token]);
 
     return (
         <div className={classes.Players}>

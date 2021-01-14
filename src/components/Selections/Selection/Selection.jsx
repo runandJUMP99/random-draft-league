@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -13,7 +13,6 @@ import {deleteSelection} from "../../../store/actions/selections";
 import logo from "../../../assets/images/logo.png";
 
 const Selection = ({selectionData, showModal, lockInSelection, handleAddSelection, setShowModal}) => {
-    const [isOver, setIsOver] = useState(false);
     const chart = useSelector(state => state.selections.selections.filter(selection => selection.player));
     const players = useSelector(state => state.players.players);
     const totalRounds = useSelector(state => state.chart.rounds);
@@ -30,10 +29,11 @@ const Selection = ({selectionData, showModal, lockInSelection, handleAddSelectio
         height: showModal && "100%",
         margin: showModal && 0,
         width: showModal && "100%"
-    };    
+    };
+
     useEffect(() => {
-        dispatch(getRounds());
-    }, [dispatch]);
+        dispatch(getRounds(token));
+    }, [dispatch, token]);
 
     function handleDelete() {
         dispatch(deleteSelection(selectionData.id, token));

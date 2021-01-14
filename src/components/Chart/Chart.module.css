@@ -3,7 +3,7 @@
     scrollbar-width: none;
     background: #fcfafa;
     border-radius: 0 0 32px 0;
-    box-shadow: 0 0 32px 8px rgba(0, 0, 0, 0.5) inset;
+    box-shadow: -16px -16px 32px 1px rgba(0, 0, 0, 0.5) inset;
     color: black;
     height: 90vh;
     left: 0;
