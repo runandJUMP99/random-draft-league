@@ -28,6 +28,7 @@ const Selection = ({selectionData, showModal, lockInSelection, handleAddSelectio
         cursor: showModal && "initial",
         height: showModal && "100%",
         margin: showModal && 0,
+        padding: !showModal && "0.5rem",
         width: showModal && "100%"
     };
 

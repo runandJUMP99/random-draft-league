@@ -2,7 +2,7 @@
     display: flex;
 }
 
-.HonorableMentions h4 {
+.Title {
     border: 1px solid black;
     cursor: pointer;
     height: 150px;
@@ -15,7 +15,7 @@
     word-break: break-word;
 }
 
-.HonorableMentions h4:hover {
+.Title:hover {
     background: #cfcfcf;
 }
 

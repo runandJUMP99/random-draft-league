@@ -27,6 +27,11 @@
     word-wrap: break-word
 }
 
+.Selection p {
+    font-size: 1.2rem;
+    line-height: 1.75;
+}
+
 .Selection img {
     margin: 0.5rem auto;
     max-width: 300px;

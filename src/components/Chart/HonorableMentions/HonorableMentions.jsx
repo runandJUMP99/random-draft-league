@@ -27,7 +27,7 @@ const HonorableMentions = ({handleSelection, setModalContent, setShowModal}) => 
 
     return (
         <div className={classes.HonorableMentions}>
-            <h4 onClick={handleClick}>Honorable Mentions</h4>
+            <h4 className={classes.Title} onClick={handleClick}>Honorable Mentions</h4>
             <div className={classes.Selections}>
                 {honorableMentions}
             </div>
