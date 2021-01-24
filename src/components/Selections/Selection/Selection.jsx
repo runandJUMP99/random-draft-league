@@ -52,9 +52,10 @@ const Selection = ({selectionData, showModal, lockInSelection, handleAddSelectio
                 }}>
                     {players.length === 0 ? "PLEASE ADD PLAYERS" : "LOCK IN"}
                 </button>
-                <div className={classes.EditDeleteButtons} style={{display: selectionData.isSelected && "none"}}>
+                <div className={classes.EditDeleteButtons}>
                     <Button onClick={() => lockInSelection(selectionData.id, true)} style={{
                         background: "#01023a",
+                        display: selectionData.isSelected && "none",
                         margin: "0.25rem",
                         padding: "0.25rem",
                         position: "initial"
@@ -71,6 +72,7 @@ const Selection = ({selectionData, showModal, lockInSelection, handleAddSelectio
                     </Button>
                     <Button onClick={handleDelete} style={{
                         background: "#01023a",
+                        display: selectionData.isSelected && "none",
                         margin: "0.25rem",
                         padding: "0.25rem",
                         position: "initial"

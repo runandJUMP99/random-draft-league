@@ -1,7 +1,7 @@
 .Board {
     -ms-overflow-style: none;
     scrollbar-width: none;
-    background: #fcfafa;
+    background: url("https://firebasestorage.googleapis.com/v0/b/randomdraftleague-f6d6d.appspot.com/o/stripes-light.png?alt=media&token=3f65b1f1-9bf7-42c5-a06d-78f5a64a3538");
     border-radius: 0 0 32px 0;
     box-shadow: -16px -16px 32px 1px rgba(0, 0, 0, 0.5) inset;
     height: 90vh;

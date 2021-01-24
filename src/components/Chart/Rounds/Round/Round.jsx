@@ -13,9 +13,9 @@ const Round = ({handleSelection, round, selections, setModalContent, setShowModa
   
     return (
         <div className={classes.Round} style={{
-            background: round % 2 === 0 && "#58585828",
             justifyContent: round % 2 === 0 && "space-between"
         }}>
+            <div className={classes.Background} style={{background: round % 2 === 0 && "#58585828"}}></div>
             <h2 onClick={handleClick}>Round {round}</h2>
             <div className={classes.Selections} style={{flexDirection: round % 2 === 0 && "column-reverse"}}>
                 {selections.map(selection => {
