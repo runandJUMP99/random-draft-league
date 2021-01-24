@@ -3,6 +3,7 @@
 }
 
 .Title {
+    background: #fcfafa;
     border: 1px solid black;
     cursor: pointer;
     height: 150px;

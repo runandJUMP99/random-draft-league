@@ -4,6 +4,7 @@ import {useSelector} from "react-redux";
 import Selection from "../../../../Selections/Selection/Selection";
 
 import classes from "./PlayerSummary.module.css";
+import logo from "../../../../../assets/images/logo.png";
 
 const PlayerSummary = ({player}) => {
     const chart = useSelector(state => state.selections.selections.filter(selection => selection.player));
@@ -14,6 +15,7 @@ const PlayerSummary = ({player}) => {
 
     return (
         <div className={classes.PlayerSummary}>
+            <img src={player.img ? player.img : logo} alt=""/>
             <h3>{player.name}</h3>
             <div className={classes.Selections}>
                 {playerSummary.map(selection => {

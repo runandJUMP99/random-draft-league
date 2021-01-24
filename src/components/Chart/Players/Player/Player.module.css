@@ -4,11 +4,11 @@
 }
 
 .Player {
-    background: #6b6b6b;
+    background: #7e7e7e;
     border: 1px solid black;
     height: 150px;
     margin: 0.25rem 0;
-    padding: 0.5rem;
+    overflow: hidden;
     transition: all 0.25s ease-out;
 }
 
@@ -16,7 +16,17 @@
     background: #979797;
 }
 
+.Player img {
+    float: left;
+    object-fit: contain;
+    padding-bottom: 0.25rem;
+    padding-right: 0.25rem;
+    width: 35%;
+}
+
 .Player h4 {
-    font-size: 1.35rem;
+    font-size: 1.2rem;
+    font-weight: normal;
+    padding-left: 0.25rem;
     word-break: break-word;
 }

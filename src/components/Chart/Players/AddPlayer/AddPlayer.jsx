@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 
 import {Button, Paper, TextField, Typography} from "@material-ui/core";
+import FileBase from "react-file-base64";
 
 import Continue from "../../../UI/Continue/Continue";
 
@@ -11,7 +12,7 @@ import {addPlayer, editPlayer, setPlayerId} from "../../../../store/actions/play
 
 const AddPlayer = ({setShowModal}) => {
     const [continueAdding, setContinueAdding] = useState(true);
-    const [player, setPlayer] = useState({name: ""});
+    const [player, setPlayer] = useState({img: "", name: ""});
     const [totalRounds, setTotalRounds] = useState("");
     const [roundsSet, setRoundsSet] = useState(false);
     const players = useSelector(state => state.players.players);
@@ -80,6 +81,13 @@ const AddPlayer = ({setShowModal}) => {
                         value={player.name}
                         variant="outlined" 
                     />
+                    <div className={classes.FileInput}>
+                        <FileBase 
+                            multiple={false} 
+                            onDone={({base64}) => setPlayer({...player, img: base64})} 
+                            type="file"
+                        />
+                    </div>
                     <Button className={classes.ButtonSubmit} color="primary" fullWidth size="large" type="submit" variant="contained">Submit</Button>
                 </form>
                 : <Continue setContinueAdding={setContinueAdding} setShowModal={setShowModal} heading="Players" />}

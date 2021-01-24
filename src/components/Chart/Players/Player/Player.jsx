@@ -11,6 +11,7 @@ import PlayerSummary from "./PlayerSummary/PlayerSummary";
 
 import classes from "./Player.module.css";
 import {setPlayerId} from "../../../../store/actions/players";
+import logo from "../../../../assets/images/logo.png";
 
 const Player = ({player, setModalContent, setShowModal}) => {
     const chart = useSelector(state => state.selections.selections.filter(selection => selection.player));
@@ -41,6 +42,7 @@ const Player = ({player, setModalContent, setShowModal}) => {
     return (
         <div className={classes.Container}>
             <div className={classes.Player} onClick={handleClick}>
+                {<img src={player.img ? player.img : logo} alt="" />}
                 <h4>{player.name}</h4>
             </div>
             <div style={{display: chart.length > 0 && "none"}}>
