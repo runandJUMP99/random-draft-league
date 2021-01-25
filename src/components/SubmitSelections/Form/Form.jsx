@@ -54,7 +54,7 @@ const AddSelection = () => {
                         variant="outlined" 
                     />
                     <div className={classes.Captcha}>
-                        <ReCAPTCHA ref={recaptchaRef} sitekey={process.env.REACT_APP_SITE_KEY} onChange={() => setCaptcha(true)} />
+                        <ReCAPTCHA ref={recaptchaRef} sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY} onChange={() => setCaptcha(true)} />
                     </div>
                     <Button className={classes.ButtonSubmit} color="primary" disabled={!captcha} fullWidth size="large" type="submit" variant="contained">Submit</Button>
                     <Button color="secondary" fullWidth onClick={() => setSelectionData({name: ""})} size="small" variant="contained">Clear</Button>
