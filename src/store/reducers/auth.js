@@ -23,7 +23,7 @@ export default (state = initialState, action) => {
         case actionTypes.AUTH_FAIL:
             return {
                 ...state,
-                error: true
+                error: action.payload
             };
         default:
             return state;

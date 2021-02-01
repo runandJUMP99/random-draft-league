@@ -17,8 +17,8 @@ const SubmittedSelection = ({count, from, id, isSelected, name, onClick, styles}
                     <p style={{margin: "2rem auto"}}>Submitted By: {from}</p>
                 </>
                 : <>
-                    <p>{count}. {name.length > 40 ? name.substring(0, 40) + "..." : name}</p>
-                    <p>Submitted By: {from.length > 30 ? from.substring(0, 30) + "..." : from}</p>
+                    <p>{count}. {name && name.length > 40 ? name.substring(0, 40) + "..." : name}</p>
+                    <p>Submitted By: {from && from.length > 30 ? from.substring(0, 30) + "..." : from}</p>
                 </>
             }
         </div>

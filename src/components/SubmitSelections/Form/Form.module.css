@@ -1,6 +1,7 @@
 .Paper {
     align-items: center;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     max-width: 25rem;
     padding: 2rem;
@@ -8,17 +9,6 @@
     right: 1rem;
     top: 1rem;
     width: 28%;
-}
-
-.Captcha {
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    margin: auto;
-}
-
-.ButtonSubmit {
-    margin: 1rem auto 0.5rem !important;
 }
 
 @media (max-width: 1200px) {
