@@ -3,10 +3,10 @@ import {useDispatch, useSelector} from "react-redux"
 
 import {Button, TextField, Typography} from "@material-ui/core";
 
-import classes from "./Login.module.css";
-import {signIn, signInWithGoogle, signUp} from "../../../../store/actions/auth";
+import classes from "./Register.module.css";
+import {register, signInWithGoogle} from "../../../../store/actions/auth";
 
-const Login = () => {
+const Register = () => {
     const [isNewUser, setIsNewUser] = useState(true);
     const [userData, setUserData] = useState({
         email: "",
@@ -18,12 +18,7 @@ const Login = () => {
     function handleSubmit(event) {
         event.preventDefault();
 
-        if (isNewUser) {
-            dispatch(signUp(userData.email, userData.password));
-        } else {
-            dispatch(signIn(userData.email, userData.password));
-        }
-
+        dispatch(register(isNewUser, userData.email, userData.password, false));
         setUserData({
             email: "",
             password: ""
@@ -31,10 +26,11 @@ const Login = () => {
     }
 
     return (
-        <div className={classes.Login}>
+        <div className={classes.Register}>
             <Typography align="center" variant="h6">{isNewUser ? "Register to Submit an Entry" : "Login to Submit an Entry"}</Typography>
             <p className={classes.Error}>{error}</p>
             <button className={classes.Google} onClick={() => dispatch(signInWithGoogle())}><i className="fab fa-google"></i> Sign In With Google</button>
+            <p className={classes.Divider}>-OR-</p>
             <form autoComplete="off" className={classes.Form} noValidate onSubmit={handleSubmit}>
                 <TextField 
                     fullWidth 
@@ -71,4 +67,4 @@ const Login = () => {
     );
 }
 
-export default Login;
+export default Register;

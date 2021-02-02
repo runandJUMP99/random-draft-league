@@ -2,8 +2,8 @@ import * as actionTypes from "../actions/actionTypes";
 
 const initialState = {
     error: null,
-    token: null,
-    userId: null
+    isAdmin: false,
+    token: null
 }
 
 export default (state = initialState, action) => {
@@ -11,14 +11,14 @@ export default (state = initialState, action) => {
         case actionTypes.AUTH:
             return {
                 error: null,
-                token: action.payload.idToken,
-                userId: action.payload.localId
+                isAdmin: action.payload.isAdmin,
+                token: action.payload.token
             };
         case actionTypes.AUTH_LOGOUT:
             return {
                 error: null,
-                token: null,
-                userId: null
+                isAdmin: false,
+                token: null
             };
         case actionTypes.AUTH_FAIL:
             return {

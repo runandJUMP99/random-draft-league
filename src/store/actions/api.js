@@ -1,8 +1,6 @@
 import axios from "axios";
 
-const url = "https://randomdraftleague-f6d6d-default-rtdb.firebaseio.com/";
-const authUrl = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=" + process.env.REACT_APP_FIREBASE_KEY;
-
+const url = process.env.REACT_APP_FIREBASE_DATABASE_URL;
 
 export const addSelection = (newSelection, token) => axios.post(`${url}.json?auth=${token}`, newSelection);
 export const getSelections = (token) => axios.get(`${url}.json?auth=${token}`);
@@ -16,8 +14,6 @@ export const addPlayer = (player, token) => axios.post(`${url}/players.json?auth
 export const getPlayers = (token) => axios.get(`${url}/players.json?auth=${token}`);
 export const editPlayer = (id, updatedPlayer, token) => axios.patch(`${url}/players/${id}.json?auth=${token}`, updatedPlayer);
 export const removePlayer = (id, token) => axios.delete(`${url}/players/${id}.json?auth=${token}`);
-
-export const auth = (authData) => axios.post(authUrl, authData);
 
 export const addSubmittedSelection = (newSelection) => axios.post(`${url}/submittedselections.json`, newSelection);
 export const getSubmittedSelections = () => axios.get(`${url}/submittedselections.json`);

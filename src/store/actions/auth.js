@@ -1,44 +1,28 @@
 import * as actionTypes from "../actions/actionTypes";
-import * as api from "./api";
 import firebase from "firebase";
 
-export const auth = (user) => async(dispatch) => {
+export const register = (isNewUser, email, password, isAdmin) => async(dispatch) => {
     try {
-        const authData = {
-            email: user.email,
-            password: user.password,
-            returnSecureToken: true
-        };
+        const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
+        let response;
+        
+        if (isNewUser) {
+            response = await firebase.auth().createUserWithEmailAndPassword(email, password);
+        } else {
+            response = await firebase.auth().signInWithEmailAndPassword(email, password);
+        }
+        console.log(response);
+        const {user} = response;
+        const userData = {
+            isAdmin: isAdmin,
+            token: user.refreshToken
+        }
 
-        const {data} = await api.auth(authData);
-
-        const expirationDate = new Date(new Date().getTime() + data.expiresIn * 1000);
-
-        localStorage.setItem("token", data.idToken);
+        localStorage.setItem("token", userData.token);
         localStorage.setItem("expirationDate", expirationDate);
-        localStorage.setItem("userId", data.localId);
 
-        dispatch({type: actionTypes.AUTH, payload: data});
-        dispatch(checkAuthTimeout(data.expiresIn));
-    } catch(err) {
-        dispatch({type: actionTypes.AUTH_FAIL, payload: true})
-    }
-};
-
-export const signUp = (email, password) => async(dispatch) => {
-    try {
-        const response = await firebase.auth().createUserWithEmailAndPassword(email, password);
-        console.log(response);
-    } catch(err) {
-        dispatch({type: actionTypes.AUTH_FAIL, payload: err.message})
-        console.log(err);
-    }
-}
-
-export const signIn = (email, password) => async(dispatch) => {
-    try {
-        const response = await firebase.auth().signInWithEmailAndPassword(email, password)
-        console.log(response);
+        dispatch({type: actionTypes.AUTH, payload: userData});
+        dispatch(checkAuthTimeout(expirationDate));
     } catch(err) {
         dispatch({type: actionTypes.AUTH_FAIL, payload: err.message});
     }
@@ -50,7 +34,8 @@ export const signInWithGoogle = () => async(dispatch) => {
             
         const response = await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION);
         const res = await firebase.auth().signInWithPopup(provider);
-        console.log(res)
+        console.log(response);
+        console.log(res);
     } catch(err) {
         dispatch({type: actionTypes.AUTH_FAIL, payload: err.message});
         console.log(err);
@@ -60,7 +45,7 @@ export const signInWithGoogle = () => async(dispatch) => {
 export const checkAuthTimeout = (expirationTime) => (dispatch) => {
     setTimeout(() => {
         dispatch(logout());
-    }, expirationTime * 1000);
+    }, expirationTime);
 };
 
 export const logout = () => (dispatch) => {

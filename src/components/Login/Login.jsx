@@ -7,7 +7,7 @@ import {Button, Paper, TextField, Typography} from "@material-ui/core";
 import Logo from "../UI/Logo/Logo";
 
 import classes from "./Login.module.css";
-import {auth} from "../../store/actions/auth";
+import {register} from "../../store/actions/auth";
 
 const Login = () => {
     const [loginForm, setLoginForm] = useState({
@@ -17,9 +17,11 @@ const Login = () => {
     const error = useSelector(state => state.auth.error);
     const isAuthenticated = useSelector(state =>  state.auth.token !== null);
     const dispatch = useDispatch();
+
     function handleSubmit(event) {
         event.preventDefault();
-        dispatch(auth(loginForm));
+
+        dispatch(register(false, loginForm.email, loginForm.password, true));
     }
 
     return (
