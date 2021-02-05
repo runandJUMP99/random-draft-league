@@ -15,18 +15,23 @@ const Login = () => {
         password: ""
     });
     const error = useSelector(state => state.auth.error);
+    const userId = useSelector(state => state.auth.userId);
     const isAuthenticated = useSelector(state =>  state.auth.token !== null);
     const dispatch = useDispatch();
 
     function handleSubmit(event) {
         event.preventDefault();
 
-        dispatch(register(false, loginForm.email, loginForm.password, true));
+        dispatch(register(false, loginForm.email, loginForm.password));
     }
-
+    
     return (
         <div className={classes.Login}>
-            {isAuthenticated && <Redirect to="/" />}
+            {isAuthenticated
+                && (userId === process.env.REACT_APP_FIREBASE_UID1 || userId === process.env.REACT_APP_FIREBASE_UID2
+                ? <Redirect to="/" />
+                : <Redirect to="/submit" />)
+            }
             <Paper className={classes.Paper}>
                 <form autoComplete="off" className={classes.Form} noValidate onSubmit={handleSubmit}>
                     <Typography align="center" variant="h6" style={{color: error && "red"}}>

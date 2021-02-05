@@ -1,13 +1,13 @@
 {
   "rules": {
-    ".read": "auth != null",
-    ".write": "auth != null",
+    ".read": "auth.uid === 'TudYR82vnvZdxK7L6nsGyOM55io2' || auth.uid === 'hYxStqhAXOTSEhPgTfk00Teukup1'",
+    ".write": "auth.uid === 'TudYR82vnvZdxK7L6nsGyOM55io2' || auth.uid === 'hYxStqhAXOTSEhPgTfk00Teukup1'",
     "subject": {
     	".read": "true"
     },
     "submittedselections": {
       ".read": "true",
-      ".write": "true"
+      ".write": "auth !== null"
     }
   }
 }

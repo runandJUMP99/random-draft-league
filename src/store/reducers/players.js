@@ -5,7 +5,7 @@ const initialState = {
     setPlayerId: null
 }
 
-export default (state = initialState, action) => {
+const players = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.ADD_PLAYER:
             return {
@@ -40,4 +40,6 @@ export default (state = initialState, action) => {
         default:
             return state;
     }
-}
+};
+
+export default players;

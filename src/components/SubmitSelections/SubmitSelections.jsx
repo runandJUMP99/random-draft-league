@@ -25,7 +25,7 @@ const SubmitSelections = () => {
             </div>
             <Form />
             <div className={classes.Logo}>
-                <Logo />
+                <Logo styles={{bottom: "2rem"}} />
             </div>
         </div>
     );

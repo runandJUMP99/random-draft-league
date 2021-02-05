@@ -24,7 +24,9 @@ const Round = ({handleSelection, round, selections, setModalContent, setShowModa
                             <div key={selection.id} onClick={() => handleSelection(selection.id)}>
                                 <Selection selectionData={selection} />
                             </div>
-                        )
+                        );
+                    } else {
+                        return null;    
                     }
                 })}
             </div>

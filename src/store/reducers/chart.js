@@ -5,7 +5,7 @@ const initialState = {
     rounds: ""
 }
 
-export default (state = initialState, action) => {
+const chart = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.SET_ROUNDS:
             return {
@@ -20,4 +20,6 @@ export default (state = initialState, action) => {
         default:
             return state;
     }
-}
+};
+
+export default chart;

@@ -6,7 +6,7 @@ const initialState = {
     subject: null
 }
 
-export default (state = initialState, action) => {
+const selections = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.ADD_SELECTION:
             return {
@@ -46,4 +46,6 @@ export default (state = initialState, action) => {
         default:
             return state;
     }
-}
+};
+
+export default selections;

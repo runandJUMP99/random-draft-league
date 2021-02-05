@@ -7,7 +7,7 @@ import classes from "./Register.module.css";
 import {register, signInWithGoogle} from "../../../../store/actions/auth";
 
 const Register = () => {
-    const [isNewUser, setIsNewUser] = useState(true);
+    const [isNewUser, setIsNewUser] = useState(false);
     const [userData, setUserData] = useState({
         email: "",
         password: ""
@@ -18,7 +18,7 @@ const Register = () => {
     function handleSubmit(event) {
         event.preventDefault();
 
-        dispatch(register(isNewUser, userData.email, userData.password, false));
+        dispatch(register(isNewUser, userData.email, userData.password));
         setUserData({
             email: "",
             password: ""

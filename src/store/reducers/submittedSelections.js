@@ -1,6 +1,6 @@
 import * as actionTypes from "../actions/actionTypes";
 
-export default (submittedSelections = [], action) => {
+const submittedSelections = (submittedSelections = [], action) => {
     switch (action.type) {
         case actionTypes.ADD_SUBMITTED_SELECTION:
             return [...submittedSelections, action.payload];
@@ -15,4 +15,6 @@ export default (submittedSelections = [], action) => {
         default:
             return submittedSelections;
     }
-}
+};
+
+export default submittedSelections;

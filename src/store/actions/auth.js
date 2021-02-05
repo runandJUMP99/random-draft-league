@@ -1,28 +1,32 @@
 import * as actionTypes from "../actions/actionTypes";
+import * as api from "./api";
 import firebase from "firebase";
 
-export const register = (isNewUser, email, password, isAdmin) => async(dispatch) => {
+export const register = (isNewUser, email, password) => async(dispatch) => {
     try {
         const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
         let response;
-        
+
         if (isNewUser) {
             response = await firebase.auth().createUserWithEmailAndPassword(email, password);
         } else {
             response = await firebase.auth().signInWithEmailAndPassword(email, password);
         }
-        console.log(response);
-        const {user} = response;
+
+        const token = await firebase.auth().currentUser.getIdToken(true);
+
         const userData = {
-            isAdmin: isAdmin,
-            token: user.refreshToken
+            token: token,
+            uid: response.user.uid
         }
 
-        localStorage.setItem("token", userData.token);
         localStorage.setItem("expirationDate", expirationDate);
+        localStorage.setItem("refreshToken", response.user.refreshToken);
+        localStorage.setItem("token", userData.token);
+        localStorage.setItem("userId", userData.uid);
 
         dispatch({type: actionTypes.AUTH, payload: userData});
-        dispatch(checkAuthTimeout(expirationDate));
+        dispatch(checkAuthTimeout(expirationDate, response.user.refreshToken));
     } catch(err) {
         dispatch({type: actionTypes.AUTH_FAIL, payload: err.message});
     }
@@ -42,15 +46,21 @@ export const signInWithGoogle = () => async(dispatch) => {
     }
 }
 
-export const checkAuthTimeout = (expirationTime) => (dispatch) => {
-    setTimeout(() => {
-        dispatch(logout());
-    }, expirationTime);
+export const checkAuthTimeout = (expirationTime, refreshToken) => (dispatch) => {
+    setTimeout(async() => {
+        try {
+            const response = await api.refreshAuth(refreshToken);
+            console.log(response);
+        } catch(err) {
+            console.log(err);
+        }
+    }, 5000);
 };
 
 export const logout = () => (dispatch) => {
-    localStorage.removeItem("token");
     localStorage.removeItem("expirdationDate");
+    localStorage.removeItem("refreshToken");
+    localStorage.removeItem("token");
     localStorage.removeItem("userId");
 
     dispatch({type: actionTypes.AUTH_LOGOUT})
@@ -63,16 +73,17 @@ export const authCheckState = () => (dispatch) => {
         dispatch(logout());
     } else {
         const expirationDate = new Date(localStorage.getItem("expirationDate"));
-        
+
         if (expirationDate >= new Date()) {
+            const refreshToken = localStorage.getItem("refreshToken");
             const userId = localStorage.getItem("userId");
             const data = {
-                idToken: token,
-                localId: userId
+                token: token,
+                uid: userId
             };
 
             dispatch({type: actionTypes.AUTH, payload: data});
-            dispatch(checkAuthTimeout((expirationDate.getTime() - new Date().getTime()) / 1000));
+            dispatch(checkAuthTimeout(expirationDate.getTime() - new Date().getTime(), refreshToken));
         } else {
             dispatch(logout());
         }

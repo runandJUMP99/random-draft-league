@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import ReCAPTCHA from "react-google-recaptcha";
 
 import {Button, TextField, Typography} from "@material-ui/core";
@@ -12,21 +12,22 @@ const AddSelection = () => {
         name: "",
         from: ""
     });
-    const [captcha, setCaptcha] = useState(false);
+    const [captcha, setCaptcha] = useState(true);
+    const token = useSelector(state => state.auth.token);
     const dispatch = useDispatch();
-    const recaptchaRef = React.createRef();
+    // const recaptchaRef = React.createRef();
         
     function handleSubmit(event) {
         event.preventDefault();
 
-        dispatch(addSubmittedSelection(selectionData));
+        dispatch(addSubmittedSelection(selectionData, token));
         setSelectionData({
             name: "",
             from: ""
         });
 
-        setCaptcha(false);
-        recaptchaRef.current.reset();
+        // setCaptcha(false);
+        // recaptchaRef.current.reset();
     }
 
     return (
@@ -54,7 +55,7 @@ const AddSelection = () => {
                     variant="outlined" 
                 />
                 <div className={classes.Captcha}>
-                    <ReCAPTCHA ref={recaptchaRef} sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY} onChange={() => setCaptcha(true)} />
+                    {/* <ReCAPTCHA ref={recaptchaRef} sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY} onChange={() => setCaptcha(true)} /> */}
                 </div>
                 <Button className={classes.ButtonSubmit} color="primary" disabled={!captcha} fullWidth size="large" type="submit" variant="contained">Submit</Button>
                 <Button color="secondary" fullWidth onClick={() => setSelectionData({name: ""})} size="small" variant="contained">Clear</Button>

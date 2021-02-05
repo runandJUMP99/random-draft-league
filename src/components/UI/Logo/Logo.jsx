@@ -3,9 +3,9 @@ import React from "react";
 import classes from "./Logo.module.css";
 import logo from "../../../assets/images/logo.png";
 
-const Logo = () => {
+const Logo = ({styles}) => {
     return (
-        <div className={classes.LogoContainer}>
+        <div className={classes.LogoContainer} style={styles}>
             <img className={classes.Logo} src={logo} alt="Logo"/>
         </div>
     );

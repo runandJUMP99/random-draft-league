@@ -1,5 +1,5 @@
 .LogoContainer {
-    bottom: 4rem;
+    bottom: calc(10vh - 11px);
     right: 0;
     position: absolute;
     width: 25%;

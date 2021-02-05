@@ -11,6 +11,18 @@
     width: 28%;
 }
 
+.Logout {
+    cursor: pointer;
+    font-size: 0.8rem;
+    text-align: center;
+    text-decoration: underline;
+}
+
+.Logout:hover {
+    color: #666666;
+    text-decoration: none;
+}
+
 @media (max-width: 1200px) {
     .Paper {
         margin: auto;
