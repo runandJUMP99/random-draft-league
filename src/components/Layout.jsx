@@ -171,7 +171,7 @@ const Layout = () => {
 
     return (
         <div className={classes.Layout}>
-            {!isAuthenticated && <Redirect to="/login" />}
+            {!isAuthenticated && <Redirect to="/" />}
             <div className={classes.Background}></div>
             <Backdrop showModal={showModal} setShowModal={setShowModal} />
             <Modal showModal={showModal}>

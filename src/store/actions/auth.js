@@ -49,12 +49,16 @@ export const signInWithGoogle = () => async(dispatch) => {
 export const checkAuthTimeout = (expirationTime, refreshToken) => (dispatch) => {
     setTimeout(async() => {
         try {
-            const response = await api.refreshAuth(refreshToken);
-            console.log(response);
+            const {data} = await api.refreshAuth(refreshToken);
+
+            localStorage.setItem("expirationDate", data.expires_in * 1000);
+            localStorage.setItem("refreshToken", data.refreshToken);
+            localStorage.setItem("token", data.id_token);
+            localStorage.setItem("userId", data.user_id);
         } catch(err) {
             console.log(err);
         }
-    }, 5000);
+    }, expirationTime);
 };
 
 export const logout = () => (dispatch) => {

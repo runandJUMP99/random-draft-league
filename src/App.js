@@ -14,27 +14,27 @@ import firebaseConfig from "./services/firebase";
 firebase.initializeApp(firebaseConfig);
 
 function App() {
-  const isAuthenticated = useSelector(state => state.auth.token !== null);
+  const userId = useSelector(state => state.auth.userId);
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
     dispatch(authCheckState());
   }, [dispatch]);
 
   let routes = (
     <Switch>
-      <Route path="/login" component={Login} />
-      <Route path="/submit" component={SubmitSelections} />
-      <Redirect to="/login" />
+      <Route path="/" exact component={SubmitSelections} />
+      <Route path="/login" exact component={Login} />
+      <Redirect to="/" />
     </Switch>
   );
   
-  if (isAuthenticated) {
+  if (userId === process.env.REACT_APP_FIREBASE_UID1 || userId === process.env.REACT_APP_FIREBASE_UID2) {
     routes = (
       <Switch>
-        <Route path="/" exact component={Layout} />
-        <Route path="/login" component={Login} />
-        <Route path="/submit" component={SubmitSelections} />
+        <Route path="/" exact component={SubmitSelections} />
+        <Route path="/draft" exact component={Layout} />
+        <Route path="/login" exact component={Login} />
       </Switch>
     );
   }

@@ -29,8 +29,8 @@ const Login = () => {
         <div className={classes.Login}>
             {isAuthenticated
                 && (userId === process.env.REACT_APP_FIREBASE_UID1 || userId === process.env.REACT_APP_FIREBASE_UID2
-                ? <Redirect to="/" />
-                : <Redirect to="/submit" />)
+                ? <Redirect to="/draft" />
+                : <Redirect to="/" />)
             }
             <Paper className={classes.Paper}>
                 <form autoComplete="off" className={classes.Form} noValidate onSubmit={handleSubmit}>
