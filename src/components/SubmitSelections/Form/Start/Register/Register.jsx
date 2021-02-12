@@ -20,6 +20,10 @@ const Register = () => {
         event.preventDefault();
 
         dispatch(register(isNewUser, userData));
+        handleClear();
+    }
+
+    function handleClear() {
         setUserData({
             email: "",
             name: "",
@@ -34,16 +38,18 @@ const Register = () => {
             {/* <button className={classes.Google} onClick={() => dispatch(signInWithGoogle())}><i className="fab fa-google"></i> Sign In With Google</button>
             <p className={classes.Divider}>-OR-</p> */}
             <form autoComplete="off" className={classes.Form} noValidate onSubmit={handleSubmit}>
-                <TextField 
-                    fullWidth 
-                    label="Username"
-                    margin="normal" 
-                    name="username"
-                    onChange={(event) => setUserData({...userData, name: event.target.value})} 
-                    required
-                    value={userData.name}
-                    variant="outlined" 
-                />
+                {isNewUser && 
+                    <TextField 
+                        fullWidth 
+                        label="Username"
+                        margin="normal" 
+                        name="username"
+                        onChange={(event) => setUserData({...userData, name: event.target.value})} 
+                        required
+                        value={userData.name}
+                        variant="outlined" 
+                    />
+                }
                 <TextField 
                     fullWidth 
                     label="Email"
@@ -67,7 +73,7 @@ const Register = () => {
                     variant="outlined" 
                 />
                 <Button className={classes.ButtonSubmit} color="primary" fullWidth size="large" type="submit" variant="contained">Submit</Button>
-                <Button color="secondary" fullWidth onClick={() => setUserData({name: ""})} size="small" variant="contained">Clear</Button>
+                <Button color="secondary" fullWidth onClick={handleClear} size="small" variant="contained">Clear</Button>
                 <p className={classes.Switch}>
                     {!isNewUser ? "Don't have an account? " : "Already signed up? "} 
                     <span className={classes.SwitchClick} onClick={() => setIsNewUser(prevValue => !prevValue)}>

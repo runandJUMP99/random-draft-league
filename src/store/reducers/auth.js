@@ -2,6 +2,7 @@ import * as actionTypes from "../actions/actionTypes";
 
 const initialState = {
     error: null,
+    name: null,
     token: null,
     userId: null
 }
@@ -11,6 +12,7 @@ const auth = (state = initialState, action) => {
         case actionTypes.AUTH:
             return {
                 error: null,
+                name: action.payload.name,
                 token: action.payload.token,
                 userId: action.payload.uid
             };

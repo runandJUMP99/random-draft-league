@@ -5,22 +5,20 @@ import firebase from "firebase";
 export const register = (isNewUser, user) => async(dispatch) => {
     try {
         const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
+        let currentUser;
         let response;
 
         if (isNewUser) {
             response = await firebase.auth().createUserWithEmailAndPassword(user.email, user.password);
-            const currentUser = firebase.auth().currentUser;
-            const updatedUser = await currentUser.updateProfile
-            user.updateProfile({
-                displayName: user.name
-            })
+            currentUser = firebase.auth().currentUser;
+            await currentUser.updateProfile({displayName: user.name});
         } else {
             response = await firebase.auth().signInWithEmailAndPassword(user.email, user.password);
+            currentUser = firebase.auth().currentUser;
         }
-
         const token = await firebase.auth().currentUser.getIdToken(true);
-
         const userData = {
+            name: currentUser.displayName,
             token: token,
             uid: response.user.uid
         }
@@ -33,6 +31,7 @@ export const register = (isNewUser, user) => async(dispatch) => {
         dispatch({type: actionTypes.AUTH, payload: userData});
         dispatch(checkAuthTimeout(expirationDate, response.user.refreshToken));
     } catch(err) {
+        console.log(err);   
         dispatch({type: actionTypes.AUTH_FAIL, payload: err.message});
     }
 }
