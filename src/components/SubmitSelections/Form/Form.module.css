@@ -5,9 +5,7 @@
     justify-content: center;
     max-width: 25rem;
     padding: 2rem;
-    position: absolute;
-    right: 1rem;
-    top: 1rem;
+    position: relative;
     width: 28%;
 }
 
@@ -26,7 +24,6 @@
 @media (max-width: 1200px) {
     .Paper {
         margin: auto;
-        position: static;
         width: 100%;
     }
 }

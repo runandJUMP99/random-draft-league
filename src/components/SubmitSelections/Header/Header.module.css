@@ -1,19 +1,45 @@
 .Header {
-    background: #eee;
-    border-radius: 4px;
-    padding: 0.5rem;
-    text-align: center;
-    width: 70%;
+    align-items: center;
+    color: white;
+    display: flex;
+    justify-content: space-around;
+    padding: 2rem 0;
+    position: relative;
+    width: 100%;
+}
+
+.Header h1 {
+    font-size: 3rem;
+}
+
+.Background {
+    background-blend-mode: multiply;
+    background-color: #7575cd;
+    background-image: radial-gradient(circle at 70% 85%, #0d1265, #7575cd), repeating-radial-gradient(circle at 70% 75%, #0d1265, #0d1265, 37px, transparent 74px, transparent 37px);
+    height: 100%;
+    left: 0;
+    opacity: 0.4;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+.Text {
+    position: relative;
 }
 
 .Subject {
     display: inline-block;
+    font-weight: normal;
     margin-left: 0.5rem;
+}
+
+.SocialsHeader {
+    margin: 2.5rem 0 0.5rem;
 }
 
 .Socials {
     display: flex;
-    justify-content: center;
 }
 
 .Socials a {
@@ -24,8 +50,11 @@
 .Twitch,
 .Twitter,
 .Facebook {
+    border-radius: 4px;
     cursor: pointer;
     margin: 0 0.5rem;
+    padding: 0.25rem 0.5rem;
+    transition: all 0.25s ease-out;
 }
 
 .Twitch i,
@@ -34,16 +63,20 @@
     margin-right: 0.25rem;
 }
 
+.Twitch {
+    margin-left: 0;
+}
+
 .Twitch:hover {
-    color: #9900ad;
+    background: #9900ad;
 }
 
 .Twitter:hover {
-    color: #08a0ce;
+    background: #08a0ce;
 }
 
 .Facebook:hover {
-    color: #1414a5;
+    background: #1414a5;
 }
 
 @media (max-width: 1200px) {

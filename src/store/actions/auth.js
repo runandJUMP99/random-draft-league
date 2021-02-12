@@ -2,15 +2,20 @@ import * as actionTypes from "../actions/actionTypes";
 import * as api from "./api";
 import firebase from "firebase";
 
-export const register = (isNewUser, email, password) => async(dispatch) => {
+export const register = (isNewUser, user) => async(dispatch) => {
     try {
         const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
         let response;
 
         if (isNewUser) {
-            response = await firebase.auth().createUserWithEmailAndPassword(email, password);
+            response = await firebase.auth().createUserWithEmailAndPassword(user.email, user.password);
+            const currentUser = firebase.auth().currentUser;
+            const updatedUser = await currentUser.updateProfile
+            user.updateProfile({
+                displayName: user.name
+            })
         } else {
-            response = await firebase.auth().signInWithEmailAndPassword(email, password);
+            response = await firebase.auth().signInWithEmailAndPassword(user.email, user.password);
         }
 
         const token = await firebase.auth().currentUser.getIdToken(true);

@@ -1,0 +1,28 @@
+.Start {
+    text-align: center;
+}
+
+.StartButton {
+    background-color: blue;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 3px 2px 4px #00005e; 
+    color: white;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1.5rem;
+    height: 10rem;
+    outline: none;
+    transition: background-color 0.15s linear;
+    width: 10rem;
+}
+
+
+.StartButton:hover {
+    background-color: #0000b4;
+}
+
+.StartButton:active {
+    box-shadow: 0 0 0 0;
+    /* outline: none; */
+    transform: translateY(3px);
+}
