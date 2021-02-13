@@ -2,6 +2,11 @@
     text-align: center;
 }
 
+.StartButtonHeader {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
 .StartButton {
     background-color: blue;
     border: none;

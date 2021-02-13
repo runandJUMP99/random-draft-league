@@ -47,7 +47,11 @@ const Header = () => {
 
     return (
         <div className={classes.Header}>
-            <div className={classes.Background}></div>
+            <div className={classes.Background}>
+                <div className={classes.Bg}></div>
+                <div className={classes.Bg2}></div>
+                <div className={classes.Bg3}></div>
+            </div>
             <div className={classes.Text}>
                 <h1>Random Draft League</h1>
                 <h2>This Week's Subject: 

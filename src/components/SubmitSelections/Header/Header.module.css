@@ -13,15 +13,34 @@
 }
 
 .Background {
-    background-blend-mode: multiply;
-    background-color: #7575cd;
-    background-image: radial-gradient(circle at 70% 85%, #0d1265, #7575cd), repeating-radial-gradient(circle at 70% 75%, #0d1265, #0d1265, 37px, transparent 74px, transparent 37px);
     height: 100%;
     left: 0;
-    opacity: 0.4;
     position: absolute;
     top: 0;
     width: 100%;
+}
+
+.Bg,
+.Bg2,
+.Bg3 {
+    animation: slide 3s ease-in-out infinite alternate;
+    background-image: linear-gradient(-60deg, green 50%, blue 50%); /* #6c3  #09f */
+    bottom: 0;
+    height: 100%;
+    left: -50%;
+    opacity: .5;
+    position: absolute;
+    right: -50%;
+    top: 0;
+}
+  
+.Bg2 {
+    animation-direction: alternate-reverse;
+    animation-duration: 4s;
+}
+
+.Bg3 {
+    animation-duration: 5s;
 }
 
 .Text {
@@ -68,15 +87,15 @@
 }
 
 .Twitch:hover {
-    background: #9900ad;
+    background: #8701d4;
 }
 
 .Twitter:hover {
-    background: #08a0ce;
+    background: #1fc4f7;
 }
 
 .Facebook:hover {
-    background: #1414a5;
+    background: #0e3aff;
 }
 
 @media (max-width: 1200px) {
@@ -84,3 +103,12 @@
         width: 100%;
     }
 }
+
+@keyframes slide {
+    0% {
+      transform:translateX(-25%);
+    }
+    100% {
+      transform:translateX(25%);
+    }
+  }

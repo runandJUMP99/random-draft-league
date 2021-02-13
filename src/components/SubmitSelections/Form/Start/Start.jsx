@@ -11,7 +11,7 @@ const Start = () => {
         <div className={classes.Start}>
             {!start
                 ? <>
-                    <p>Submit up to 3 entries per week. Make sure to provide a name to be eligible for prizes.</p>
+                    <p className={classes.StartButtonHeader}>Submit up to 3 entries per week!</p>
                     <button className={classes.StartButton} onClick={() => setStart(true)}>Start</button>
                 </>
                 : <Register />}
