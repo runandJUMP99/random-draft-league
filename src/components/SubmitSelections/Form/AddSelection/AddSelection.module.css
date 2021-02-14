@@ -1,3 +1,7 @@
+.AddSelection {
+    width: 100%;
+}
+
 .Captcha {
     align-items: center;
     display: flex;
@@ -7,4 +11,16 @@
 
 .ButtonSubmit {
     margin: 1rem auto 0.5rem !important;
+}
+
+.AccountIcon {
+    color: blue;
+    cursor: pointer;
+    position: absolute;
+    right: 0.5rem;
+    top: 0.5rem;
+}
+
+.AccountIcon:hover {
+    color: #4444ff;
 }

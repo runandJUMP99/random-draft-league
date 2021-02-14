@@ -9,9 +9,3 @@
     flex-direction: column;
     margin: auto;
 }
-
-@media (max-width: 1200px) {
-    .Logo {
-        display: none;
-    }
-}

@@ -4,6 +4,8 @@ import ReCAPTCHA from "react-google-recaptcha";
 
 import {Button, TextField, Typography} from "@material-ui/core";
 
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+
 import classes from "./AddSelection.module.css";
 import {addSubmittedSelection} from "../../../../store/actions/submittedSelections";
 
@@ -30,8 +32,9 @@ const AddSelection = () => {
     }
 
     return (
-        <>
+        <div className={classes.AddSelection}>
             <Typography align="center" variant="h6">Submit Entry</Typography>
+            <AccountCircleIcon className={classes.AccountIcon} fontSize="large" />
             <form autoComplete="off" className={classes.Form} noValidate onSubmit={handleSubmit}>
                 <TextField 
                     fullWidth 
@@ -49,7 +52,7 @@ const AddSelection = () => {
                 <Button className={classes.ButtonSubmit} color="primary" disabled={!captcha} fullWidth size="large" type="submit" variant="contained">Submit</Button>
                 <Button color="secondary" fullWidth onClick={() => setSelection("")} size="small" variant="contained">Clear</Button>
             </form>
-        </>
+        </div>
     );
 }
 
