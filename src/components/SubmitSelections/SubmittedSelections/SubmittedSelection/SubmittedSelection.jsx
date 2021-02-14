@@ -13,8 +13,8 @@ const SubmittedSelection = ({count, from, id, isSelected, name, onClick, styles}
         }}>
             {styles
                 ? <>
-                    <p style={{margin: "1rem auto"}}>{name}</p>
-                    <p style={{margin: "2rem auto"}}>Submitted By: {from}</p>
+                    <p>{name}</p>
+                    <p>Submitted By: {from}</p>
                 </>
                 : <>
                     <p>{count}. {name && name.length > 40 ? name.substring(0, 40) + "..." : name}</p>
