@@ -18,6 +18,8 @@ export const register = (isNewUser, user) => async(dispatch) => {
         }
         const token = await firebase.auth().currentUser.getIdToken(true);
         const userData = {
+            email: currentUser.email,
+            img: currentUser.photoURL,
             name: currentUser.displayName,
             token: token,
             uid: response.user.uid

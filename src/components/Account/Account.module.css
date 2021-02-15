@@ -5,6 +5,7 @@
 
 .Account {
     color: rgba(0, 0, 0, 0.5);
+    height: 75%;
     margin: auto;
     max-width: 900px;
     padding: 10% 1rem;
@@ -19,6 +20,6 @@
 }
 
 .Display {
-    height: 75%;
     padding: 1rem 3rem;
+    width: 100%;
 }

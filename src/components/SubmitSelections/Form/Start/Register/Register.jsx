@@ -17,7 +17,6 @@ const Register = () => {
         password: ""
     });
     const error = useSelector(state => state.auth.error);
-    const token = useSelector(state => state.auth.token);
     const dispatch = useDispatch();
 
     function handleSubmit(event) {
@@ -34,6 +33,10 @@ const Register = () => {
             name: "",
             password: ""
         });
+    }
+
+    if (error && registering) {
+        setRegistering(false);
     }
 
     return (

@@ -2,6 +2,8 @@ import * as actionTypes from "../actions/actionTypes";
 
 const initialState = {
     error: null,
+    email: null,
+    img: null,
     name: null,
     token: null,
     userId: null
@@ -12,6 +14,8 @@ const auth = (state = initialState, action) => {
         case actionTypes.AUTH:
             return {
                 error: null,
+                email: action.payload.email,
+                img: action.payload.img,
                 name: action.payload.name,
                 token: action.payload.token,
                 userId: action.payload.uid
@@ -19,6 +23,9 @@ const auth = (state = initialState, action) => {
         case actionTypes.AUTH_LOGOUT:
             return {
                 error: null,
+                email: null,
+                img: null,
+                name: null,
                 token: null,
                 userId: null
             };
