@@ -1,0 +1,5 @@
+.SideMenu {
+    border-right: 4px solid rgba(0, 0, 0, 0.5);
+    list-style: none;
+    padding: 0.5rem 3rem 0.5rem 0;
+}

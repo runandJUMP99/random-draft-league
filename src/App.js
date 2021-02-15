@@ -3,9 +3,10 @@ import {useDispatch, useSelector} from "react-redux";
 import {BrowserRouter, Redirect, Route, Switch} from "react-router-dom";
 import firebase from "firebase";
 
+import Account from "./components/Account/Account";
 import Layout from "./components/Layout";
 import Login from "./components/Login/Login";
-import Spinner from "./components/UI/Spinner/Spinner";
+import GlobalLoader from "./components/UI/GlobalLoader/GlobalLoader";
 import SubmitSelections from"./components/SubmitSelections/SubmitSelections";
 
 import {authCheckState} from "./store/actions/auth";
@@ -24,7 +25,7 @@ function App() {
   let routes = (
     <Switch>
       <Route path="/" exact component={SubmitSelections} />
-      <Route path="/login" exact component={Login} />
+      <Route path="/account" exact component={Account} />
       <Redirect to="/" />
     </Switch>
   );
@@ -33,6 +34,7 @@ function App() {
     routes = (
       <Switch>
         <Route path="/" exact component={SubmitSelections} />
+        <Route path="/account" exact component={Account} />
         <Route path="/draft" exact component={Layout} />
         <Route path="/login" exact component={Login} />
       </Switch>
@@ -41,7 +43,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Suspense fallback={Spinner}>
+      <Suspense fallback={GlobalLoader}>
         {routes}
       </Suspense>
     </BrowserRouter>

@@ -1,0 +1,27 @@
+.AccountHeader {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+}
+
+.AccountHeader h1 {
+    font-size: 3rem;
+}
+
+.CloseIcon {
+    align-items: center;
+    border-radius: 4px;
+    color: inherit !important;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    transition: all 0.1s linear;
+}
+
+.CloseIcon:hover {
+    background: #ccc;
+}
+
+.CloseIcon svg {
+    padding: 0;
+}

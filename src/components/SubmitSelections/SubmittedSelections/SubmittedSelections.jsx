@@ -6,8 +6,7 @@ import SubmittedSelection from "./SubmittedSelection/SubmittedSelection";
 
 import classes from "./SubmittedSelections.module.css";
 
-const SubmittedSelections = ({setModalContent, setShowModal}) => {
-    let submittedSelections = useSelector(state => state.submittedSelections);
+const SubmittedSelections = ({setModalContent, setShowModal, submittedSelections}) => {
     const selectedSelections = submittedSelections.filter(selection => selection.isSelected);
     const notSelectedSelections = submittedSelections.filter(selection => !selection.isSelected);
     const token = useSelector(state => state.auth.token);

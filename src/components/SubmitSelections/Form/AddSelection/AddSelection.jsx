@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
+import {NavLink} from "react-router-dom";
 import ReCAPTCHA from "react-google-recaptcha";
 
 import {Button, TextField, Typography} from "@material-ui/core";
@@ -34,7 +35,7 @@ const AddSelection = () => {
     return (
         <div className={classes.AddSelection}>
             <Typography align="center" variant="h6">Submit Entry</Typography>
-            <AccountCircleIcon className={classes.AccountIcon} fontSize="large" />
+            <NavLink to="/account"><AccountCircleIcon className={classes.AccountIcon} fontSize="large" /></NavLink>
             <form autoComplete="off" className={classes.Form} noValidate onSubmit={handleSubmit}>
                 <TextField 
                     fullWidth 
