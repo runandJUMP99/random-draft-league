@@ -8,12 +8,13 @@ import {Button, TextField, Typography} from "@material-ui/core";
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 import classes from "./AddSelection.module.css";
+import logo from "../../../../assets/images/logo.png";
 import {addSubmittedSelection} from "../../../../store/actions/submittedSelections";
 
 const AddSelection = () => {
     const [selection, setSelection] = useState("");
     const [captcha, setCaptcha] = useState(true);
-    const currentUserName = useSelector(state => state.auth.name);
+    const currentUser = useSelector(state => state.auth);
     const token = useSelector(state => state.auth.token);
     const dispatch = useDispatch();
     // const recaptchaRef = React.createRef();
@@ -22,7 +23,7 @@ const AddSelection = () => {
         event.preventDefault();
         const selectionData = {
             name: selection,
-            from: currentUserName
+            from: currentUser.name
         };
         
         dispatch(addSubmittedSelection(selectionData, token));
@@ -34,7 +35,8 @@ const AddSelection = () => {
 
     return (
         <div className={classes.AddSelection}>
-            <Typography align="center" variant="h6">Submit Entry</Typography>
+            <img src={currentUser.img ? currentUser.img : logo} alt="Profile" />
+            <Typography align="center" variant="h6">Submit An Entry</Typography>
             <NavLink to="/account"><AccountCircleIcon className={classes.AccountIcon} fontSize="large" /></NavLink>
             <form autoComplete="off" className={classes.Form} noValidate onSubmit={handleSubmit}>
                 <TextField 

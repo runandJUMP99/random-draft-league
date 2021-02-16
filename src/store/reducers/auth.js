@@ -20,6 +20,14 @@ const auth = (state = initialState, action) => {
                 token: action.payload.token,
                 userId: action.payload.uid
             };
+        case actionTypes.AUTH_UPDATE_PROFILE:
+            return {
+                ...state, 
+                error: null,
+                email: action.payload.email,
+                img: action.payload.img,
+                name: action.payload.name
+            };
         case actionTypes.AUTH_LOGOUT:
             return {
                 error: null,

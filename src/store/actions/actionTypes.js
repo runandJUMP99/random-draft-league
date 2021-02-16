@@ -22,6 +22,7 @@ export const CLEAR_PLAYERS = "CLEAR_PLAYERS";
 export const SET_PLAYER_ID = "SET_PLAYER_ID";
 
 export const AUTH = "AUTH";
+export const AUTH_UPDATE_PROFILE = "AUTH_UPDATE_PROFILE";
 export const AUTH_LOGOUT = "AUTH_LOGOUT";
 export const AUTH_FAIL = "AUTH_FAIL";
 

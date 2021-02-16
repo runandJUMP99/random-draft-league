@@ -1,6 +1,7 @@
 import * as actionTypes from "../actions/actionTypes";
 import * as api from "./api";
 import firebase from "firebase";
+import {storage} from "../../services/firebase";
 
 export const register = (isNewUser, user) => async(dispatch) => {
     try {
@@ -38,17 +39,51 @@ export const register = (isNewUser, user) => async(dispatch) => {
     }
 }
 
-export const signInWithGoogle = () => async(dispatch) => {
+export const updateProfile = (updatedUser, setIsLoading) => async(dispatch) => {
     try {
-        const provider = new firebase.auth.GoogleAuthProvider();
+        const currentUser = firebase.auth().currentUser;
+        const uploadTask = storage.ref(`/profileImgs/${updatedUser.userId}`).put(updatedUser.img);
+        setIsLoading(true);
+        
+        if (updatedUser.email && updatedUser.email !== currentUser.email) {
+            console.log("updating email");
+            // await currentUser.updateEmail(updatedUser.email);
+        }
+
+        if (updatedUser.password) {
+            console.log("updating password");
+            // await currentUser.updatePassword(updatedUser.password);
+        }
+
+        if (updatedUser.img) {
+            uploadTask.on("state_changed", snapshot => {
+            }, err => {
+                console.log(err);
+            }, () => {
+                storage.ref("profileImgs").child(updatedUser.userId).getDownloadURL()
+                    .then(firebaseUrl => {
+                        currentUser.updateProfile({
+                            displayName: updatedUser.name,
+                            photoURL: firebaseUrl
+                        });
+
+                        updatedUser = {...updatedUser, img: firebaseUrl}
+                        
+                        setIsLoading(false);
+                        dispatch({type: actionTypes.AUTH_UPDATE_PROFILE, payload: updatedUser})
+                    });
+            });
+        } else {
+            currentUser.updateProfile({
+                displayName: updatedUser.name
+            });
             
-        const response = await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION);
-        const res = await firebase.auth().signInWithPopup(provider);
-        console.log(response);
-        console.log(res);
+            setIsLoading(false);
+            dispatch({type: actionTypes.AUTH_UPDATE_PROFILE, payload: updatedUser})
+        }
     } catch(err) {
-        dispatch({type: actionTypes.AUTH_FAIL, payload: err.message});
         console.log(err);
+        dispatch({type:actionTypes.AUTH_FAIL, payload: err.message});
     }
 }
 
@@ -99,3 +134,33 @@ export const authCheckState = () => (dispatch) => {
         }
     }
 };
+
+
+
+//GOOGLE SIGN IN
+
+// export const signInWithGoogle = () => async(dispatch) => {
+//     try {
+//         const provider = new firebase.auth.GoogleAuthProvider();
+            
+//         const response = await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION);
+//         const res = await firebase.auth().signInWithPopup(provider);
+//         console.log(response);
+//         console.log(res);
+//     } catch(err) {
+//         dispatch({type: actionTypes.AUTH_FAIL, payload: err.message});
+//         console.log(err);
+//     }
+// }  
+
+
+//DELETE PROFILE IMG
+
+// if (currentUser.photoURL !== firebaseUrl) {
+//     storage.ref(`/profileImgs/${updatedUser.userId}`).delete()
+//         .then(() => {
+//         })
+//         .catch(error => {
+//             console.log(error);
+//         }); 
+// }

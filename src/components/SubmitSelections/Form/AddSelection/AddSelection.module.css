@@ -1,5 +1,15 @@
 .AddSelection {
+    display: flex;
+    flex-direction: column;
     width: 100%;
+}
+
+.AddSelection img {
+    border-radius: 50%;
+    height: 7rem;
+    margin: 1rem auto;
+    object-fit: cover;
+    width: 7rem;
 }
 
 .Captcha {
@@ -19,8 +29,9 @@
     position: absolute;
     right: 1rem;
     top: 1rem;
+    transition: all 0.2s linear !important;
 }
 
 .AccountIcon:hover {
-    color: #4444ff;
+    color: #0051ff;
 }

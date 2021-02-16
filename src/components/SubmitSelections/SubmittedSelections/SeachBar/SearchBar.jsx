@@ -20,6 +20,7 @@ const SearchBar = ({search, setSearch}) => {
                 {!hasTyped ? <SearchIcon /> : <CloseIcon onClick={() => setSearch("")} />}
             </label>
             <input
+                autoComplete="off"
                 id="search"
                 name="search"
                 onChange={(event) => setSearch(event.target.value)}

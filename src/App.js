@@ -1,7 +1,6 @@
 import React, {useEffect, Suspense} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {BrowserRouter, Redirect, Route, Switch} from "react-router-dom";
-import firebase from "firebase";
 
 import Account from "./components/Account/Account";
 import Layout from "./components/Layout";
@@ -10,9 +9,7 @@ import GlobalLoader from "./components/UI/GlobalLoader/GlobalLoader";
 import SubmitSelections from"./components/SubmitSelections/SubmitSelections";
 
 import {authCheckState} from "./store/actions/auth";
-import firebaseConfig from "./services/firebase";
-
-firebase.initializeApp(firebaseConfig);
+import firebase from "./services/firebase";
 
 function App() {
   const userId = useSelector(state => state.auth.userId);

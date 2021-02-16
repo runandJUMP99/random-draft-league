@@ -24,7 +24,7 @@
 .Bg,
 .Bg2,
 .Bg3 {
-    animation: slide 3s ease-in-out infinite alternate;
+    animation: slide 5s ease-in-out infinite alternate;
     background-image: linear-gradient(-60deg, green 50%, blue 50%); /* #6c3  #09f */
     bottom: 0;
     height: 100%;
@@ -37,11 +37,11 @@
   
 .Bg2 {
     animation-direction: alternate-reverse;
-    animation-duration: 4s;
+    animation-duration: 6s;
 }
 
 .Bg3 {
-    animation-duration: 5s;
+    animation-duration: 7s;
 }
 
 .Text {
