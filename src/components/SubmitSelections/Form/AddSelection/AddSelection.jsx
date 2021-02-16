@@ -16,6 +16,7 @@ const AddSelection = () => {
     const [captcha, setCaptcha] = useState(true);
     const currentUser = useSelector(state => state.auth);
     const token = useSelector(state => state.auth.token);
+    const userId = useSelector(state => state.auth.userId);
     const dispatch = useDispatch();
     // const recaptchaRef = React.createRef();
         
@@ -37,7 +38,15 @@ const AddSelection = () => {
         <div className={classes.AddSelection}>
             <img src={currentUser.img ? currentUser.img : logo} alt="Profile" />
             <Typography align="center" variant="h6">Submit An Entry</Typography>
-            <NavLink to="/account"><AccountCircleIcon className={classes.AccountIcon} fontSize="large" /></NavLink>
+            <div className={classes.IconButtons}>
+                {(userId === process.env.REACT_APP_FIREBASE_UID1 || userId === process.env.REACT_APP_FIREBASE_UID2) &&
+                    <>
+                        <NavLink to="/draft"><button className={classes.DraftIcon}>Draft Board</button></NavLink>
+                        <NavLink to="/admin"><button className={classes.AdminIcon}>Admin</button></NavLink>
+                    </>
+                }
+                <NavLink to="/account"><AccountCircleIcon className={classes.AccountIcon} fontSize="large" /></NavLink>
+            </div>
             <form autoComplete="off" className={classes.Form} noValidate onSubmit={handleSubmit}>
                 <TextField 
                     fullWidth 

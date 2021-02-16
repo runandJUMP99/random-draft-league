@@ -3,8 +3,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {BrowserRouter, Redirect, Route, Switch} from "react-router-dom";
 
 import Account from "./components/Account/Account";
+import Admin from "./components/Admin/Admin";
 import Layout from "./components/Layout";
-import Login from "./components/Login/Login";
 import GlobalLoader from "./components/UI/GlobalLoader/GlobalLoader";
 import SubmitSelections from"./components/SubmitSelections/SubmitSelections";
 
@@ -32,8 +32,8 @@ function App() {
       <Switch>
         <Route path="/" exact component={SubmitSelections} />
         <Route path="/account" exact component={Account} />
+        <Route path="/admin" exact component={Admin} />
         <Route path="/draft" exact component={Layout} />
-        <Route path="/login" exact component={Login} />
       </Switch>
     );
   }

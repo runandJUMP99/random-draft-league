@@ -14,6 +14,11 @@
     width: 100%;
 }
 
+.EmailSent {
+    color: green;
+    margin: 0;
+}
+
 .Error {
     color: red;
     text-align: center;
@@ -22,6 +27,21 @@
 .Divider {
     margin: 1rem 0 0;
     text-align: center;
+}
+
+.ForgotPassword {
+    bottom: 0.6rem;
+    cursor: pointer;
+    font-size: 0.7rem;
+    margin: 0;
+    position: relative;
+    text-align: right;
+    text-decoration: underline;
+}
+
+.ForgotPassword:hover {
+    color: #666666;
+    text-decoration: none;
 }
 
 .ButtonSubmit {

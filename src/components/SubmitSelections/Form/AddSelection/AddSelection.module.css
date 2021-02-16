@@ -23,12 +23,43 @@
     margin: 1rem auto 0.5rem !important;
 }
 
-.AccountIcon {
-    color: blue;
-    cursor: pointer;
+.IconButtons {
     position: absolute;
     right: 1rem;
     top: 1rem;
+}
+
+.DraftIcon {
+    background: #18b618;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    margin-right: 0.25rem;
+    transition: all 0.2s linear !important;
+}
+
+.DraftIcon:hover {
+    background: #20c920;
+}
+
+.AdminIcon {
+    background: #636363;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    margin-right: 0.25rem;
+    transition: all 0.2s linear !important;
+}
+
+.AdminIcon:hover {
+    background: #777777;
+}
+
+.AccountIcon {
+    color: blue;
+    cursor: pointer;
     transition: all 0.2s linear !important;
 }
 

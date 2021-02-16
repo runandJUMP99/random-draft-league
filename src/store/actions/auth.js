@@ -5,10 +5,11 @@ import {storage} from "../../services/firebase";
 
 export const register = (isNewUser, user) => async(dispatch) => {
     try {
+        dispatch({type: actionTypes.AUTH_START});
         const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
         let currentUser;
         let response;
-
+        
         if (isNewUser) {
             response = await firebase.auth().createUserWithEmailAndPassword(user.email, user.password);
             currentUser = firebase.auth().currentUser;
@@ -25,12 +26,12 @@ export const register = (isNewUser, user) => async(dispatch) => {
             token: token,
             uid: response.user.uid
         }
-
+        
         localStorage.setItem("expirationDate", expirationDate);
         localStorage.setItem("refreshToken", response.user.refreshToken);
         localStorage.setItem("token", userData.token);
         localStorage.setItem("userId", userData.uid);
-
+        
         dispatch({type: actionTypes.AUTH, payload: userData});
         dispatch(checkAuthTimeout(expirationDate, response.user.refreshToken));
     } catch(err) {
@@ -39,23 +40,22 @@ export const register = (isNewUser, user) => async(dispatch) => {
     }
 }
 
-export const updateProfile = (updatedUser, setIsLoading) => async(dispatch) => {
+export const updateProfile = (updatedUser) => async(dispatch) => {
     try {
+        dispatch({type: actionTypes.AUTH_START});
         const currentUser = firebase.auth().currentUser;
-        const uploadTask = storage.ref(`/profileImgs/${updatedUser.userId}`).put(updatedUser.img);
-        setIsLoading(true);
         
         if (updatedUser.email && updatedUser.email !== currentUser.email) {
-            console.log("updating email");
-            // await currentUser.updateEmail(updatedUser.email);
+            await currentUser.updateEmail(updatedUser.email);
         }
 
         if (updatedUser.password) {
-            console.log("updating password");
-            // await currentUser.updatePassword(updatedUser.password);
+            await currentUser.updatePassword(updatedUser.password);
         }
 
         if (updatedUser.img) {
+            const uploadTask = storage.ref(`/profileImgs/${updatedUser.userId}`).put(updatedUser.img);
+
             uploadTask.on("state_changed", snapshot => {
             }, err => {
                 console.log(err);
@@ -68,8 +68,7 @@ export const updateProfile = (updatedUser, setIsLoading) => async(dispatch) => {
                         });
 
                         updatedUser = {...updatedUser, img: firebaseUrl}
-                        
-                        setIsLoading(false);
+                    
                         dispatch({type: actionTypes.AUTH_UPDATE_PROFILE, payload: updatedUser})
                     });
             });
@@ -77,13 +76,38 @@ export const updateProfile = (updatedUser, setIsLoading) => async(dispatch) => {
             currentUser.updateProfile({
                 displayName: updatedUser.name
             });
+
+            updatedUser = {...updatedUser, img: currentUser.photoURL}
             
-            setIsLoading(false);
             dispatch({type: actionTypes.AUTH_UPDATE_PROFILE, payload: updatedUser})
         }
     } catch(err) {
         console.log(err);
         dispatch({type:actionTypes.AUTH_FAIL, payload: err.message});
+    }
+}
+
+export const resetPassword = (email) => async(dispatch) => {
+    try {
+        dispatch({type: actionTypes.AUTH_START});
+
+        await firebase.auth().sendPasswordResetEmail(email);
+        
+        dispatch({type: actionTypes.AUTH_LOGOUT})
+    } catch(err) {
+        console.log(err);
+    }
+}
+
+export const deleteProfile = () => async(dispatch) => {
+    try {
+        dispatch({type: actionTypes.AUTH_START});
+
+        await firebase.auth().currentUser.delete();
+        
+        dispatch({type: actionTypes.AUTH_LOGOUT})
+    } catch(err) {
+        console.log(err);
     }
 }
 

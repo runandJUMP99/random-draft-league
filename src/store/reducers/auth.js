@@ -3,7 +3,8 @@ import * as actionTypes from "../actions/actionTypes";
 const initialState = {
     error: null,
     email: null,
-    img: null,
+    img: "",
+    loading: false,
     name: null,
     token: null,
     userId: null
@@ -16,9 +17,16 @@ const auth = (state = initialState, action) => {
                 error: null,
                 email: action.payload.email,
                 img: action.payload.img,
+                loading: false,
                 name: action.payload.name,
                 token: action.payload.token,
                 userId: action.payload.uid
+            };
+        case actionTypes.AUTH_START:
+            return {
+                ...state,
+                error: null,
+                loading: true
             };
         case actionTypes.AUTH_UPDATE_PROFILE:
             return {
@@ -26,13 +34,15 @@ const auth = (state = initialState, action) => {
                 error: null,
                 email: action.payload.email,
                 img: action.payload.img,
+                loading: false,
                 name: action.payload.name
             };
         case actionTypes.AUTH_LOGOUT:
             return {
                 error: null,
                 email: null,
-                img: null,
+                img: "",
+                loading: false,
                 name: null,
                 token: null,
                 userId: null
@@ -40,7 +50,8 @@ const auth = (state = initialState, action) => {
         case actionTypes.AUTH_FAIL:
             return {
                 ...state,
-                error: action.payload
+                error: action.payload,
+                loading: false
             };
         default:
             return state;
