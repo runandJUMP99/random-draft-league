@@ -1,5 +1,6 @@
 import * as actionTypes from "../actions/actionTypes";
 import * as api from "./api";
+import {editUser, deleteUser} from "../actions/users";
 import firebase from "firebase";
 import {storage} from "../../services/firebase";
 
@@ -13,7 +14,15 @@ export const register = (isNewUser, user) => async(dispatch) => {
         if (isNewUser) {
             response = await firebase.auth().createUserWithEmailAndPassword(user.email, user.password);
             currentUser = firebase.auth().currentUser;
+
+            const newUser = {
+                email: user.email,
+                name: user.name,
+                userId: response.user.uid
+            };
+            
             await currentUser.updateProfile({displayName: user.name});
+            await dispatch(editUser(newUser.userId, newUser));
         } else {
             response = await firebase.auth().signInWithEmailAndPassword(user.email, user.password);
             currentUser = firebase.auth().currentUser;
@@ -40,7 +49,7 @@ export const register = (isNewUser, user) => async(dispatch) => {
     }
 }
 
-export const updateProfile = (updatedUser) => async(dispatch) => {
+export const updateProfile = (updatedUser, token) => async(dispatch) => {
     try {
         dispatch({type: actionTypes.AUTH_START});
         const currentUser = firebase.auth().currentUser;
@@ -81,6 +90,14 @@ export const updateProfile = (updatedUser) => async(dispatch) => {
             
             dispatch({type: actionTypes.AUTH_UPDATE_PROFILE, payload: updatedUser})
         }
+
+        updatedUser = {
+            email: updatedUser.email,
+            name: updatedUser.name,
+            userId: updatedUser.userId
+        };
+
+        dispatch(editUser(currentUser.uid, updatedUser, token));
     } catch(err) {
         console.log(err);
         dispatch({type:actionTypes.AUTH_FAIL, payload: err.message});
@@ -99,12 +116,14 @@ export const resetPassword = (email) => async(dispatch) => {
     }
 }
 
-export const deleteProfile = () => async(dispatch) => {
+export const deleteProfile = (userId, token) => async(dispatch) => {
     try {
         dispatch({type: actionTypes.AUTH_START});
 
         await firebase.auth().currentUser.delete();
+        await storage.ref(`/profileImgs/${userId}`).delete();
         
+        await dispatch(deleteUser(userId, token));
         dispatch({type: actionTypes.AUTH_LOGOUT})
     } catch(err) {
         console.log(err);
@@ -176,15 +195,3 @@ export const authCheckState = () => (dispatch) => {
 //         console.log(err);
 //     }
 // }  
-
-
-//DELETE PROFILE IMG
-
-// if (currentUser.photoURL !== firebaseUrl) {
-//     storage.ref(`/profileImgs/${updatedUser.userId}`).delete()
-//         .then(() => {
-//         })
-//         .catch(error => {
-//             console.log(error);
-//         }); 
-// }

@@ -1,0 +1,19 @@
+.Admin {
+    background: #111111;
+    padding-top: 8%;
+    height: 100vh;
+}
+
+.SearchBar {
+    background: #ebebeb;
+    border-radius: 32px;
+    margin: auto;
+    padding: 1rem;
+    width: 90%;
+}
+
+@media (min-width: 600px) {
+    .SearchBar {
+        width: 40%;
+    }
+}

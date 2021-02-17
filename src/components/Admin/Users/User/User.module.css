@@ -1,0 +1,10 @@
+.User {
+    background: white;
+    margin: auto;
+    padding: 0.5rem;
+    width: 30%;
+}
+
+.User p:last-child {
+    margin-bottom: 0;
+}

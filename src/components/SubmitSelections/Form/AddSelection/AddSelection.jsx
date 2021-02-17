@@ -23,8 +23,9 @@ const AddSelection = () => {
     function handleSubmit(event) {
         event.preventDefault();
         const selectionData = {
+            from: currentUser.name,
             name: selection,
-            from: currentUser.name
+            userId: userId
         };
         
         dispatch(addSubmittedSelection(selectionData, token));
@@ -41,7 +42,7 @@ const AddSelection = () => {
             <div className={classes.IconButtons}>
                 {(userId === process.env.REACT_APP_FIREBASE_UID1 || userId === process.env.REACT_APP_FIREBASE_UID2) &&
                     <>
-                        <NavLink to="/draft"><button className={classes.DraftIcon}>Draft Board</button></NavLink>
+                        <NavLink to="/draft"><button className={classes.DraftIcon}>Draft</button></NavLink>
                         <NavLink to="/admin"><button className={classes.AdminIcon}>Admin</button></NavLink>
                     </>
                 }

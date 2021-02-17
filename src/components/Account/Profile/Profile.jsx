@@ -44,7 +44,7 @@ const Profile = () => {
     }
 
     function handleSubmit() {
-        dispatch(updateProfile(updatedUser));
+        dispatch(updateProfile(updatedUser, currentUser.token));
         setUpdating(false);
     }
 

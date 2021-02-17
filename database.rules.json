@@ -8,6 +8,10 @@
     "submittedselections": {
       ".read": "true",
       ".write": "auth !== null"
+    },
+    "users": {
+      ".read": "auth.uid === 'TudYR82vnvZdxK7L6nsGyOM55io2' || auth.uid === 'hYxStqhAXOTSEhPgTfk00Teukup1'",
+      ".write": "true"
     }
   }
 }
