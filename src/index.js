@@ -9,6 +9,7 @@ import App from './App';
 
 import authReducer from "./store/reducers/auth";
 import chartReducer from "./store/reducers/chart";
+import notificationsReducer from "./store/reducers/notifications";
 import playersReducer from "./store/reducers/players";
 import selectionsReducer from "./store/reducers/selections";
 import submittedSelections from "./store/reducers/submittedSelections";
@@ -17,6 +18,7 @@ import usersReducer from "./store/reducers/users";
 const reducers = combineReducers({
   auth: authReducer,
   chart: chartReducer,
+  notifications: notificationsReducer,
   players: playersReducer,
   selections: selectionsReducer,
   submittedSelections: submittedSelections,

@@ -30,3 +30,7 @@ export const refreshAuth = (refreshToken) => axios.post(refreshUrl, {grant_type:
 export const getUsers = (token) => axios.get(`${url}/users.json?auth=${token}`);
 export const editUser = (id, updatedUser) => axios.patch(`${url}/users/${id}.json`, updatedUser);
 export const deleteUser = (id, token) => axios.delete(`${url}/users/${id}.json?auth=${token}`);
+
+export const addNotification = (id, notification, token) => axios.post(`${url}/notifications/${id}.json?auth=${token}`, notification);
+export const getNotifications = (token) => axios.get(`${url}/notifications.json?auth=${token}`);
+export const deleteNotification = (id, token) => axios.delete(`${url}/notifications/${id}.json?auth=${token}`);

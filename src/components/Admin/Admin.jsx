@@ -19,10 +19,11 @@ const Admin = () => {
         width: "calc(100% - 45px)"
     };
 
-
     useEffect(() => {
         dispatch(getUsers(token));
     }, [dispatch]);
+    
+    users.sort((a, b) => a.name.localeCompare(b.name, "en", {'sensitivity': 'base'}))
 
     if (search.length > 0) {
         users = users.filter(user => {

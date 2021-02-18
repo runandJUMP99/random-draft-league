@@ -12,6 +12,10 @@
     "users": {
       ".read": "auth.uid === 'TudYR82vnvZdxK7L6nsGyOM55io2' || auth.uid === 'hYxStqhAXOTSEhPgTfk00Teukup1'",
       ".write": "true"
+    },
+    "notifications": {
+      ".read": "true",
+      ".write": "auth.uid === 'TudYR82vnvZdxK7L6nsGyOM55io2' || auth.uid === 'hYxStqhAXOTSEhPgTfk00Teukup1'"
     }
   }
 }

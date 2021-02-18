@@ -1,3 +1,6 @@
 .Users {
+    align-items: center;
+    display: flex;
+    justify-content: center;
     margin: 4rem auto 2rem;
 }

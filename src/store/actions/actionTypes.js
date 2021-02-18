@@ -36,3 +36,7 @@ export const AUTH_FAIL = "AUTH_FAIL";
 export const GET_USERS = "GET_USERS";
 export const EDIT_USER = "EDIT_USER";
 export const DELETE_USER = "DELETE_USER";
+
+export const ADD_NOTIFICATION = "ADD_NOTIFICATION";
+export const GET_NOTIFICATIONS = "GET_NOTIFICATIONS";
+export const DELETE_NOTIFICATION = "DELETE_NOTIFICATION";

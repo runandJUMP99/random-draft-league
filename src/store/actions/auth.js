@@ -17,6 +17,7 @@ export const register = (isNewUser, user) => async(dispatch) => {
 
             const newUser = {
                 email: user.email,
+                isFranchise: false,
                 name: user.name,
                 userId: response.user.uid
             };
@@ -49,7 +50,7 @@ export const register = (isNewUser, user) => async(dispatch) => {
     }
 }
 
-export const updateProfile = (updatedUser, token) => async(dispatch) => {
+export const updateProfile = (updatedUser) => async(dispatch) => {
     try {
         dispatch({type: actionTypes.AUTH_START});
         const currentUser = firebase.auth().currentUser;
@@ -91,13 +92,13 @@ export const updateProfile = (updatedUser, token) => async(dispatch) => {
             dispatch({type: actionTypes.AUTH_UPDATE_PROFILE, payload: updatedUser})
         }
 
-        updatedUser = {
+        updatedUser = { //used to remove unnecessary data from being passed
             email: updatedUser.email,
             name: updatedUser.name,
             userId: updatedUser.userId
         };
 
-        dispatch(editUser(currentUser.uid, updatedUser, token));
+        dispatch(editUser(currentUser.uid, updatedUser));
     } catch(err) {
         console.log(err);
         dispatch({type:actionTypes.AUTH_FAIL, payload: err.message});

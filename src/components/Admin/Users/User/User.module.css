@@ -1,10 +1,40 @@
 .User {
-    background: white;
-    margin: auto;
+    background: #ebebeb;
+    border-radius: 4px;
+    margin: 0.5rem;
+    min-height: 125px;
+    overflow: hidden;
     padding: 0.5rem;
-    width: 30%;
+    position: relative;
+    width: 20rem;
 }
 
-.User p:last-child {
+.ID {
     margin-bottom: 0;
+}
+
+.Icons {
+    bottom: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    right: 0.5rem;
+}
+
+.Icon,
+.NotificationsActive {
+    cursor: pointer;
+}
+
+.Icon:hover {
+    color: #808080;
+}
+
+.NotificationsActive {
+    color: rgb(179, 179, 12);
+}
+
+.NotificationsOff {
+    color: #bdbdbd;
+    cursor: not-allowed;
 }
