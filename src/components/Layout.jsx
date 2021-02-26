@@ -110,9 +110,8 @@ const Layout = () => {
     }
     
     function lockInSelection(id, honorableMention) {
-        const playerId = players[playerTurn].playerId;
         let newSelection = selections.find(selection => selection.id === id);
-
+        
         if (honorableMention) {
             newSelection = {
                 ...newSelection,
@@ -123,6 +122,7 @@ const Layout = () => {
                 roundSelected: null
             }
         } else {
+            const playerId = players[playerTurn].playerId;
             newSelection = {
                 ...newSelection,
                 honorableMention: false,

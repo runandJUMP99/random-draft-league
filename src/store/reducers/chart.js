@@ -10,7 +10,7 @@ const chart = (state = initialState, action) => {
         case actionTypes.SET_ROUNDS:
             return {
                 ...state,
-                rounds: action.payload
+                rounds: action.payload.rounds
             };
         case actionTypes.GET_ROUNDS:
             return {

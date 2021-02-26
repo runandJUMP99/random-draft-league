@@ -13,7 +13,7 @@ import {addPlayer, editPlayer, setPlayerId} from "../../../../store/actions/play
 const AddPlayer = ({setShowModal}) => {
     const [continueAdding, setContinueAdding] = useState(true);
     const [player, setPlayer] = useState({img: "", name: ""});
-    const [totalRounds, setTotalRounds] = useState("");
+    const [totalRounds, setTotalRounds] = useState({rounds: ""});
     const [roundsSet, setRoundsSet] = useState(false);
     const players = useSelector(state => state.players.players);
     const playerId = useSelector(state => state.players.setPlayerId);
@@ -56,15 +56,15 @@ const AddPlayer = ({setShowModal}) => {
                 ? <form autoComplete="off" className={classes.Form} noValidate onSubmit={handleSubmit}>
                     <Typography align="center" variant="h6">How Many Rounds?</Typography>
                     <p>-Leave Blank To Have Unlimited Rounds-</p>
-                    <TextField 
-                        fullWidth 
+                    <TextField
+                        fullWidth
                         label="Total Rounds"
-                        margin="normal" 
+                        margin="normal"
                         name="rounds"
-                        onChange={(event) => setTotalRounds(event.target.value)} 
+                        onChange={(event) => setTotalRounds({rounds: event.target.value})}
                         required
-                        value={totalRounds.total}
-                        variant="outlined" 
+                        value={totalRounds.rounds}
+                        variant="outlined"
                     />
                     <Button className={classes.ButtonSubmit} color="primary" fullWidth size="large" type="submit" variant="contained">Submit</Button>
                 </form>

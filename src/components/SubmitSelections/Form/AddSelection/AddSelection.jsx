@@ -15,11 +15,13 @@ const AddSelection = () => {
     const [selection, setSelection] = useState("");
     const [captcha, setCaptcha] = useState(true);
     const currentUser = useSelector(state => state.auth);
+    const submittedSelections = useSelector(state => state.submittedSelections);
     const token = useSelector(state => state.auth.token);
     const userId = useSelector(state => state.auth.userId);
     const dispatch = useDispatch();
+    const currentUserSubmissions = submittedSelections.filter(selection => currentUser.name === selection.from);
     // const recaptchaRef = React.createRef();
-        
+    
     function handleSubmit(event) {
         event.preventDefault();
         const selectionData = {
@@ -34,6 +36,7 @@ const AddSelection = () => {
         // setCaptcha(false);
         // recaptchaRef.current.reset();
     }
+
 
     return (
         <div className={classes.AddSelection}>
@@ -62,8 +65,25 @@ const AddSelection = () => {
                 <div className={classes.Captcha}>
                     {/* <ReCAPTCHA ref={recaptchaRef} sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY} onChange={() => setCaptcha(true)} /> */}
                 </div>
-                <Button className={classes.ButtonSubmit} color="primary" disabled={!captcha} fullWidth size="large" type="submit" variant="contained">Submit</Button>
-                <Button color="secondary" fullWidth onClick={() => setSelection("")} size="small" variant="contained">Clear</Button>
+                <Button
+                    className={classes.ButtonSubmit}
+                    color="primary" disabled={!captcha || currentUserSubmissions.length >= 3}
+                    fullWidth
+                    size="large"
+                    type="submit"
+                    variant="contained"
+                >
+                        {currentUserSubmissions.length >= 3 ? "Max 3 Submissions Per Draft" : "Submit"}
+                </Button>
+                <Button
+                    color="secondary"
+                    fullWidth
+                    onClick={() => setSelection("")}
+                    size="small"
+                    variant="contained"
+                >
+                    Clear
+                </Button>
             </form>
         </div>
     );

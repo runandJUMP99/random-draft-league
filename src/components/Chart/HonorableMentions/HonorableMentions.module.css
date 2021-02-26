@@ -22,6 +22,8 @@
 
 .Selections {
     display: flex;
+    justify-content: center;
+    width: 100%;
 }
 
 .Selection {

@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 
+import Banner from "./Banner/Banner";
 import Form from "../Form/Form";
 
 import classes from "./Header.module.css";
@@ -52,6 +53,7 @@ const Header = () => {
                 <div className={classes.Bg2}></div>
                 <div className={classes.Bg3}></div>
             </div>
+            <Banner />
             <div className={classes.Text}>
                 <h1>Random Draft League</h1>
                 <h2>This Week's Subject: 
@@ -67,6 +69,7 @@ const Header = () => {
                         : <span className={classes.Subject}onClick={handleClick}>{currentSubject ? currentSubject.name : subject.name}</span>
                     }
                 </h2>
+                <p>Entries must be submitted by 11:59 pm on Thursday or they may not be added to the board!</p>
                 <p className={classes.SocialsHeader}>Follow us on Twitch, Twitter, and Facebook for updates on the next draft!</p>
                 <div className={classes.Socials}>
                     <p className={classes.Twitch}><a target="_blank" rel="noopener noreferrer" href="https://twitch.com/heathypoop"><i className="fab fa-twitch"></i>Twitch</a></p>

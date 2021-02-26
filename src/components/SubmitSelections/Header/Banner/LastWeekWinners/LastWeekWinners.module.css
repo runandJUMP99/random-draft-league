@@ -1,0 +1,18 @@
+.LastWeekWinners {
+    color: black;
+    font-size: 1.5rem;
+}
+
+.LastWeekWinners span {
+    animation: slide 3s ease-in;
+    margin-left: 2rem;
+}
+
+@keyframes slide {
+    0% {
+        transform: translateX(1rem);
+    }
+    100% {
+        transform: translateX(-1rem);
+    }
+}

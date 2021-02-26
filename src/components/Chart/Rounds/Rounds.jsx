@@ -4,6 +4,7 @@ import {useSelector} from "react-redux";
 import Round from "./Round/Round";
 
 import classes from "./Rounds.module.css";
+
 const Rounds = ({handleSelection, setModalContent, setShowModal}) => {
     const chart = useSelector(state => state.selections.selections.filter(selection => selection.player));
     const players = useSelector(state => state.players.players);

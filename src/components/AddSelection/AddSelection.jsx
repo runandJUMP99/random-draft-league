@@ -60,6 +60,7 @@ const AddSelection = ({submittedSelection, setShowModal}) => {
 
     function handleDelete() {
         dispatch(deleteSubmittedSelection(submittedSelection.id, token));
+        setShowModal(false);
     }
 
     function clear() {
