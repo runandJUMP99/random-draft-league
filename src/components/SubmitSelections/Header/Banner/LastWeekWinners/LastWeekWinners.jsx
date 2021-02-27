@@ -17,7 +17,7 @@ const LastWeekWinners = () => {
             } else { 
                 setCurrentName(0);
             }
-        }, 3000);
+        }, 4000);
 
         return () => {
             clearInterval(timer);
@@ -26,7 +26,7 @@ const LastWeekWinners = () => {
 
     return (
         <div className={classes.LastWeekWinners}>
-            Last Week's Winners: <span>{dummyData[currentName].name}</span>
+            Last Week's Winners: <div className={classes.Animation}>{dummyData[currentName].name}</div>
         </div>
     );
 }
