@@ -18,7 +18,7 @@ const Users = ({users}) => {
     return (
         <div className={classes.Users}>
             {users.map(user => {
-                let userNotifications = null;
+                let userNotifications = {};
 
                 notifications.forEach(notification => {
                     if (notification.id === user.id) {

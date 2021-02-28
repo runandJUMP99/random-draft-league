@@ -57,12 +57,27 @@
     background: #20c920;
 }
 
+.AccountIconGroup {
+    position: relative;
+}
+
 .AccountIcon {
     color: blue;
     cursor: pointer;
-    transition: all 0.2s linear !important;
+    padding: 0;
+    transition: all 0.2s ease-out !important;
 }
 
 .AccountIcon:hover {
-    color: #0051ff;
+    color: #2469ff;
+}
+
+.NotificationAlert {
+    background: #18b618;
+    border-radius: 50%;
+    color: white;
+    font-size: 1rem !important;
+    position: absolute;
+    right: 0;
+    padding: 0;
 }

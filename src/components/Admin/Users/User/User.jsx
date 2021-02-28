@@ -46,7 +46,7 @@ const User = ({email, isFranchise, name, notifications, userId}) => {
 
     return (
         <div className={classes.User}>
-            {viewNotifications ? <Notifications notifications={notifications} userId={userId} /> : isMessaging
+            {(viewNotifications && Object.keys(notifications).length > 1) ? <Notifications notifications={notifications} userId={userId} /> : isMessaging
                 ? <textarea 
                     cols="30"
                     rows="4"
@@ -61,7 +61,7 @@ const User = ({email, isFranchise, name, notifications, userId}) => {
                 </>
             } 
             <div className={classes.Icons}>
-                {notifications
+                {Object.keys(notifications).length > 1 //check if notifications object has notifications in it
                     ? <NotificationsActiveIcon className={classes.NotificationsActive} onClick={() => setViewNotifications(prevValue => !prevValue)} />
                     : <NotificationsIcon className={classes.NotificationsOff} />
                 }

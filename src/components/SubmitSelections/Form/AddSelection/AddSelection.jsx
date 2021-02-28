@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {NavLink} from "react-router-dom";
 import ReCAPTCHA from "react-google-recaptcha";
@@ -6,9 +6,11 @@ import ReCAPTCHA from "react-google-recaptcha";
 import {Button, TextField, Typography} from "@material-ui/core";
 
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import PriorityHighIcon from '@material-ui/icons/PriorityHigh';
 
 import classes from "./AddSelection.module.css";
 import logo from "../../../../assets/images/logo.png";
+import {getNotifications} from "../../../../store/actions/notifications";
 import {addSubmittedSelection} from "../../../../store/actions/submittedSelections";
 
 const AddSelection = () => {
@@ -18,10 +20,15 @@ const AddSelection = () => {
     const submittedSelections = useSelector(state => state.submittedSelections);
     const token = useSelector(state => state.auth.token);
     const userId = useSelector(state => state.auth.userId);
+    const notifications = useSelector(state => state.notifications).filter(notification => notification.id === userId);
     const dispatch = useDispatch();
     const currentUserSubmissions = submittedSelections.filter(selection => currentUser.name === selection.from);
     // const recaptchaRef = React.createRef();
-    
+
+    useEffect(() => {
+        dispatch(getNotifications(token));
+    }, [dispatch, token]);
+
     function handleSubmit(event) {
         event.preventDefault();
         const selectionData = {
@@ -49,7 +56,10 @@ const AddSelection = () => {
                         <NavLink to="/admin"><button className={classes.AdminIcon}>Admin</button></NavLink>
                     </>
                 }
-                <NavLink to="/account"><AccountCircleIcon className={classes.AccountIcon} fontSize="large" /></NavLink>
+                <NavLink className={classes.AccountIconGroup} to="/account">
+                    <AccountCircleIcon className={classes.AccountIcon} fontSize="large" />
+                    {notifications.length > 0 && <PriorityHighIcon className={classes.NotificationAlert} fontSize="small" />}
+                </NavLink>
             </div>
             <form autoComplete="off" className={classes.Form} noValidate onSubmit={handleSubmit}>
                 <TextField 

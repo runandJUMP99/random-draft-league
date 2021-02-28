@@ -29,7 +29,7 @@ const notifications = (state = [], action) => {
             return updatedNotifications;
         case actionTypes.GET_NOTIFICATIONS:
             return action.payload;
-        case actionTypes.DELETE_NOTIFICATION://delete thisIsObject[key]; 
+        case actionTypes.DELETE_NOTIFICATION:
             const updatedNotifs = state.map(notification => {            
                 for (let key in notification) {
                     if (key === action.payload) {
