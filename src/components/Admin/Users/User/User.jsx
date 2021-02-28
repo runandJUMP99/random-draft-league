@@ -32,19 +32,21 @@ const User = ({email, isFranchise, name, notifications, userId}) => {
     }
     
     function handleSubmit() {
-        dispatch(addNotification(userId, newNotification, token));
+        if (newNotification.message !== "") {
+            dispatch(addNotification(userId, newNotification, token));
+        }
         
         setNewNotification({message: ""});
         setIsMessaging(false);
     }
 
-    if (viewNotifications && notifications.length === 0) {
+    if (viewNotifications && !notifications) {
         setViewNotifications(false);
     }
 
     return (
         <div className={classes.User}>
-            {isMessaging
+            {viewNotifications ? <Notifications notifications={notifications} userId={userId} /> : isMessaging
                 ? <textarea 
                     cols="30"
                     rows="4"
@@ -59,7 +61,7 @@ const User = ({email, isFranchise, name, notifications, userId}) => {
                 </>
             } 
             <div className={classes.Icons}>
-                {notifications.length > 0 
+                {notifications
                     ? <NotificationsActiveIcon className={classes.NotificationsActive} onClick={() => setViewNotifications(prevValue => !prevValue)} />
                     : <NotificationsIcon className={classes.NotificationsOff} />
                 }

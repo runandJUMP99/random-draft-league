@@ -1,6 +1,7 @@
 .Users {
     align-items: center;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     margin: 4rem auto 2rem;
 }

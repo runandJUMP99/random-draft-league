@@ -1,11 +1,16 @@
 import * as actionTypes from "../actions/actionTypes";
 import * as api from "./api";
 
-export const addNotification = (id, notification, token) => async(dispatch) => {
-    try {console.log(notification);
-        await api.addNotification(id, notification, token);
-        
-        dispatch({type: actionTypes.ADD_NOTIFICATION, payload: notification});
+export const addNotification = (userId, notification, token) => async(dispatch) => {
+    try {
+        const {data} = await api.addNotification(userId, notification, token);
+        const messageData = {   //create message data object to match how objects appear in firebase. this helps other components GET and access data properly when new notifications are added
+            notificationId: data.name,
+            message: notification,
+            userId: userId
+        };
+
+        dispatch({type: actionTypes.ADD_NOTIFICATION, payload: messageData});
     } catch(err) {
         console.log(err);
     }
@@ -29,9 +34,9 @@ export const getNotifications = (token) => async(dispatch) => {
     }
 };
 
-export const deleteNotification = (id, token) => (dispatch) => {
+export const deleteNotification = (id, token, userId) => (dispatch) => {
     try {
-        api.deleteNotification(id, token);
+        api.deleteNotification(id, token, userId);
 
         dispatch({type: actionTypes.DELETE_NOTIFICATION, payload: id});
     } catch(err) {

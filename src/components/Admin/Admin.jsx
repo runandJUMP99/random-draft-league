@@ -21,7 +21,7 @@ const Admin = () => {
 
     useEffect(() => {
         dispatch(getUsers(token));
-    }, [dispatch]);
+    }, [dispatch, token]);
     
     users.sort((a, b) => a.name.localeCompare(b.name, "en", {'sensitivity': 'base'}))
 

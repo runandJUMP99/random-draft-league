@@ -33,4 +33,4 @@ export const deleteUser = (id, token) => axios.delete(`${url}/users/${id}.json?a
 
 export const addNotification = (id, notification, token) => axios.post(`${url}/notifications/${id}.json?auth=${token}`, notification);
 export const getNotifications = (token) => axios.get(`${url}/notifications.json?auth=${token}`);
-export const deleteNotification = (id, token) => axios.delete(`${url}/notifications/${id}.json?auth=${token}`);
+export const deleteNotification = (id, token, userId) => axios.delete(`${url}/notifications/${userId}/${id}.json?auth=${token}`);

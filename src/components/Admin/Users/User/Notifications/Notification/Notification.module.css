@@ -1,0 +1,23 @@
+.Notification {
+    align-items: center;
+    border-radius: 32px;
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.25rem;
+    padding: 0.25rem 0.5rem;
+    width: calc(100% - 28px);
+}
+
+.Notification svg {
+    background: #d4402d;
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    padding: 0;
+    transition: all 0.25s ease-out;
+}
+
+.Notification svg:hover {
+    background: #f3544e;
+}

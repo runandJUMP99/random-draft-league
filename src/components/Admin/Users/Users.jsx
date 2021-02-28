@@ -13,19 +13,25 @@ const Users = ({users}) => {
 
     useEffect(() => {
         dispatch(getNotifications(token));
-    }, [dispatch]);
+    }, [dispatch, token]);
 
     return (
         <div className={classes.Users}>
             {users.map(user => {
-                //for (let key in notifications
+                let userNotifications = null;
+
+                notifications.forEach(notification => {
+                    if (notification.id === user.id) {
+                        userNotifications = notification;
+                    }
+                });
 
                 return <User 
                     email={user.email}
                     key={user.userId}
                     isFranchise={user.isFranchise}
                     name={user.name}
-                    notifications={notifications}
+                    notifications={userNotifications}
                     userId={user.userId}
                 />
             })}

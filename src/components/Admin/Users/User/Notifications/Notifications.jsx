@@ -1,17 +1,25 @@
 import React from "react";
-import {useSelector} from "react-redux";
 
 import Notification from "./Notification/Notification";
 
 import classes from "./Notifications.module.css";
 
-const Notifications = () => {
-    const notifications = useSelector(state => state.notifications);
+const Notifications = ({notifications, userId}) => {
+    const messages = [];
+
+    for (let key in notifications) {
+        if (key !== "id") {
+            messages.push({
+                message: notifications[key].message,
+                id: key
+            });
+        }
+    }
 
     return (
         <div className={classes.Notifications}>
-            {notifications.map(notification => (
-                <Notification message={notification.message} />
+            {messages.map(message => (
+                <Notification key={message.id} message={message} userId={userId} />
             ))}
         </div>
     );

@@ -36,7 +36,7 @@ const players = (state = initialState, action) => {
             return {
                 ...state,
                 setPlayerId: action.payload
-            }
+            };
         default:
             return state;
     }
