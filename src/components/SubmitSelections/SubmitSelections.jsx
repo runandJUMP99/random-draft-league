@@ -1,18 +1,32 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
 
 import Backdrop from "../UI/Backdrop/Backdrop";
-import Form from "./Form/Form";
 import Header from "./Header/Header";
-import Logo from "../UI/Logo/Logo";
 import Modal from "../UI/Modal/Modal";
+import SearchBar from "../UI/SeachBar/SearchBar";
 import SubmittedSelections from "./SubmittedSelections/SubmittedSelections";
 
 import classes from "./SubmitSelections.module.css";
+import {getSubmittedSelections} from "../../store/actions/submittedSelections";
 
 const SubmitSelections = () => {
     const [modalContent, setModalContent] = useState(null);
+    const [search, setSearch] = useState("");
     const [showModal, setShowModal] = useState(false);
+    let submittedSelections = useSelector(state => state.submittedSelections);
+    const dispatch = useDispatch();
 
+    useEffect(() => {
+        dispatch(getSubmittedSelections());
+    }, [dispatch]);
+
+    if (search.length > 0) {
+        submittedSelections = submittedSelections.filter(selection => {
+            return selection.from.toLowerCase().includes(search.toLowerCase()) || selection.name.toLowerCase().includes(search.toLowerCase());
+        });
+    }
+    
     return (
         <div className={classes.SubmitSelections}>
             <Backdrop showModal={showModal} setShowModal={setShowModal} />
@@ -21,11 +35,12 @@ const SubmitSelections = () => {
             </Modal>
             <div className={classes.MainContent}>
                 <Header />
-                <SubmittedSelections setModalContent={setModalContent} setShowModal={setShowModal} />
-            </div>
-            <Form />
-            <div className={classes.Logo}>
-                <Logo />
+                <SearchBar search={search} setSearch={setSearch} />
+                <SubmittedSelections
+                    setModalContent={setModalContent}
+                    setShowModal={setShowModal}
+                    submittedSelections={submittedSelections}
+                />
             </div>
         </div>
     );

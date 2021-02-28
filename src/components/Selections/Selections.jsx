@@ -2,7 +2,7 @@ import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 
 import Selection from "./Selection/Selection";
-import Spinner from "../UI/Spinner/Spinner";
+import GlobalLoader from "../UI/GlobalLoader/GlobalLoader";
 
 import classes from "./Selections.module.css";
 import {getSelections} from "../../store/actions/selections";
@@ -16,7 +16,7 @@ const Selections = ({showModal, handleSelection}) => {
     const notSelectedSelections = selections.filter(selection => !selection.isSelected);
     
     useEffect(() => {
-        dispatch(getSelections(token));
+        // dispatch(getSelections(token)); TODO--FIX UPDATING SUBJECT AND ROUNDS
     }, [dispatch]);
 
     selectedSelections.sort((a, b) => {
@@ -31,7 +31,7 @@ const Selections = ({showModal, handleSelection}) => {
     
     return (
         <div className={classes.Selections}>
-            {selections.length === 0 ? <Spinner /> : selections.map(selection => (
+            {selections.length === 0 ? <GlobalLoader /> : selections.map(selection => (
                 <div className={classes.Selection} key={selection.id} onClick={() => handleSelection(selection.id)}>
                     <Selection 
                         selectionData={selection} 

@@ -1,0 +1,8 @@
+.MenuItem {
+    cursor: pointer;
+    margin-bottom: 0.5rem;
+}
+
+.MenuItem:hover {
+    color: #c0c0c0;
+}

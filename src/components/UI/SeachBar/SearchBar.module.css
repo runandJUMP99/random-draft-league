@@ -1,0 +1,21 @@
+.SearchBar {
+    margin-left: 1.5%;
+    margin-top: 1.5%;
+}
+
+.SearchBar label {
+    cursor: pointer;
+}
+
+.SearchBar input {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    outline: none;
+    padding: 0.25rem;
+    transition: background 0.25s linear;
+}
+
+.SearchBar input:focus {
+    background: #ccc;
+}

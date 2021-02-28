@@ -1,21 +1,35 @@
 .SubmittedSelection {
-    border-radius: 4px;
+    box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.3);
     cursor: pointer;
     font-weight: bold;
-    margin: 0.5rem;
+    height: 14rem;
+    margin: 1rem 1.5%;
+    overflow: hidden;
     padding: 0.25rem;
     position: relative;
     transition: all 0.25s ease-out;
-    width: 20%;
+    width: 13%;
 }
 
 .SubmittedSelection:hover {
-    box-shadow: 0 1px 4px 2px rgba(255, 255, 255, 0.5);
+    box-shadow: 1px 1px 4px 2px rgba(0, 0, 0, 0.5);
+    transform: rotate(0deg) scale(1.25) !important;
+    z-index: 5;
 }
 
 .SubmittedSelection p {
     margin-bottom: 0.25rem;
     word-wrap: break-word
+}
+
+.From {
+    font-family: "Poppins";
+    font-size: 1.5rem;
+}
+
+.Submission {
+    font-family: "Shadows Into Light";
+    font-size: 1.1rem;
 }
 
 @media (max-width: 1200px) {

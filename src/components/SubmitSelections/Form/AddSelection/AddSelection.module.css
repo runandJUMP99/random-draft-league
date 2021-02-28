@@ -1,0 +1,83 @@
+.AddSelection {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.AddSelection img {
+    border-radius: 50%;
+    height: 7rem;
+    margin: 1rem auto;
+    object-fit: cover;
+    width: 7rem;
+}
+
+.Captcha {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+}
+
+.ButtonSubmit {
+    margin: 1rem auto 0.5rem !important;
+}
+
+.IconButtons {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+}
+
+.DraftIcon {
+    background: #636363;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    margin-right: 0.25rem;
+    transition: all 0.2s linear !important;
+}
+
+.DraftIcon:hover {
+    background: #777777;
+}
+
+.AdminIcon {
+    background: #18b618;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    margin-right: 0.25rem;
+    transition: all 0.2s linear !important;
+}
+
+.AdminIcon:hover {
+    background: #20c920;
+}
+
+.AccountIconGroup {
+    position: relative;
+}
+
+.AccountIcon {
+    color: blue;
+    cursor: pointer;
+    padding: 0;
+    transition: all 0.2s ease-out !important;
+}
+
+.AccountIcon:hover {
+    color: #2469ff;
+}
+
+.NotificationAlert {
+    background: #18b618;
+    border-radius: 50%;
+    color: white;
+    font-size: 1rem !important;
+    position: absolute;
+    right: 0;
+    padding: 0;
+}

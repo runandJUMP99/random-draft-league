@@ -1,30 +1,30 @@
 .Paper {
     align-items: center;
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    min-height: 470px;
     max-width: 25rem;
-    padding: 2rem;
-    position: absolute;
-    right: 1rem;
-    top: 1rem;
+    padding: 1rem 2rem;
+    position: relative;
     width: 28%;
 }
 
-.Captcha {
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    margin: auto;
+.Logout {
+    cursor: pointer;
+    font-size: 0.8rem;
+    text-align: center;
+    text-decoration: underline;
 }
 
-.ButtonSubmit {
-    margin: 1rem auto 0.5rem !important;
+.Logout:hover {
+    color: #666666;
+    text-decoration: none;
 }
 
 @media (max-width: 1200px) {
     .Paper {
         margin: auto;
-        position: static;
         width: 100%;
     }
 }

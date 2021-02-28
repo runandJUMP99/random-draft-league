@@ -42,7 +42,7 @@ const Player = ({player, setModalContent, setShowModal}) => {
     return (
         <div className={classes.Container}>
             <div className={classes.Player} onClick={handleClick}>
-                {<img src={player.img ? player.img : logo} alt="" />}
+                {<img src={player.img ? player.img : logo} alt={player.name} />}
                 <h4>{player.name}</h4>
             </div>
             <div style={{display: chart.length > 0 && "none"}}>

@@ -1,0 +1,27 @@
+.ConfirmDelete button {
+    background: white;
+    border: none;
+    border-radius: 32px;
+    box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.1);
+    font-weight: bold;
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    position: relative;
+    transition: box-shadow 0.1s linear;
+}
+
+.ConfirmDelete button:hover {
+    box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+.ConfirmDelete button:active {
+    background: #dbdbdb;
+    box-shadow: 0 0 0 0;
+    top: 2px;
+}
+
+.Delete {
+    background: #f55d4c !important;
+    color: white;
+    margin-left: 1rem;
+}

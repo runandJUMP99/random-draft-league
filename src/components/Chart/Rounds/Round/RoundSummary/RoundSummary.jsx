@@ -25,7 +25,9 @@ const RoundSummary = ({round, selections}) => {
                                 <h4>{players[count].name.substring(0, 13)}:</h4>
                                 <Selection selectionData={selection} />
                             </div>
-                        )
+                        );
+                    } else {
+                        return null;
                     }
                 })}
             </div>

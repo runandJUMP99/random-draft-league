@@ -1,0 +1,40 @@
+.User {
+    background: #ebebeb;
+    border-radius: 4px;
+    margin: 0.5rem;
+    min-height: 125px;
+    overflow: hidden;
+    padding: 0.5rem;
+    position: relative;
+    width: 21rem;
+}
+
+.ID {
+    margin-bottom: 0;
+}
+
+.Icons {
+    bottom: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    right: 0.5rem;
+}
+
+.Icon,
+.NotificationsActive {
+    cursor: pointer;
+}
+
+.Icon:hover {
+    color: #808080;
+}
+
+.NotificationsActive {
+    color: #cccc04;
+}
+
+.NotificationsOff {
+    color: #bdbdbd;
+    cursor: not-allowed;
+}

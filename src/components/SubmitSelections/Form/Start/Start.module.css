@@ -1,0 +1,35 @@
+.Start {
+    text-align: center;
+}
+
+.StartButtonHeader {
+    bottom: 2.5rem;
+    font-family: "Poppins";
+    font-size: 1.5rem;
+    font-weight: bold;
+    position: relative;
+}
+
+.StartButton {
+    background-color: blue;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 3px 2px 4px #00005e; 
+    color: white;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 2rem;
+    height: 12rem;
+    transition: background-color 0.15s linear;
+    width: 12rem;
+}
+
+
+.StartButton:hover {
+    background-color: #0000b4;
+}
+
+.StartButton:active {
+    box-shadow: 0 0 0 0;
+    outline: none;
+    transform: translateY(0.5rem);
+}

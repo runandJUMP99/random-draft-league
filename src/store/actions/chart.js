@@ -13,13 +13,8 @@ export const getRounds = (token) => async(dispatch) => {
 
 export const setRounds = (rounds, token) => async(dispatch) => {
     try {
-        const {data} = await api.setRounds(rounds, token);
-        const setRounds = {
-            ...rounds,
-            id: data.name,                
-        };
-
-        dispatch({type: actionTypes.SET_ROUNDS, payload: setRounds});
+        await api.setRounds(rounds, token);
+        dispatch({type: actionTypes.SET_ROUNDS, payload: rounds});
     } catch(err) {
         console.log(err);
     }

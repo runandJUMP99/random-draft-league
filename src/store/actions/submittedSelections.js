@@ -1,14 +1,14 @@
 import * as actionTypes from "../actions/actionTypes";
 import * as api from "./api";
 
-export const addSubmittedSelection = (selection) => async(dispatch) => {
+export const addSubmittedSelection = (selection, token) => async(dispatch) => {
     try {
-        const {data} = await api.addSubmittedSelection(selection);
-
+        const {data} = await api.addSubmittedSelection(selection, token);
         const newSelection = {
-            ...selection,
+            from: selection.from,
             id: data.name,
-            isSelected: false
+            isSelected: false,
+            name: selection.name
         }
         
         dispatch({type: actionTypes.ADD_SUBMITTED_SELECTION, payload: newSelection});

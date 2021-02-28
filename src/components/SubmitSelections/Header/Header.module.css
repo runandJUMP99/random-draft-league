@@ -1,19 +1,65 @@
 .Header {
-    background: #eee;
-    border-radius: 4px;
-    padding: 0.5rem;
-    text-align: center;
-    width: 70%;
+    align-items: center;
+    color: white;
+    display: flex;
+    justify-content: space-around;
+    overflow: hidden;
+    padding: 4rem 0;
+    position: relative;
+    width: 100%;
+}
+
+.Header h1 {
+    font-size: 3rem;
+}
+
+.Background {
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+.Bg,
+.Bg2,
+.Bg3 {
+    animation: slide 5s ease-in-out infinite alternate;
+    background-image: linear-gradient(-60deg, green 50%, blue 50%); /* #6c3  #09f */
+    bottom: 0;
+    height: 100%;
+    left: -50%;
+    opacity: .5;
+    position: absolute;
+    right: -50%;
+    top: 0;
+}
+  
+.Bg2 {
+    animation-direction: alternate-reverse;
+    animation-duration: 6s;
+}
+
+.Bg3 {
+    animation-duration: 7s;
+}
+
+.Text {
+    position: relative;
 }
 
 .Subject {
     display: inline-block;
+    font-weight: normal;
     margin-left: 0.5rem;
+}
+
+.SocialsHeader {
+    margin: 2.5rem 0 0.5rem;
 }
 
 .Socials {
     display: flex;
-    justify-content: center;
 }
 
 .Socials a {
@@ -24,8 +70,11 @@
 .Twitch,
 .Twitter,
 .Facebook {
+    border-radius: 4px;
     cursor: pointer;
     margin: 0 0.5rem;
+    padding: 0.25rem 0.5rem;
+    transition: all 0.25s ease-out;
 }
 
 .Twitch i,
@@ -34,20 +83,33 @@
     margin-right: 0.25rem;
 }
 
+.Twitch {
+    margin-left: 0;
+}
+
 .Twitch:hover {
-    color: #9900ad;
+    background: #8701d4;
 }
 
 .Twitter:hover {
-    color: #08a0ce;
+    background: #1fc4f7;
 }
 
 .Facebook:hover {
-    color: #1414a5;
+    background: #0e3aff;
 }
 
 @media (max-width: 1200px) {
     .Header {
         width: 100%;
+    }
+}
+
+@keyframes slide {
+    0% {
+      transform:translateX(-25%);
+    }
+    100% {
+      transform:translateX(25%);
     }
 }

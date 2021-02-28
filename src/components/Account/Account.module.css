@@ -1,0 +1,25 @@
+.AccountContainer {
+    background: #e4e4e4;
+    height: 100vh;
+}
+
+.Account {
+    color: rgba(0, 0, 0, 0.5);
+    height: 75%;
+    margin: auto;
+    max-width: 900px;
+    padding: 10% 1rem;
+    width: 90%;
+}
+
+.AccountDisplay {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+}
+
+.Display {
+    padding: 1rem 3rem;
+    width: 100%;
+}

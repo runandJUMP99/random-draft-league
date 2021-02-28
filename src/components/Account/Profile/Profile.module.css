@@ -1,0 +1,56 @@
+.Profile img {
+    border-radius: 50%;
+    height: 7rem;
+    margin-bottom: 0.5rem;
+    object-fit: cover;
+    width: 7rem;
+}
+
+.Profile p {
+    margin: 0.5rem 0;
+}
+
+.Profile button {
+    background: white;
+    border: none;
+    border-radius: 32px;
+    box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.1);
+    font-weight: bold;
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    position: relative;
+    transition: box-shadow 0.1s linear;
+}
+
+.Profile button:hover {
+    box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+.Profile button:active {
+    background: #dbdbdb;
+    box-shadow: 0 0 0 0;
+    top: 2px;
+}
+
+.FileInput {
+    font-size: 0.8rem;
+    margin-bottom: 2rem;
+}
+
+.PasswordCaption {
+    bottom: 0.5rem;
+    font-size: 0.7rem;
+    font-style: italic;
+    left: 5rem;
+    position: relative;
+}
+
+.Error {
+    color: red;
+}
+
+.Delete {
+    background: #f55d4c !important;
+    color: white;
+    margin-left: 1rem;
+}
