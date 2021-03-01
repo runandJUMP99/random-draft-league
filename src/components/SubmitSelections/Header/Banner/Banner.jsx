@@ -1,37 +1,43 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
+import {useDispatch, useSelector} from "react-redux";
 
 import LastWeekWinners from "./LastWeekWinners/LastWeekWinners";
-import MostDrafted from "./MostDrafted/MostDrafted";
-import PickStreakLeaders from "./PickStreakLeaders/PickStreakLeaders";
+// import MostDrafted from "./MostDrafted/MostDrafted";
+// import PickStreakLeaders from "./PickStreakLeaders/PickStreakLeaders";
 
 import classes from "./Banner.module.css";
+import {getUsers} from "../../../../store/actions/users";
 
 const Banner = () => {
-    const [currentDisplay, setCurrentDisplay] = useState(0);
-    const displays = [
-        <LastWeekWinners />,
-        <MostDrafted />,
-        <PickStreakLeaders />
-    ];
+    const winners = useSelector(state => state.users).filter(user => user.isWinner);
+    const dispatch = useDispatch();
+    // const [currentDisplay, setCurrentDisplay] = useState(0);
+    // const displays = [
+    //     <LastWeekWinners />,
+    //     <MostDrafted />,
+    //     <PickStreakLeaders />
+    // ];
 
     useEffect(() => {
-        const timer = setInterval(() => {
-            if (currentDisplay < displays.length - 1) {
-                setCurrentDisplay(currentDisplay + 1)
-            } else { 
-                setCurrentDisplay(0);
-            }
-        }, 12000);
+        dispatch(getUsers());
+        // const timer = setInterval(() => {
+        //     if (currentDisplay < displays.length - 1) {
+        //         setCurrentDisplay(currentDisplay + 1)
+        //     } else { 
+        //         setCurrentDisplay(0);
+        //     }
+        // }, 12000);
 
-        return () => {
-            clearInterval(timer);
-        }
-    });
+        // return () => {
+        //     clearInterval(timer);
+        // }
+    }, [dispatch]);
 
     return (
         <div className={classes.Banner}>
             <div className={classes.BannerContent}>
-                {displays[currentDisplay]}
+                <LastWeekWinners winners={winners} />
+                {/* {displays[currentDisplay]} */}
             </div>
         </div>
     );

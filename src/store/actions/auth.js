@@ -7,6 +7,7 @@ import {storage} from "../../services/firebase";
 export const register = (isNewUser, user) => async(dispatch) => {
     try {
         dispatch({type: actionTypes.AUTH_START});
+
         const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
         let currentUser;
         let response;
@@ -18,6 +19,8 @@ export const register = (isNewUser, user) => async(dispatch) => {
             const newUser = {
                 email: user.email,
                 isFranchise: false,
+                isWinner: false,
+                img: "",
                 name: user.name,
                 userId: response.user.uid
             };
@@ -53,6 +56,7 @@ export const register = (isNewUser, user) => async(dispatch) => {
 export const updateProfile = (updatedUser) => async(dispatch) => {
     try {
         dispatch({type: actionTypes.AUTH_START});
+
         const currentUser = firebase.auth().currentUser;
         
         if (updatedUser.email && updatedUser.email !== currentUser.email) {
@@ -77,8 +81,14 @@ export const updateProfile = (updatedUser) => async(dispatch) => {
                             photoURL: firebaseUrl
                         });
 
-                        updatedUser = {...updatedUser, img: firebaseUrl}
+                        updatedUser = { //used to remove unnecessary data from being passed
+                            email: updatedUser.email,
+                            img: firebaseUrl,
+                            name: updatedUser.name,
+                            userId: updatedUser.userId
+                        };
                     
+                        dispatch(editUser(currentUser.uid, updatedUser));
                         dispatch({type: actionTypes.AUTH_UPDATE_PROFILE, payload: updatedUser})
                     });
             });
@@ -87,18 +97,16 @@ export const updateProfile = (updatedUser) => async(dispatch) => {
                 displayName: updatedUser.name
             });
 
-            updatedUser = {...updatedUser, img: currentUser.photoURL}
+            updatedUser = { //used to remove unnecessary data from being passed
+                email: updatedUser.email,
+                img: currentUser.photoURL,
+                name: updatedUser.name,
+                userId: updatedUser.userId
+            };
             
+            dispatch(editUser(currentUser.uid, updatedUser));
             dispatch({type: actionTypes.AUTH_UPDATE_PROFILE, payload: updatedUser})
         }
-
-        updatedUser = { //used to remove unnecessary data from being passed
-            email: updatedUser.email,
-            name: updatedUser.name,
-            userId: updatedUser.userId
-        };
-
-        dispatch(editUser(currentUser.uid, updatedUser));
     } catch(err) {
         console.log(err);
         dispatch({type:actionTypes.AUTH_FAIL, payload: err.message});

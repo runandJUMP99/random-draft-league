@@ -1,10 +1,10 @@
 import * as actionTypes from "../actions/actionTypes";
 import * as api from "./api";
 
-export const getUsers = (token) => async(dispatch) => {
+export const getUsers = () => async(dispatch) => {
     try {
         const fetchedUsers = [];
-        const {data} = await api.getUsers(token);
+        const {data} = await api.getUsers();
 
         for (let key in data) {
             fetchedUsers.push({
@@ -12,7 +12,7 @@ export const getUsers = (token) => async(dispatch) => {
                 id: key
             });
         }
-        
+
         dispatch({type: actionTypes.GET_USERS, payload: fetchedUsers});
     } catch(err) {
         console.log(err);

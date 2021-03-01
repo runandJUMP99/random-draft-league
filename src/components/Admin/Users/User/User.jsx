@@ -13,7 +13,7 @@ import classes from "./User.module.css";
 import {editUser} from "../../../../store/actions/users";
 import {addNotification} from "../../../../store/actions/notifications";
 
-const User = ({email, isFranchise, name, notifications, userId}) => {
+const User = ({email, isFranchise, isWinner, name, notifications, userId}) => {
     const [viewNotifications, setViewNotifications] = useState(false);
     const [isMessaging, setIsMessaging] = useState(false);
     const [newNotification, setNewNotification] = useState({message: ""});
@@ -24,9 +24,22 @@ const User = ({email, isFranchise, name, notifications, userId}) => {
         const updatedUser = {
             email: email,
             isFranchise: !isFranchise,
+            isWinner: isWinner,
             name: name,
             userId: userId
         };
+
+        dispatch(editUser(userId, updatedUser));
+    }
+
+    function handleIsWinner() {
+        const updatedUser = {
+            email: email,
+            isFranchise: isFranchise,
+            isWinner: !isWinner,
+            name: name,
+            userId: userId
+        }
 
         dispatch(editUser(userId, updatedUser));
     }
@@ -61,6 +74,7 @@ const User = ({email, isFranchise, name, notifications, userId}) => {
                 </>
             } 
             <div className={classes.Icons}>
+                <span className={classes.Icon } onClick={handleIsWinner}><i className="fas fa-crown" style={{color: isWinner && "#eca2af"}}></i></span>
                 {Object.keys(notifications).length > 1 //check if notifications object has notifications in it
                     ? <NotificationsActiveIcon className={classes.NotificationsActive} onClick={() => setViewNotifications(prevValue => !prevValue)} />
                     : <NotificationsIcon className={classes.NotificationsOff} />

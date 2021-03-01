@@ -7,10 +7,12 @@ import classes from "./Players.module.css";
 import {getPlayers} from "../../../store/actions/players";
 
 const Players = ({setModalContent, setShowModal}) => {
-    const players = useSelector(state => state.players.players);
+    const customPlayers = useSelector(state => state.players.players); //players added by the admin
+    const userPlayers = useSelector(state => state.users).filter(user => user.isFranchise); //players with accounts
     const token = useSelector(state => state.auth.token);
     const dispatch = useDispatch();
-    
+    const players = userPlayers.concat(customPlayers);
+
     useEffect(() => {
         dispatch(getPlayers(token));
     }, [dispatch, token]);

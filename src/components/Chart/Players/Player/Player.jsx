@@ -49,7 +49,7 @@ const Player = ({player, setModalContent, setShowModal}) => {
                 <Button onClick={handleEdit} style={{
                     background: "#b9b8b8",
                     margin: "0.25rem",
-                    padding: "0.3rem 0.25rem 0.2rem",
+                    padding: "0.25rem",
                     right: "2rem"
                 }}>
                     <EditIcon fontSize="small" />
@@ -57,7 +57,7 @@ const Player = ({player, setModalContent, setShowModal}) => {
                 <Button onClick={handleDelete} style={{
                     background: "#b9b8b8",
                     margin: "0.25rem",
-                    padding: "0.3rem 0.25rem 0.2rem",
+                    padding: "0.25rem",
                     right: 0
                 }}>
                     <DeleteIcon fontSize="small" />
