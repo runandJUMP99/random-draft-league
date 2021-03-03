@@ -22,6 +22,8 @@ export const register = (isNewUser, user) => async(dispatch) => {
                 isWinner: false,
                 img: "",
                 name: user.name,
+                pickStreak: 0,
+                pickTotal: 0,
                 userId: response.user.uid
             };
             

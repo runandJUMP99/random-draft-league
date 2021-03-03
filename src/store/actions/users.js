@@ -8,8 +8,7 @@ export const getUsers = () => async(dispatch) => {
 
         for (let key in data) {
             fetchedUsers.push({
-                ...data[key],
-                id: key
+                ...data[key]
             });
         }
 
@@ -23,6 +22,16 @@ export const editUser = (id, user) => async(dispatch) => {
     try {
         const {data} = await api.editUser(id, user);
         
+        dispatch({type: actionTypes.EDIT_USER, payload: data});
+    } catch(err) {
+        console.log(err);
+    }
+};
+
+export const updateUsers = (users, token) => async(dispatch) => {
+    try {
+        const {data} = await api.updateUsers(users, token);
+
         dispatch({type: actionTypes.EDIT_USER, payload: data});
     } catch(err) {
         console.log(err);

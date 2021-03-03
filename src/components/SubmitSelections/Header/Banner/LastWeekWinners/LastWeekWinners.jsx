@@ -8,29 +8,29 @@ const LastWeekWinners = ({winners}) => {
     const [transitionEnd, setTransitionEnd] = useState(false);
 
     useEffect(() => {
-        const timer = setInterval(() => {
+        
+        const winnersTimer = setInterval(() => {
             setTransitionStart(true);
             setTransitionEnd(false);
-
-            setTimeout(() => {
-                setTransitionStart(false);
-                setTransitionEnd(true);
-                
-                setTimeout(() => {
-                    setTransitionEnd(false);
-                }, 1000);
-            }, 4000);
-
             
             if (currentName < winners.length - 1) {
                 setCurrentName(currentName + 1)
+                
+                setTimeout(() => {
+                    setTransitionStart(false);
+                    setTransitionEnd(true);
+                    
+                    setTimeout(() => {
+                        setTransitionEnd(false);
+                    }, 1000);
+                }, 3000);
             } else { 
-                setCurrentName(0);
-            }
-        }, 5000);
+                clearInterval(winnersTimer);
+            }      
+        }, 4000);
 
         return () => {
-            clearInterval(timer);
+            clearInterval(winnersTimer);
         }
     });
 
@@ -40,7 +40,7 @@ const LastWeekWinners = ({winners}) => {
                 && <h4>Last Week's Winners: 
                     <span className={classes.Animation} style={{
                         opacity: transitionStart && 1,
-                        transform:  transitionStart ? "translateX(0)" : transitionEnd && "translateX(-2.5rem)"
+                        transform:  transitionStart ? "translateX(0)" : transitionEnd && "translateX(-2.25rem)"
                     }}>{winners[currentName].name}</span>
                 </h4>}
         </div>

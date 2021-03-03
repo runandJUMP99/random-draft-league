@@ -11,6 +11,7 @@ const ClearBoard = ({setShowModal}) => {
     const players = useSelector(state => state.players.players);
     const submittedSelections = useSelector(state => state.submittedSelections);
     const token = useSelector(state => state.auth.token);
+    const users = useSelector(state => state.users);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -18,7 +19,7 @@ const ClearBoard = ({setShowModal}) => {
     }, [dispatch]);
 
     function handleClick() {
-        dispatch(deleteSelections(selections, token));
+        dispatch(deleteSelections(selections, token, users));
         dispatch(clearPlayers(players, token));
         dispatch(clearSubmittedSelections(submittedSelections, token));
         setShowModal(false);

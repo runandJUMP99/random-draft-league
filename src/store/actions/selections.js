@@ -1,5 +1,6 @@
 import * as actionTypes from "../actions/actionTypes";
 import * as api from "./api";
+import {updateUsers} from "../actions/users";
 
 export const addSelection = (selection, token) => async(dispatch) => {
     try {
@@ -23,12 +24,10 @@ export const getSelections = (token) => async(dispatch) => {
         const {data} = await api.getSelections(token);
 
         for (let key in data) {
-            if (key !== "chart" && key !== "players" && key !== "submittedselections" && key !== "subject") {
-                fetchedSelections.push({
-                    ...data[key],
-                    id: key
-                });
-            }
+            fetchedSelections.push({
+                ...data[key],
+                id: key
+            });
         }
         
         dispatch({type: actionTypes.GET_SELECTIONS, payload: fetchedSelections});
@@ -57,12 +56,36 @@ export const deleteSelection = (id, token) => (dispatch) => {
     }
 };
 
-export const deleteSelections = (selections, token) => (dispatch) => {
+export const deleteSelections = (selections, token, users) => (dispatch) => {
     try {
+        const updatedUsers = {};
+        
         selections.forEach(selection => {
+            if (selection.isSelected) {
+                const currentUser = users.find(user => user.userId === selection.userId);
+
+                updatedUsers[selection.userId] = {...currentUser, pickTotal: currentUser.pickTotal + 1};
+                currentUser.pickTotal++;
+            }
+          
             api.deleteSelection(selection.id, token);
         });
 
+        users.forEach(user => {
+            if (updatedUsers.hasOwnProperty(user.userId)) {
+                updatedUsers[user.userId] = {
+                    ...updatedUsers[user.userId],
+                    pickStreak: updatedUsers[user.userId].pickStreak + 1
+                };
+            } else {
+                updatedUsers[user.userId] = {
+                    ...user,
+                    pickStreak: 0
+                };
+            }
+        });
+
+        dispatch(updateUsers(updatedUsers, token));
         dispatch({type: actionTypes.DELETE_SELECTIONS});
     } catch(err) {
         console.log(err);

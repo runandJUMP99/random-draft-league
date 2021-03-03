@@ -9,6 +9,6 @@
     font-family: 'Play', sans-serif;
     margin-left: 2.5rem;
     opacity: 0;
-    transform: translateX(2.5rem);
+    transform: translateX(2.25rem);
     transition: all 1s ease-out;
 }

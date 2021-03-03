@@ -6,45 +6,20 @@
     position: absolute;
     text-align: center;
     top: 0;
-    transition: all 0.25s ease-out;
     width: 100%;
 }
 
 .BannerContent {
-    /* animation: slide 12s infinite; */
     display: flex;
     justify-content: space-between;
     margin: auto;
     max-width: 500px;
+    opacity: 0;
+    transition: all 1s ease-out;
+    transform: translateY(-2rem);
     width: 90%;
 }
 
 .BannerContent h4 {
     margin: 0;
 }
-
-/* @keyframes slide {
-    0% {
-        opacity: 0;
-        transform: translateY(-1.5rem);
-    }
-    2% {
-        opacity: 0;
-    }
-    10% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-    50% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-    90% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-    100% {
-        opacity: 0;
-        transform: translateY(1.5rem);
-    }
-} */
