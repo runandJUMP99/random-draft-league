@@ -20,12 +20,14 @@ import {editSelection, setSelectionId} from "../store/actions/selections";
 import {setPlayerId} from "../store/actions/players";
 
 const Layout = () => {
-    const [display, setDisplay] = useState(true)
-    const [forward, setForward] = useState(true);
+    const [display, setDisplay] = useState(true); //display board or chart
+    const [forward, setForward] = useState(true); //round direction
     const [modalContent, setModalContent] = useState(null);
-    const [order, setOrder] = useState(0);
+    const [order, setOrder] = useState(0); //pick number of draft
     const [playerTurn, setPlayerTurn] = useState(0);
     const [round, setRound] = useState(1);
+    const [selectionContent, setSelectionContent] = useState(null); //display approriate content board/chart
+    const [selectionSelected, setSelectionSelected] = useState(false); //handle display of chart or board
     const [showModal, setShowModal] = useState(false);
     const chart = useSelector(state => state.selections.selections.filter(selection => selection.player));
     const isAuthenticated = useSelector(state =>  state.auth.token !== null);
@@ -97,12 +99,13 @@ const Layout = () => {
         const selectionData = selections.filter(selection => selection.id === id);
         
         dispatch(setSelectionId(id));
-        setShowModal(true);
-        setModalContent(
+        setSelectionSelected(true);
+        setSelectionContent(
             <Selection 
                 handleAddSelection={handleAddSelection}
                 lockInSelection={lockInSelection} 
-                selectionData={selectionData[0]} 
+                selectionData={selectionData[0]}
+                selectionSelected={!selectionSelected}
                 showModal={!showModal} 
                 setShowModal={setShowModal}
             />
@@ -150,7 +153,8 @@ const Layout = () => {
         }
 
         dispatch(editSelection(id, newSelection, token));
-        setShowModal(false);
+        setSelectionSelected(false);
+        setSelectionContent(null);
         setOrder(prevOrder => prevOrder + 1);
         handleDisplay();
     }
@@ -180,12 +184,16 @@ const Layout = () => {
             <div style={{transform: !display && "translateX(-100%)", transition: "all 0.75s ease-in-out"}}>
                 <Board
                     handleSelection={handleSelection}
+                    selectionContent={selectionContent}
+                    selectionSelected={selectionSelected}
                 /> 
             </div>
             <div style={{transform: display && "translateX(100%)", transition: "all 0.75s ease-in-out"}}>
                 <Chart 
                     handleSelection={handleSelection}
                     setModalContent={setModalContent} 
+                    selectionContent={selectionContent}
+                    selectionSelected={selectionSelected}
                     setShowModal={setShowModal}
                     showModal={showModal}
                 />

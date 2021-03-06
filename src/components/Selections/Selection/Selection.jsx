@@ -12,7 +12,7 @@ import {getRounds} from "../../../store/actions/chart";
 import {deleteSelection} from "../../../store/actions/selections";
 import logo from "../../../assets/images/logo.png";
 
-const Selection = ({selectionData, showModal, lockInSelection, handleAddSelection, setShowModal}) => {
+const Selection = ({selectionData, selectionSelected, lockInSelection, handleAddSelection, setShowModal}) => {
     const chart = useSelector(state => state.selections.selections.filter(selection => selection.player));
     const players = useSelector(state => state.players.players);
     const totalRounds = useSelector(state => state.chart.rounds);
@@ -25,11 +25,11 @@ const Selection = ({selectionData, showModal, lockInSelection, handleAddSelectio
     const selectedStyles = {
         background: selectionData.isSelected && "#000120",
         boxShadow: selectionData.isSelected && "0 0 0 0",
-        cursor: showModal && "initial",
-        height: showModal && "100%",
-        margin: showModal && 0,
-        padding: !showModal && "0.5rem",
-        width: showModal && "100%"
+        cursor: selectionSelected && "initial",
+        height: selectionSelected && "85%",
+        margin: selectionSelected && 0,
+        padding: !selectionSelected && "0.5rem",
+        width: selectionSelected && "100%"
     };
 
     useEffect(() => {
@@ -40,13 +40,13 @@ const Selection = ({selectionData, showModal, lockInSelection, handleAddSelectio
         dispatch(deleteSelection(selectionData.id, token));
         setShowModal(false);
     }
-    
+    console.log(selectionSelected);
     return (
         <div className={classes.Selection} style={selectedStyles}>
-            <img src={selectionData.img ? selectionData.img : logo} alt="Selection" />
-            <h4 style={{fontSize: showModal ? "2rem" : "1.5rem"}}>{showModal ? name : truncatedName}</h4>
-            <p style={{padding: showModal && "0 1rem"}}>{showModal && description}</p>
-            <div className={classes.Buttons} style={{display: !showModal && "none"}}>
+            <img src={selectionData.img ? selectionData.img : logo} alt="Selection" style={{height: selectionSelected && "20rem", width: selectionSelected && "20rem"}} />
+            <h4 style={{fontSize: selectionSelected ? "2rem" : "1.5rem"}}>{selectionSelected ? name : truncatedName}</h4>
+            <p style={{padding: selectionSelected && "0 1rem"}}>{selectionSelected && description}</p>
+            <div className={classes.Buttons} style={{display: !selectionSelected && "none"}}>
                 <button className={classes.LockIn} disabled={players.length === 0 || (totalSelections !== 0 && chart.length >= totalSelections)} onClick={() => lockInSelection(selectionData.id)} style={{
                     display: selectionData.isSelected && "none"
                 }}>
