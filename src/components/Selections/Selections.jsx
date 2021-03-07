@@ -16,8 +16,8 @@ const Selections = ({showModal, handleSelection}) => {
     const notSelectedSelections = selections.filter(selection => !selection.isSelected);
     
     useEffect(() => {
-        dispatch(getSelections(token)); //TODO--FIX UPDATING SUBJECT AND ROUNDS
-    }, [dispatch]);
+        dispatch(getSelections(token));
+    }, [dispatch, token]);
 
     selectedSelections.sort((a, b) => {
         return a.name.localeCompare(b.name, 'en', {'sensitivity': 'base'});

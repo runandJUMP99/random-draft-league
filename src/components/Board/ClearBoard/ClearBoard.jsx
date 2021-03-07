@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 
 import classes from "./ClearBoard.module.css";
 import {deleteSelections} from "../../../store/actions/selections";
+import {clearNotifications} from "../../../store/actions/notifications";
 import {clearPlayers} from "../../../store/actions/players";
 import {clearSubmittedSelections, getSubmittedSelections} from "../../../store/actions/submittedSelections";
 
@@ -22,6 +23,7 @@ const ClearBoard = ({setShowModal}) => {
         dispatch(deleteSelections(selections, token, users));
         dispatch(clearPlayers(players, token));
         dispatch(clearSubmittedSelections(submittedSelections, token));
+        dispatch(clearNotifications(token));
         setShowModal(false);
     }
 

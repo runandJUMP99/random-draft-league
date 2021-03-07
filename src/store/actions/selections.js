@@ -64,10 +64,12 @@ export const deleteSelections = (selections, token, users) => (dispatch) => {
             if (selection.isSelected) {
                 const currentUser = users.find(user => user.userId === selection.userId);
 
-                updatedUsers[selection.userId] = {...currentUser, pickTotal: currentUser.pickTotal + 1};
-                currentUser.pickTotal++;
+                if (currentUser) {
+                    updatedUsers[selection.userId] = {...currentUser, pickTotal: currentUser.pickTotal + 1};
+                    currentUser.pickTotal++;
+                }
             }
-          
+
             api.deleteSelection(selection.id, token);
         });
 

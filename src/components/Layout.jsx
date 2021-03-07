@@ -21,6 +21,7 @@ import {setPlayerId} from "../store/actions/players";
 
 const Layout = () => {
     const [display, setDisplay] = useState(true); //display board or chart
+    const [fade, setFade] = useState(false); //fade effect for board and chart
     const [forward, setForward] = useState(true); //round direction
     const [modalContent, setModalContent] = useState(null);
     const [order, setOrder] = useState(0); //pick number of draft
@@ -99,7 +100,13 @@ const Layout = () => {
         const selectionData = selections.filter(selection => selection.id === id);
         
         dispatch(setSelectionId(id));
-        setSelectionSelected(true);
+        setFade(true);
+
+        setTimeout(() => {
+            setSelectionSelected(true);
+            setFade(false);
+        }, 500);
+
         setSelectionContent(
             <Selection 
                 handleAddSelection={handleAddSelection}
@@ -183,6 +190,8 @@ const Layout = () => {
             </Modal>
             <div style={{transform: !display && "translateX(-100%)", transition: "all 0.75s ease-in-out"}}>
                 <Board
+                    fade={fade}
+                    setFade={setFade}
                     handleSelection={handleSelection}
                     selectionContent={selectionContent}
                     selectionSelected={selectionSelected}
@@ -191,10 +200,13 @@ const Layout = () => {
             </div>
             <div style={{transform: display && "translateX(100%)", transition: "all 0.75s ease-in-out"}}>
                 <Chart 
+                    fade={fade}
+                    setFade={setFade}
                     handleSelection={handleSelection}
                     setModalContent={setModalContent} 
                     selectionContent={selectionContent}
                     selectionSelected={selectionSelected}
+                    setSelectionSelected={setSelectionSelected}
                     setShowModal={setShowModal}
                     showModal={showModal}
                 />

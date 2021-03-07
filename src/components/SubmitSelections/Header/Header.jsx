@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 
-import Banner from "./Banner/Banner";
+// import Banner from "./Banner/Banner";
 import Form from "../Form/Form";
 
 import classes from "./Header.module.css";
@@ -53,7 +53,7 @@ const Header = () => {
                 <div className={classes.Bg2}></div>
                 <div className={classes.Bg3}></div>
             </div>
-            <Banner />
+            {/* <Banner /> */}
             <div className={classes.Text}>
                 <h1>Random Draft League</h1>
                 <h2>This Week's Subject: 

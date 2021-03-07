@@ -41,6 +41,8 @@ const notifications = (state = [], action) => {
             });
 
             return updatedNotifs;
+        case actionTypes.CLEAR_NOTIFICATIONS:
+            return [];
         default:
             return state;
     }

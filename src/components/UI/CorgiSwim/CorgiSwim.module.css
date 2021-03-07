@@ -2,9 +2,10 @@
     animation: flood 5s ease-out;
     background: #00f7ff56;
     background: linear-gradient(#00f7ff28, #00f7ff);
+    bottom: 0;
     height: 10%;
     margin-top: 2rem;
-    position: relative;
+    position: absolute;
     left: -2rem;
     width: 110%;
 }

@@ -43,3 +43,13 @@ export const deleteNotification = (id, token, userId) => (dispatch) => {
         console.log(err);
     }
 };
+
+export const clearNotifications = (token) => (dispatch) => {
+    try {
+        api.clearNotifications(token);
+
+        dispatch({type: actionTypes.CLEAR_PLAYERS});
+    } catch(err) {
+        console.log(err);
+    }
+};

@@ -5,7 +5,7 @@ import classes from "./GlobalLoader.module.css";
 const GlobalLoader = () => {
     return (
         <div className={classes.GlobalLoader}>
-            <img src="https://firebasestorage.googleapis.com/v0/b/randomdraftleague-f6d6d.appspot.com/o/giphy.gif?alt=media&token=c0679a6e-2f9f-4901-9bb0-0bf7ebd699b0" alt="Corgi With Leash"/>
+            <img src="https://firebasestorage.googleapis.com/v0/b/randomdraftleague-f6d6d.appspot.com/o/Leash.gif?alt=media&token=2d462cec-ad30-4578-a0f9-ec380ae7eca5" alt="Corgi With Leash"/>
         </div>
     );
 }

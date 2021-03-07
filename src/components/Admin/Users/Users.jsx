@@ -21,7 +21,7 @@ const Users = ({users}) => {
                 let userNotifications = {};
 
                 notifications.forEach(notification => {
-                    if (notification.id === user.id) {
+                    if (notification.id === user.userId) {
                         userNotifications = notification;
                     }
                 });
