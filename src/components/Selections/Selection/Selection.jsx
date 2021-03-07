@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -13,6 +13,8 @@ import {deleteSelection} from "../../../store/actions/selections";
 import logo from "../../../assets/images/logo.png";
 
 const Selection = ({selectionData, selectionSelected, lockInSelection, handleAddSelection, setShowModal}) => {
+    const [imgStyle, setImgStyle] = useState(null);
+    const [shadowStyle, setShadowStyle] = useState(null);
     const chart = useSelector(state => state.selections.selections.filter(selection => selection.player));
     const players = useSelector(state => state.players.players);
     const totalRounds = useSelector(state => state.chart.rounds);
@@ -26,7 +28,7 @@ const Selection = ({selectionData, selectionSelected, lockInSelection, handleAdd
         background: selectionData.isSelected && "#000120",
         boxShadow: selectionData.isSelected && "0 0 0 0",
         cursor: selectionSelected && "initial",
-        height: selectionSelected && "85%",
+        height: selectionSelected && "80%",
         margin: selectionSelected && 0,
         padding: !selectionSelected && "0.5rem",
         width: selectionSelected && "100%"
@@ -36,14 +38,29 @@ const Selection = ({selectionData, selectionSelected, lockInSelection, handleAdd
         dispatch(getRounds(token));
     }, [dispatch, token]);
 
+    function handleMouseEnter() {
+        if (!selectionSelected) {
+            setImgStyle({transform: "translateY(-0.5rem) rotateY(360deg)"});
+            setShadowStyle({opacity: 0.3});
+        }
+    }
+    
+    function handleMouseLeave() {
+        if (!selectionSelected) {
+            setImgStyle(null);
+            setShadowStyle(null);
+        }
+    }
+
     function handleDelete() {
         dispatch(deleteSelection(selectionData.id, token));
         setShowModal(false);
     }
-    console.log(selectionSelected);
+
     return (
-        <div className={classes.Selection} style={selectedStyles}>
-            <img src={selectionData.img ? selectionData.img : logo} alt="Selection" style={{height: selectionSelected && "20rem", width: selectionSelected && "20rem"}} />
+        <div className={classes.Selection} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} style={selectedStyles}>
+            <img src={selectionData.img ? selectionData.img : logo} alt="Selection" style={{height: selectionSelected && "20rem", width: selectionSelected && "20rem", ...imgStyle}} />
+            <div className={classes.ImgShadow} style={{display: selectionSelected && "none", ...shadowStyle}}></div>
             <h4 style={{fontSize: selectionSelected ? "2rem" : "1.5rem"}}>{selectionSelected ? name : truncatedName}</h4>
             <p style={{padding: selectionSelected && "0 1rem"}}>{selectionSelected && description}</p>
             <div className={classes.Buttons} style={{display: !selectionSelected && "none"}}>

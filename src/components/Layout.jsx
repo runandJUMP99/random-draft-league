@@ -186,6 +186,7 @@ const Layout = () => {
                     handleSelection={handleSelection}
                     selectionContent={selectionContent}
                     selectionSelected={selectionSelected}
+                    setSelectionSelected={setSelectionSelected}
                 /> 
             </div>
             <div style={{transform: display && "translateX(100%)", transition: "all 0.75s ease-in-out"}}>

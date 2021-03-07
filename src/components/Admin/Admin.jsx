@@ -1,13 +1,3 @@
-<<<<<<< HEAD
-import React from "react";
-
-import classes from "./Admin.module.css";
-
-const Admin = () => {
-    return (
-        <div className={classes.Admin}>
-            Admin
-=======
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 
@@ -47,7 +37,6 @@ const Admin = () => {
                 <SearchBar search={search} setSearch={setSearch} stylesContainer={stylesContainer} stylesInput={stylesInput} />
             </div>
             <Users users={users} />
->>>>>>> 051b96770fe30234d46f3206669c545318649b39
         </div>
     );
 }

@@ -34,17 +34,34 @@
 }
 
 .Selection img {
+    border: 2px solid #929191;
     border-radius: 50%;
     height: 4rem;
     margin: 0.5rem auto;
     max-width: 300px;
     object-fit: contain;
     overflow: hidden;
+    transition: all 1s ease-out;
     width: 4rem
 }
 
+.ImgShadow {
+    background: #afafaf;
+    border-radius: 50%;
+    bottom: 3.5rem;
+    box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.2) inset;
+    height: 0.5rem;
+    left: 0;
+    margin: auto;
+    opacity: 0.5;
+    position: absolute;
+    right: 0;
+    transition: all 1s ease-out;
+    width: 3.5rem;
+}
+
 .EditDeleteButtons {
-    bottom: 2rem;
+    bottom: 0;
     display: flex;
     flex-direction: column;
     position: absolute;
@@ -58,7 +75,7 @@
     color: white;
     cursor: pointer;
     font-size: 2rem;
-    margin: 1rem;
+    margin: 1rem 1rem 0;
     outline: none;
     padding: 0.5rem 1rem;
     transition: all 0.15s ease-out;
