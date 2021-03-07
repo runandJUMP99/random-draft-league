@@ -6,7 +6,7 @@ import Rounds from "./Rounds/Rounds";
 
 import classes from "./Chart.module.css";
 
-const Chart = ({handleSelection, setModalContent, setShowModal, showModal}) => {
+const Chart = ({handleSelection, setModalContent, setShowModal, selectionContent, selectionSelected}) => {
     return (
         <div className={classes.Chart}>
             <div className={classes.PlayersAndRounds}>

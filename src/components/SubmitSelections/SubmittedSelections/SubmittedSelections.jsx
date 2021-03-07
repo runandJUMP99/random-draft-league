@@ -25,12 +25,10 @@ const SubmittedSelections = ({setModalContent, setShowModal, submittedSelections
     function handleClick(id) {
         const selectedSubmission = submittedSelections.filter(selection => selection.id === id);
 
-        if (!selectedSubmission[0].isSelected) {
-            if (token) {
-                setModalContent(
-                    <AddSelection setShowModal={setShowModal} submittedSelection={selectedSubmission[0]} />
-                );
-            }
+        if (!selectedSubmission[0].isSelected && token) {
+            setModalContent(
+                <AddSelection setShowModal={setShowModal} submittedSelection={selectedSubmission[0]} />
+            );
     
             setShowModal(true);
         }

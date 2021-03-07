@@ -1,24 +1,25 @@
 .Selection {
-    background: #13158d;
+    /* background: #13158d; */
     border-radius: 4px;
-    box-shadow: 0 1px 0 2px #02045f;
-    color: white;
+    /* box-shadow: 0 1px 0 2px #02045f; */
+    color: black;
     cursor: pointer;
     display: flex;
     flex-direction: column;
     height: 150px;
     justify-content: space-between;
     margin: 0.25rem;
-    max-height: 500px;
+    /* max-height: 500px; */
     padding: 0.5rem 2rem;
+    position: relative;
     text-align: center;
     transition: all 0.5s ease-out;
     width: 10rem;
 }
 
 .Selection:hover {
-    background: #0f11bb;
-    box-shadow: 0 1px 0 3px #0a0e7e;
+    /* background: #0f11bb; */
+    /* box-shadow: 0 1px 0 3px #0a0e7e; */
 }
 
 .Selection h3,
@@ -33,11 +34,13 @@
 }
 
 .Selection img {
+    border-radius: 50%;
+    height: 4rem;
     margin: 0.5rem auto;
     max-width: 300px;
     object-fit: contain;
     overflow: hidden;
-    width: 60%;
+    width: 4rem
 }
 
 .EditDeleteButtons {

@@ -6,7 +6,8 @@ import {Button, TextField, Typography} from "@material-ui/core";
 import Spinner from "../../../../UI/Spinner/Spinner";
 
 import classes from "./Register.module.css";
-import {register, resetPassword, signInWithGoogle} from "../../../../../store/actions/auth";
+import {register, resetPassword} from "../../../../../store/actions/auth";
+//signInWithGoogle can be imported from ... ../auth
 
 const Register = () => {
     const [emailSent, setEmailSent] = useState(false);

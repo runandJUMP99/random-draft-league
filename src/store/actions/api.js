@@ -27,8 +27,9 @@ export const setSelectionSubject = (id, subject, token) => axios.patch(`${url}/s
 
 export const refreshAuth = (refreshToken) => axios.post(refreshUrl, {grant_type: "refresh_token", refresh_token: refreshToken});
 
-export const getUsers = (token) => axios.get(`${url}/users.json?auth=${token}`);
+export const getUsers = () => axios.get(`${url}/users.json`);
 export const editUser = (id, updatedUser) => axios.patch(`${url}/users/${id}.json`, updatedUser);
+export const updateUsers = (updatedUsers, token) => axios.patch(`${url}/users.json?auth=${token}`, updatedUsers);
 export const deleteUser = (id, token) => axios.delete(`${url}/users/${id}.json?auth=${token}`);
 
 export const addNotification = (id, notification, token) => axios.post(`${url}/notifications/${id}.json?auth=${token}`, notification);

@@ -30,6 +30,7 @@ const Users = ({users}) => {
                     email={user.email}
                     key={user.userId}
                     isFranchise={user.isFranchise}
+                    isWinner={user.isWinner}
                     name={user.name}
                     notifications={userNotifications}
                     userId={user.userId}

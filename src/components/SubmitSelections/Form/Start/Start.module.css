@@ -4,8 +4,8 @@
 
 .StartButtonHeader {
     bottom: 2.5rem;
-    font-family: "Poppins";
-    font-size: 1.5rem;
+    font-family: 'Play', sans-serif;
+    font-size: 1.75rem;
     font-weight: bold;
     position: relative;
 }

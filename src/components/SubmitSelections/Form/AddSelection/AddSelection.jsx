@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {NavLink} from "react-router-dom";
-import ReCAPTCHA from "react-google-recaptcha";
+// import ReCAPTCHA from "react-google-recaptcha";
 
 import {Button, TextField, Typography} from "@material-ui/core";
 
@@ -15,7 +15,7 @@ import {addSubmittedSelection} from "../../../../store/actions/submittedSelectio
 
 const AddSelection = () => {
     const [selection, setSelection] = useState("");
-    const [captcha, setCaptcha] = useState(true);
+    // const [captcha, setCaptcha] = useState(true);
     const currentUser = useSelector(state => state.auth);
     const submittedSelections = useSelector(state => state.submittedSelections);
     const token = useSelector(state => state.auth.token);
@@ -77,7 +77,9 @@ const AddSelection = () => {
                 </div>
                 <Button
                     className={classes.ButtonSubmit}
-                    color="primary" disabled={!captcha || currentUserSubmissions.length >= 3}
+                    color="primary"
+                    // disabled={!captcha || currentUserSubmissions.length >= 3}
+                    disabled={currentUserSubmissions.length >= 3}
                     fullWidth
                     size="large"
                     type="submit"
