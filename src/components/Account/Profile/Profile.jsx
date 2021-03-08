@@ -75,7 +75,7 @@ const Profile = () => {
                         {updating ? <input onChange={(event) => setUpdatedUser({...updatedUser, password: event.target.value})} placeholder="Password" type="password" value={updatedUser.password} /> : "•••••••••"}
                     </p>
                     {updating && <p className={classes.PasswordCaption}>(Leave blank to not update password)</p>}
-                    <button onClick={updating ? handleSubmit : handleUpdating}>
+                    <button className={classes.Update} onClick={updating ? handleSubmit : handleUpdating}>
                         {updating ? "Save" : "Update Profile"}
                     </button>
                     {!updating && <button className={classes.Delete} onClick={() => setDeleting(true)}>Delete Profile</button>}

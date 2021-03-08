@@ -3,12 +3,44 @@
     font-size: 1.5rem;
 }
 
-.Animation {
-    color: green;
-    display: inline-block;
-    font-family: 'Play', sans-serif;
+.PickStreakLeaders h4 {
+    align-items: center;
+    display: flex;
+    font-size: 1.1rem;
+    justify-content: center;
+}
+
+.AnimationContainer {
     margin-left: 2.5rem;
-    opacity: 0;
-    transform: translateX(2.25rem);
-    transition: all 1s ease-out;
+    overflow: hidden;
+    width: 12rem;
+}
+
+.Animation {
+    animation: cycle 15s linear infinite;
+    display: flex;
+    font-family: 'Play', sans-serif;
+}
+
+.Animation span {
+    display: inline-block;
+    color: green;
+    margin: 0 5rem;
+    transform: translateX(105%);
+    white-space: nowrap;
+}
+
+@media (min-width: 430px) {
+    .PickStreakLeaders h4 {
+        font-size: 1.5rem;
+    }
+}
+
+@keyframes cycle {
+    0% {
+        transform: translateX(105%);
+    }
+    100% {
+        transform: translateX(-800%);
+    }
 }

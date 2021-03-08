@@ -27,14 +27,11 @@ const Banner = () => {
         dispatch(getUsers());
     }, [dispatch])
 
-    useEffect(() => {
-        const bannerTimer = setInterval(() => {
-            console.log("banner start");
+    useEffect(() => {        
+        setInterval(() => {
             setTransitionStart(true);
-            setTransitionEnd(false);
             
             if (currentDisplay < displays.length - 1) {
-                console.log("banner if");
                 setCurrentDisplay(currentDisplay + 1)
             } else { 
                 setCurrentDisplay(0);
@@ -47,19 +44,15 @@ const Banner = () => {
                 setTimeout(() => {
                     setTransitionEnd(false);
                 }, 1000);
-            }, 24000);
-        }, 25000);
-
-        return () => {
-            clearInterval(bannerTimer);
-        }
-    });
+            }, 11000);
+        }, 12000);
+    }, [currentDisplay, displays.length]);
 
     return (
         <div className={classes.Banner}>
             <div className={classes.BannerContent} style={{
                         opacity: transitionStart && 1,
-                        transform:  transitionStart ? "translateY(0)" : transitionEnd && "translateY(2rem)"
+                        transform:  transitionStart ? "translateY(0)" : (transitionEnd && "translateY(2rem)")
                     }}>
                 {displays[currentDisplay]}
             </div>

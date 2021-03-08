@@ -131,8 +131,13 @@ export const deleteProfile = (userId, token) => async(dispatch) => {
     try {
         dispatch({type: actionTypes.AUTH_START});
 
-        await firebase.auth().currentUser.delete();
-        await storage.ref(`/profileImgs/${userId}`).delete();
+        const currentUser = firebase.auth().currentUser;
+
+        await currentUser.delete();
+
+        if (currentUser.photoURL) {
+            await storage.ref(`/profileImgs/${userId}`).delete();
+        }
         
         await dispatch(deleteUser(userId, token));
         dispatch({type: actionTypes.AUTH_LOGOUT})

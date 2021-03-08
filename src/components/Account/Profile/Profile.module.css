@@ -1,3 +1,7 @@
+.Profile {
+    text-align: center;
+}
+
 .Profile img {
     border-radius: 50%;
     height: 7rem;
@@ -41,7 +45,7 @@
     bottom: 0.5rem;
     font-size: 0.7rem;
     font-style: italic;
-    left: 5rem;
+    left: 2.5rem;
     position: relative;
 }
 
@@ -49,8 +53,38 @@
     color: red;
 }
 
+.Update {
+    margin-right: 1rem;
+}
+
 .Delete {
     background: #f55d4c !important;
     color: white;
-    margin-left: 1rem;
+}
+
+@media (max-width: 360px) {
+    .Update {
+        margin-right: 0
+    }
+}
+
+@media (min-width: 475px) {
+    .Profile {
+        text-align: left;
+    }
+
+    .PasswordCaption {
+        left: 5rem;
+    }
+}
+
+@media (min-width: 475px) and (max-width: 560px) {
+    .Profile input {
+        display: block;
+        width: 100%;
+    }
+
+    .PasswordCaption {
+        left: 0;
+    }
 }

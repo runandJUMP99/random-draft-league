@@ -1,47 +1,25 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 
 import classes from "./LastWeekWinners.module.css";
 
 const LastWeekWinners = ({winners}) => {
-    const [currentName, setCurrentName] = useState(0);
-    const [transitionStart, setTransitionStart] = useState(false);
-    const [transitionEnd, setTransitionEnd] = useState(false);
-
-    useEffect(() => {
-        
-        const winnersTimer = setInterval(() => {
-            setTransitionStart(true);
-            setTransitionEnd(false);
-            
-            if (currentName < winners.length - 1) {
-                setCurrentName(currentName + 1)
-                
-                setTimeout(() => {
-                    setTransitionStart(false);
-                    setTransitionEnd(true);
-                    
-                    setTimeout(() => {
-                        setTransitionEnd(false);
-                    }, 1000);
-                }, 3000);
-            } else { 
-                clearInterval(winnersTimer);
-            }      
-        }, 4000);
-
-        return () => {
-            clearInterval(winnersTimer);
-        }
-    });
-
     return (
         <div className={classes.LastWeekWinners}>
             {winners.length > 0
                 && <h4>Last Week's Winners: 
-                    <span className={classes.Animation} style={{
-                        opacity: transitionStart && 1,
-                        transform:  transitionStart ? "translateX(0)" : transitionEnd && "translateX(-2.25rem)"
-                    }}>{winners[currentName].name}</span>
+                    <div className={classes.AnimationContainer}>
+                        <div className={classes.Animation}>
+                            <span>
+                                {winners[0].name.substring(0, 10)}
+                            </span>
+                            <span>
+                                {winners[1].name.substring(0, 10)}
+                            </span>
+                            <span>
+                                {winners[2].name.substring(0, 10)}
+                            </span>
+                        </div>
+                    </div>
                 </h4>}
         </div>
     );

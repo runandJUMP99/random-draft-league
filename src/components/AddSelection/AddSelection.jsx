@@ -31,7 +31,11 @@ const AddSelection = ({submittedSelection, setShowModal}) => {
                 userId: submittedSelection.userId
             })
         } else {
-            clear();
+            setSelectionData({
+                name: "",
+                description: "",
+                img: ""
+            });
         }
     }, [selection, submittedSelection]);
     

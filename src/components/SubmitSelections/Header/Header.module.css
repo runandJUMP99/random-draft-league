@@ -1,16 +1,15 @@
 .Header {
-    align-items: center;
     color: white;
-    display: flex;
-    justify-content: space-around;
     overflow: hidden;
-    padding: 4rem 0;
+    padding: 5rem 1rem;
     position: relative;
+    text-align: center;
     width: 100%;
 }
 
 .Header h1 {
     font-size: 3rem;
+    margin-bottom: 1rem;
 }
 
 .Background {
@@ -45,13 +44,13 @@
 }
 
 .Text {
+    margin-right: 1rem;
     position: relative;
 }
 
 .Subject {
     display: inline-block;
     font-weight: normal;
-    margin-left: 0.5rem;
 }
 
 .SocialsHeader {
@@ -60,6 +59,8 @@
 
 .Socials {
     display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
 }
 
 .Socials a {
@@ -99,9 +100,22 @@
     background: #0e3aff;
 }
 
-@media (max-width: 1200px) {
+@media (min-width: 800px) {
     .Header {
-        width: 100%;
+        align-items: center;
+        display: flex;
+        justify-content: space-around;
+        text-align: left;
+    }
+
+    .Socials {
+        justify-content: flex-start;
+    }
+}
+
+@media (min-width: 1200px) {
+    .Subject {
+        margin-left: 0.5rem;
     }
 }
 

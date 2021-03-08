@@ -1,6 +1,16 @@
 .SideMenu {
     align-self: stretch;
-    border-right: 4px solid rgba(0, 0, 0, 0.5);
+    border-bottom: 4px solid rgba(0, 0, 0, 0.5);
     list-style: none;
-    padding: 0.5rem 3rem 0.5rem 0;
+    margin: 1rem 2rem;
+    padding: 0;
+}
+
+@media (min-width: 475px) {
+    .SideMenu {
+        border-bottom: none;
+        border-right: 4px solid rgba(0, 0, 0, 0.5);
+        margin: 0;
+        padding: 0.5rem 3rem 0.5rem 0;
+    }
 }

@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 
 import Backdrop from "../UI/Backdrop/Backdrop";
+import Footer from "./Footer/Footer";
 import Header from "./Header/Header";
 import Modal from "../UI/Modal/Modal";
 import SearchBar from "../UI/SeachBar/SearchBar";
@@ -42,6 +43,7 @@ const SubmitSelections = () => {
                     submittedSelections={submittedSelections}
                 />
             </div>
+            <Footer />
         </div>
     );
 }

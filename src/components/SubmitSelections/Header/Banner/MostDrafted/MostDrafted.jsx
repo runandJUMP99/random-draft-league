@@ -1,46 +1,25 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 
 import classes from "./MostDrafted.module.css";
 
 const MostDrafted = ({pickLeaders}) => {
-    const [currentName, setCurrentName] = useState(0);
-    const [transitionStart, setTransitionStart] = useState(false);
-    const [transitionEnd, setTransitionEnd] = useState(false);
-
-    useEffect(() => {
-        const mostDraftedTimer = setInterval(() => {
-            setTransitionStart(true);
-            setTransitionEnd(false);
-            
-            if (currentName < pickLeaders.length - 1) {
-                setCurrentName(currentName + 1)
-            } else { 
-                setCurrentName(0);
-            }
-            
-            setTimeout(() => {
-                setTransitionStart(false);
-                setTransitionEnd(true);
-                
-                setTimeout(() => {
-                    setTransitionEnd(false);
-                }, 1000);
-            }, 3000);
-        }, 4000);
-
-        return () => {
-            clearInterval(mostDraftedTimer);
-        }
-    });
-
     return (
         <div className={classes.MostDrafted}>
             {pickLeaders.length > 0
-                && <h4>Last Week's Winners: 
-                    <span className={classes.Animation} style={{
-                        opacity: transitionStart && 1,
-                        transform:  transitionStart ? "translateX(0)" : transitionEnd && "translateX(-2.25rem)"
-                    }}>{pickLeaders[currentName].name}</span>
+                && <h4>Most Picked Drafters:
+                    <div className={classes.AnimationContainer}> 
+                        <div className={classes.Animation}>
+                            <span>
+                                {pickLeaders[0].name.substring(0, 10)} - {pickLeaders[0].pickTotal}
+                            </span>
+                            <span>
+                                {pickLeaders[1].name.substring(0, 10)} - {pickLeaders[1].pickTotal}
+                            </span>
+                            <span>
+                                {pickLeaders[2].name.substring(0, 10)} - {pickLeaders[2].pickTotal}
+                            </span>
+                        </div>
+                    </div>
                 </h4>}
         </div>
     );

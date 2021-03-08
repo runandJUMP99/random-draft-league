@@ -1,3 +1,8 @@
+.ConfirmDelete h1 {
+    font-size: 2rem;
+    max-width: 500px;
+}
+
 .ConfirmDelete button {
     background: white;
     border: none;

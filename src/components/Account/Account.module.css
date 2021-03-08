@@ -8,18 +8,30 @@
     height: 75%;
     margin: auto;
     max-width: 900px;
-    padding: 10% 1rem;
+    padding: 2% 1rem;
     width: 90%;
 }
 
 .AccountDisplay {
-    align-items: center;
-    display: flex;
-    justify-content: space-between;
     margin-top: 2rem;
 }
 
 .Display {
-    padding: 1rem 3rem;
     width: 100%;
+}
+
+@media(min-width: 475px) {
+    .Account {
+        padding: 10% 1rem;
+    }
+    
+    .AccountDisplay {
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    .Display {
+        padding: 1rem 0 1rem 3rem;
+    } 
 }
