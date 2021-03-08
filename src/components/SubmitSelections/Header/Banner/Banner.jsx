@@ -28,7 +28,7 @@ const Banner = () => {
     }, [dispatch])
 
     useEffect(() => {        
-        setInterval(() => {
+        const bannerInterval = setInterval(() => {
             setTransitionStart(true);
             
             if (currentDisplay < displays.length - 1) {
@@ -43,9 +43,14 @@ const Banner = () => {
                 
                 setTimeout(() => {
                     setTransitionEnd(false);
+                    clearInterval(bannerInterval);
                 }, 1000);
             }, 11000);
         }, 12000);
+
+        return () => {
+            clearInterval(bannerInterval);
+        }
     }, [currentDisplay, displays.length]);
 
     return (

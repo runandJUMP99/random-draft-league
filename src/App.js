@@ -9,6 +9,7 @@ import GlobalLoader from "./components/UI/GlobalLoader/GlobalLoader";
 import SubmitSelections from"./components/SubmitSelections/SubmitSelections";
 
 import {authCheckState} from "./store/actions/auth";
+// import {getUsers} from "./store/actions/users";
 import firebase from "./services/firebase";
 
 // const Admin = React.lazy(() => {
@@ -16,6 +17,7 @@ import firebase from "./services/firebase";
 // });
 
 function App() {
+  // const users = useSelector(state => state.users);
   const userId = useSelector(state => state.auth.userId);
   const dispatch = useDispatch();
 
