@@ -13,7 +13,11 @@ export const register = (isNewUser, user) => async(dispatch) => {
         let response;
         
         if (isNewUser) {
-            response = await firebase.auth().createUserWithEmailAndPassword(user.email, user.password);
+            response = await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+                .then(() => {
+                    return firebase.auth().createUserWithEmailAndPassword(user.email, user.password);
+                });
+            
             currentUser = firebase.auth().currentUser;
 
             const newUser = {
@@ -30,22 +34,23 @@ export const register = (isNewUser, user) => async(dispatch) => {
             await currentUser.updateProfile({displayName: user.name});
             await dispatch(editUser(newUser.userId, newUser));
         } else {
-            response = await firebase.auth().signInWithEmailAndPassword(user.email, user.password);
+            response = await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+                .then(() => {
+                    return firebase.auth().signInWithEmailAndPassword(user.email, user.password);
+                });
             currentUser = firebase.auth().currentUser;
         }
         const token = await firebase.auth().currentUser.getIdToken(true);
         const userData = {
             email: currentUser.email,
-            img: currentUser.photoURL,
+            img: currentUser.photoURL ? currentUser.photoURL : "",
             name: currentUser.displayName,
             token: token,
             uid: response.user.uid
         }
         
-        localStorage.setItem("expirationDate", expirationDate);
-        localStorage.setItem("refreshToken", response.user.refreshToken);
-        localStorage.setItem("token", userData.token);
-        localStorage.setItem("userId", userData.uid);
+        localStorage.setItem("rdlexpirationDate", expirationDate);
+        localStorage.setItem("rdltoken", userData.token);
         
         dispatch({type: actionTypes.AUTH, payload: userData});
         dispatch(checkAuthTimeout(expirationDate, response.user.refreshToken));
@@ -60,7 +65,7 @@ export const updateProfile = (updatedUser) => async(dispatch) => {
         dispatch({type: actionTypes.AUTH_START});
 
         const currentUser = firebase.auth().currentUser;
-        
+
         if (updatedUser.email && updatedUser.email !== currentUser.email) {
             await currentUser.updateEmail(updatedUser.email);
         }
@@ -101,7 +106,7 @@ export const updateProfile = (updatedUser) => async(dispatch) => {
 
             updatedUser = { //used to remove unnecessary data from being passed
                 email: updatedUser.email,
-                img: currentUser.photoURL,
+                img: currentUser.photoURL ? currentUser.photoURL : "",
                 name: updatedUser.name,
                 userId: updatedUser.userId
             };
@@ -111,7 +116,7 @@ export const updateProfile = (updatedUser) => async(dispatch) => {
         }
     } catch(err) {
         console.log(err);
-        dispatch({type:actionTypes.AUTH_FAIL, payload: err.message});
+        dispatch({type: actionTypes.AUTH_FAIL, payload: err.message});
     }
 }
 
@@ -124,6 +129,7 @@ export const resetPassword = (email) => async(dispatch) => {
         dispatch({type: actionTypes.AUTH_LOGOUT})
     } catch(err) {
         console.log(err);
+        dispatch({type: actionTypes.AUTH_FAIL, payload: err.message});
     }
 }
 
@@ -132,7 +138,6 @@ export const deleteProfile = (userId, token) => async(dispatch) => {
         dispatch({type: actionTypes.AUTH_START});
 
         const currentUser = firebase.auth().currentUser;
-
         await currentUser.delete();
 
         if (currentUser.photoURL) {
@@ -143,6 +148,7 @@ export const deleteProfile = (userId, token) => async(dispatch) => {
         dispatch({type: actionTypes.AUTH_LOGOUT})
     } catch(err) {
         console.log(err);
+        dispatch({type: actionTypes.AUTH_FAIL, payload: err.message});
     }
 }
 
@@ -151,43 +157,48 @@ export const checkAuthTimeout = (expirationTime, refreshToken) => (dispatch) => 
         try {
             const {data} = await api.refreshAuth(refreshToken);
 
-            localStorage.setItem("expirationDate", data.expires_in * 1000);
-            localStorage.setItem("refreshToken", data.refreshToken);
-            localStorage.setItem("token", data.id_token);
-            localStorage.setItem("userId", data.user_id);
+            localStorage.setItem("rdlexpirationDate", data.expires_in * 1000);
+            localStorage.setItem("rdltoken", data.id_token);
         } catch(err) {
             console.log(err);
+            dispatch({type: actionTypes.AUTH_FAIL, payload: err.message});
         }
     }, expirationTime);
 };
 
 export const logout = () => (dispatch) => {
-    localStorage.removeItem("expirdationDate");
-    localStorage.removeItem("refreshToken");
-    localStorage.removeItem("token");
-    localStorage.removeItem("userId");
+    localStorage.removeItem("rdlexpirdationDate");
+    localStorage.removeItem("rdltoken");
 
     dispatch({type: actionTypes.AUTH_LOGOUT})
 };
 
 export const authCheckState = () => (dispatch) => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("rdltoken");
 
     if (!token) {
         dispatch(logout());
     } else {
-        const expirationDate = new Date(localStorage.getItem("expirationDate"));
+        const expirationDate = new Date(localStorage.getItem("rdlexpirationDate"));
 
         if (expirationDate >= new Date()) {
-            const refreshToken = localStorage.getItem("refreshToken");
-            const userId = localStorage.getItem("userId");
-            const data = {
-                token: token,
-                uid: userId
-            };
-
-            dispatch({type: actionTypes.AUTH, payload: data});
-            dispatch(checkAuthTimeout(expirationDate.getTime() - new Date().getTime(), refreshToken));
+            firebase.auth().onAuthStateChanged(user => {
+                if (user){ 
+                    const data = {
+                        email: user.email,
+                        img: user.photoURL ? user.photoURL : "",
+                        name: user.displayName,
+                        token: token,
+                        uid: user.uid
+                    };
+        
+                    dispatch({type: actionTypes.AUTH, payload: data});
+                    dispatch(checkAuthTimeout(expirationDate.getTime() - new Date().getTime(), user.refreshToken));
+                }
+                else {
+                    dispatch(logout());
+                }
+            });
         } else {
             dispatch(logout());
         }

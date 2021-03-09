@@ -18,6 +18,12 @@ const PickStreakLeaders = ({pickStreakLeaders}) => {
                             <span>
                                 {pickStreakLeaders[2].name.substring(0, 10)} - {pickStreakLeaders[2].pickStreak}
                             </span>
+                            <span>
+                                {pickStreakLeaders[3].name.substring(0, 10)} - {pickStreakLeaders[3].pickStreak}
+                            </span>
+                            <span>
+                                {pickStreakLeaders[4].name.substring(0, 10)} - {pickStreakLeaders[4].pickStreak}
+                            </span>
                         </div>
                     </div>
                 </h4>}

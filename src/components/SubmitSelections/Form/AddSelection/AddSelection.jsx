@@ -14,6 +14,7 @@ import {getNotifications} from "../../../../store/actions/notifications";
 import {addSubmittedSelection} from "../../../../store/actions/submittedSelections";
 
 const AddSelection = () => {
+    const [error, setError] = useState(null);
     const [selection, setSelection] = useState("");
     // const [captcha, setCaptcha] = useState(true);
     const currentUser = useSelector(state => state.auth);
@@ -31,15 +32,28 @@ const AddSelection = () => {
 
     function handleSubmit(event) {
         event.preventDefault();
-        const selectionData = {
-            from: currentUser.name,
-            name: selection,
-            userId: userId
-        };
-        
-        dispatch(addSubmittedSelection(selectionData, token));
-        setSelection("");
+        let matched = false;
 
+        submittedSelections.forEach(submittedSelection => {
+            if (submittedSelection.name.toLowerCase() === selection.toLowerCase()) {
+                matched = true;
+            }
+        });
+
+        if (matched) {
+            setError("Submission already exists. Try using a different name!");
+        } else {
+            const selectionData = {
+                from: currentUser.name,
+                name: selection,
+                userId: userId
+            };
+            
+            setError(null);
+            dispatch(addSubmittedSelection(selectionData, token));
+        }
+        
+        setSelection("");
         // setCaptcha(false);
         // recaptchaRef.current.reset();
     }
@@ -49,6 +63,7 @@ const AddSelection = () => {
         <div className={classes.AddSelection}>
             <img src={currentUser.img ? currentUser.img : logo} alt="Profile" />
             <Typography align="center" variant="h6">Submit An Entry</Typography>
+            <p className={classes.Error}>{error}</p>
             <div className={classes.IconButtons}>
                 {(userId === process.env.REACT_APP_FIREBASE_UID1 || userId === process.env.REACT_APP_FIREBASE_UID2) &&
                     <>

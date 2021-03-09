@@ -32,6 +32,7 @@ const Profile = () => {
             password: "",
             userId: currentUser.userId            
         });
+        setDeleting(false);
         setUpdating(true);
     }
 
@@ -50,7 +51,7 @@ const Profile = () => {
 
     return (
         <div className={classes.Profile}>
-            {deleting ? <ConfirmDelete setDeleting={setDeleting} /> : loading ? <Spinner /> : 
+            {(deleting && !error) ? <ConfirmDelete setDeleting={setDeleting} /> : loading ? <Spinner /> : 
                 <>
                     <img src={currentUser.img ? currentUser.img : logo} alt="Avatar" />
                     {updating && <div className={classes.FileInput}>

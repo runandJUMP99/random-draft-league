@@ -13,8 +13,8 @@ const Banner = () => {
     const [transitionStart, setTransitionStart] = useState(true);
     const [transitionEnd, setTransitionEnd] = useState(false);
     const users = useSelector(state => state.users);
-    const pickLeaders = users.sort((a, b) => b.pickTotal - a.pickTotal).slice(0, 3); //sort array from most to least, than slice top 3
-    const pickStreakLeaders = users.sort((a, b) => b.pickStreak - a.pickStreak).slice(0, 3);
+    const pickLeaders = users.sort((a, b) => b.pickTotal - a.pickTotal).slice(0, 5); //sort array from most to least, than slice top 3
+    const pickStreakLeaders = users.sort((a, b) => b.pickStreak - a.pickStreak).slice(0, 5);
     const winners = users.filter(user => user.isWinner);
     const dispatch = useDispatch();
     const displays = [
@@ -45,8 +45,8 @@ const Banner = () => {
                     setTransitionEnd(false);
                     clearInterval(bannerInterval);
                 }, 1000);
-            }, 11000);
-        }, 12000);
+            }, 19000);
+        }, 20000);
 
         return () => {
             clearInterval(bannerInterval);

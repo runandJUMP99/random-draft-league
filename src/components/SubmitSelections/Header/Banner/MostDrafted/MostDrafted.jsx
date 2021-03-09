@@ -18,6 +18,12 @@ const MostDrafted = ({pickLeaders}) => {
                             <span>
                                 {pickLeaders[2].name.substring(0, 10)} - {pickLeaders[2].pickTotal}
                             </span>
+                            <span>
+                                {pickLeaders[3].name.substring(0, 10)} - {pickLeaders[3].pickTotal}
+                            </span>
+                            <span>
+                                {pickLeaders[4].name.substring(0, 10)} - {pickLeaders[4].pickTotal}
+                            </span>
                         </div>
                     </div>
                 </h4>}

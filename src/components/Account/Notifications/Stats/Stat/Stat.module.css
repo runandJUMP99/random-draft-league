@@ -1,0 +1,22 @@
+.Name {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin: 0 1rem;
+}
+
+.Value {
+    align-items: center;
+    background: white;
+    border-radius: 4px;
+    box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.3) inset;
+    color: #0000c2;
+    display: flex;
+    font-size: 3rem;
+    font-weight: normal;
+    height: 6rem;
+    justify-content: center;
+    margin: 0 1rem;
+    padding-bottom: 0.5rem;
+    text-align: center;
+    width: 6rem;
+}

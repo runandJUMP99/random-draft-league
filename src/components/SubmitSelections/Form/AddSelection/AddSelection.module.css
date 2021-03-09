@@ -81,3 +81,8 @@
     right: 0;
     padding: 0;
 }
+
+.Error {
+    color: red;
+    text-align: center;
+}
