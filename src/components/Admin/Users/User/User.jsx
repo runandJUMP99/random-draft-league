@@ -13,7 +13,7 @@ import classes from "./User.module.css";
 import {editUser} from "../../../../store/actions/users";
 import {addNotification} from "../../../../store/actions/notifications";
 
-const User = ({email, isFranchise, isWinner, name, notifications, userId}) => {
+const User = ({email, isFranchise, isWinner, name, notifications, order, userId}) => {
     const [viewNotifications, setViewNotifications] = useState(false);
     const [isMessaging, setIsMessaging] = useState(false);
     const [newNotification, setNewNotification] = useState({message: ""});
@@ -26,6 +26,7 @@ const User = ({email, isFranchise, isWinner, name, notifications, userId}) => {
             isFranchise: !isFranchise,
             isWinner: isWinner,
             name: name,
+            order: isFranchise ? 0 : order,
             userId: userId
         };
 

@@ -2,6 +2,10 @@
   "rules": {
     ".read": "auth.uid === 'syUe4fsRgXSPjY34c7DICMqTiU23' || auth.uid === 'hYxStqhAXOTSEhPgTfk00Teukup1'",
     ".write": "auth.uid === 'syUe4fsRgXSPjY34c7DICMqTiU23' || auth.uid === 'hYxStqhAXOTSEhPgTfk00Teukup1'",
+    "notifications": {
+      ".read": "true",
+      ".write": "auth.uid === 'syUe4fsRgXSPjY34c7DICMqTiU23' || auth.uid === 'hYxStqhAXOTSEhPgTfk00Teukup1'"
+    },
     "subject": {
     	".read": "true"
     },
@@ -12,10 +16,6 @@
     "users": {
       ".read": "true",
       ".write": "true"
-    },
-    "notifications": {
-      ".read": "true",
-      ".write": "auth.uid === 'syUe4fsRgXSPjY34c7DICMqTiU23' || auth.uid === 'hYxStqhAXOTSEhPgTfk00Teukup1'"
     }
   }
 }

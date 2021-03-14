@@ -13,7 +13,7 @@ const Banner = () => {
     const [transitionStart, setTransitionStart] = useState(true);
     const [transitionEnd, setTransitionEnd] = useState(false);
     const users = useSelector(state => state.users);
-    const pickLeaders = users.sort((a, b) => b.pickTotal - a.pickTotal).slice(0, 5); //sort array from most to least, than slice top 3
+    const pickLeaders = users.sort((a, b) => b.pickTotal - a.pickTotal).slice(0, 5); //sort array from most to least, then slice top 5
     const pickStreakLeaders = users.sort((a, b) => b.pickStreak - a.pickStreak).slice(0, 5);
     const winners = users.filter(user => user.isWinner);
     const dispatch = useDispatch();
@@ -54,7 +54,7 @@ const Banner = () => {
     }, [currentDisplay, displays.length]);
 
     return (
-        <div className={classes.Banner}>
+        <div className={classes.Banner} style={{display: users.length === 0 && "none"}}>
             <div className={classes.BannerContent} style={{
                         opacity: transitionStart && 1,
                         transform:  transitionStart ? "translateY(0)" : (transitionEnd && "translateY(2rem)")

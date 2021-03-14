@@ -9,15 +9,11 @@ const LastWeekWinners = ({winners}) => {
                 && <h4>Last Week's Winners: 
                     <div className={classes.AnimationContainer}>
                         <div className={classes.Animation}>
-                            <span>
-                                {winners[0].name.substring(0, 10)}
-                            </span>
-                            <span>
-                                {winners[1].name.substring(0, 10)}
-                            </span>
-                            <span>
-                                {winners[2].name.substring(0, 10)}
-                            </span>
+                            {winners.map(winner => (
+                                <span key={winner.userId}>
+                                    {winner.name.substring(0, 10)}
+                                </span>
+                            ))}
                         </div>
                     </div>
                 </h4>}

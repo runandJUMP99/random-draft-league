@@ -11,8 +11,9 @@ const Admin = () => {
     const [search, setSearch] = useState("");
     const token = useSelector(state => state.auth.token);
     let users = useSelector(state => state.users);
+    const order = users.sort((a, b) => b.order - a.order).slice(0, 1)[0].order + 1; //sorts users by their order number then slices highest user, targets 'order' then add 1 to assign the next order for franchises
     const dispatch = useDispatch();
-    const stylesContainer = {
+    const stylesContainer = { //styles for search bar
         margin: 0
     };
     const stylesInput = {
@@ -23,7 +24,9 @@ const Admin = () => {
         dispatch(getUsers(token));
     }, [dispatch, token]);
     
-    users.sort((a, b) => a.name.localeCompare(b.name, "en", {'sensitivity': 'base'}))
+    users.sort((a, b) => {
+        return a.name.localeCompare(b.name, "en", {"sensitivity": "base"});
+    });
 
     if (search.length > 0) {
         users = users.filter(user => {
@@ -36,7 +39,7 @@ const Admin = () => {
             <div className={classes.SearchBar}>
                 <SearchBar search={search} setSearch={setSearch} stylesContainer={stylesContainer} stylesInput={stylesInput} />
             </div>
-            <Users users={users} />
+            <Users order={order} users={users} />
         </div>
     );
 }

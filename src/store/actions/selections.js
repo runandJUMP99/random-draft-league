@@ -39,7 +39,7 @@ export const getSelections = (token) => async(dispatch) => {
 export const editSelection = (id, selection, token) => async(dispatch) => {
     try {
         const {data} = await api.editSelection(id, selection, token);
-        
+
         dispatch({type: actionTypes.EDIT_SELECTION, payload: data});
     } catch(err) {
         console.log(err);
@@ -61,7 +61,7 @@ export const deleteSelections = (selections, token, users) => (dispatch) => {
         const updatedUsers = {};
         
         selections.forEach(selection => {
-            if (selection.isSelected) {
+            if (selection.isSelected && !selection.honorableMention) {
                 const currentUser = users.find(user => user.userId === selection.userId);
 
                 if (currentUser) {
@@ -72,7 +72,7 @@ export const deleteSelections = (selections, token, users) => (dispatch) => {
 
             api.deleteSelection(selection.id, token);
         });
-
+        
         users.forEach(user => {
             if (updatedUsers.hasOwnProperty(user.userId)) {
                 updatedUsers[user.userId] = {

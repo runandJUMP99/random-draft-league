@@ -1,5 +1,6 @@
 .HonorableMentions {
     display: flex;
+    margin-top: 5rem;
 }
 
 .Title {
@@ -22,7 +23,6 @@
 
 .Selections {
     display: flex;
-    justify-content: center;
     width: 100%;
 }
 

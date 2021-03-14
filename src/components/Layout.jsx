@@ -30,9 +30,11 @@ const Layout = () => {
     const [selectionContent, setSelectionContent] = useState(null); //display approriate content board/chart
     const [selectionSelected, setSelectionSelected] = useState(false); //handle display of chart or board
     const [showModal, setShowModal] = useState(false);
-    const chart = useSelector(state => state.selections.selections.filter(selection => selection.player));
+    const chart = useSelector(state => state.selections.selections).filter(selection => selection.isSelected);
     const isAuthenticated = useSelector(state =>  state.auth.token !== null);
-    const players = useSelector(state => state.players.players);
+    const customPlayers = useSelector(state => state.players.players); //players added by the admin
+    const userPlayers = useSelector(state => state.users).filter(user => user.isFranchise); //players with accounts sorted by their order number
+    const players = userPlayers.concat(customPlayers);
     const selections = useSelector(state => state.selections.selections);
     const token = useSelector(state => state.auth.token);
     const dispatch = useDispatch();
@@ -132,7 +134,7 @@ const Layout = () => {
                 roundSelected: null
             }
         } else {
-            const playerId = players[playerTurn].playerId;
+            const playerId = players[playerTurn].userId;
             newSelection = {
                 ...newSelection,
                 honorableMention: false,
@@ -142,7 +144,7 @@ const Layout = () => {
                 roundSelected: round
             }
     
-            if (forward) {            
+            if (forward) {
                 if (playerTurn === players.length - 1) {
                     setRound(prevRound => prevRound + 1);
                     setForward(false);

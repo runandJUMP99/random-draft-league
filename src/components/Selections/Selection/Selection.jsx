@@ -13,10 +13,12 @@ import {deleteSelection} from "../../../store/actions/selections";
 import logo from "../../../assets/images/logo.png";
 
 const Selection = ({selectionData, selectionSelected, lockInSelection, handleAddSelection, setShowModal}) => {
-    const chart = useSelector(state => state.selections.selections.filter(selection => selection.player));
-    const players = useSelector(state => state.players.players);
+    const chart = useSelector(state => state.selections.selections).filter(selection => selection.isSelected);
+    const customPlayers = useSelector(state => state.players.players);
     const totalRounds = useSelector(state => state.chart.rounds);
     const token = useSelector(state => state.auth.token);
+    const userPlayers = useSelector(state => state.users).filter(user => user.isFranchise);
+    const players = userPlayers.concat(customPlayers);
     const dispatch = useDispatch();
     const description = selectionData.description || "";
     const name = selectionData.name || "";

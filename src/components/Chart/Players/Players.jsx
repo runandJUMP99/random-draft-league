@@ -8,7 +8,7 @@ import {getPlayers} from "../../../store/actions/players";
 
 const Players = ({setModalContent, setShowModal}) => {
     const customPlayers = useSelector(state => state.players.players); //players added by the admin
-    const userPlayers = useSelector(state => state.users).filter(user => user.isFranchise); //players with accounts
+    const userPlayers = useSelector(state => state.users).filter(user => user.isFranchise).sort((a, b) => a.order - b.order); //players with accounts sorted by their order number
     const token = useSelector(state => state.auth.token);
     const dispatch = useDispatch();
     const players = userPlayers.concat(customPlayers);

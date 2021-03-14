@@ -19,9 +19,12 @@ const selections = (state = initialState, action) => {
                 selections: action.payload
             };
         case actionTypes.EDIT_SELECTION:
+            console.log(action.payload);
             return {
                 ...state,
-                selections: state.selections.map(selection => selection.id === action.payload.id ? action.payload : selection)
+                selections: state.selections.map(selection => {
+                    return selection.id === action.payload.id ? action.payload : selection;
+                })
             };
         case actionTypes.DELETE_SELECTION:
             return {

@@ -15,7 +15,7 @@ const PlayerSummary = ({player}) => {
 
     return (
         <div className={classes.PlayerSummary}>
-            <img src={player.img ? player.img : logo} alt=""/>
+            <img src={player.img ? player.img : logo} alt="Player Logo"/>
             <h3>{player.name}</h3>
             <div className={classes.Selections}>
                 {playerSummary.map(selection => {

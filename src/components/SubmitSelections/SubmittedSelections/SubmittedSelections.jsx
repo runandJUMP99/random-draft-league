@@ -3,6 +3,7 @@ import {useSelector} from "react-redux";
 
 import AddSelection from "../../AddSelection/AddSelection";
 import SubmittedSelection from "./SubmittedSelection/SubmittedSelection";
+import GlobalLoader from "../../UI/GlobalLoader/GlobalLoader";
 
 import classes from "./SubmittedSelections.module.css";
 
@@ -36,7 +37,7 @@ const SubmittedSelections = ({setModalContent, setShowModal, submittedSelections
 
     return (
         <div className={classes.SubmittedSelections}>
-            {submittedSelections.map(submittedSelection => {
+            {submittedSelections.length === 0 ? <GlobalLoader /> : submittedSelections.map(submittedSelection => {
                 count++;
                 return (
                     <SubmittedSelection 

@@ -6,7 +6,7 @@ import User from "./User/User";
 import classes from "./Users.module.css";
 import {getNotifications} from "../../../store/actions/notifications";
 
-const Users = ({users}) => {
+const Users = ({order, users}) => {
     const notifications = useSelector(state => state.notifications);
     const token = useSelector(state => state.auth.token);
     const dispatch = useDispatch();
@@ -33,6 +33,7 @@ const Users = ({users}) => {
                     isWinner={user.isWinner}
                     name={user.name}
                     notifications={userNotifications}
+                    order={order}
                     userId={user.userId}
                 />
             })}
