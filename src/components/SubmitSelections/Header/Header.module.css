@@ -45,6 +45,7 @@
 
 .Text {
     margin-right: 1rem;
+    max-width: 800px;
     position: relative;
 }
 
