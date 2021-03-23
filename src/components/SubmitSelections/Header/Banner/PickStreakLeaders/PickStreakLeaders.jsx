@@ -2,28 +2,18 @@ import React from "react";
 
 import classes from "./PickStreakLeaders.module.css";
 
-const PickStreakLeaders = ({pickStreakLeaders}) => {
+const PickStreakLeaders = ({darkMode, pickStreakLeaders}) => {
     return (
         <div className={classes.PickStreakLeaders}>
             {pickStreakLeaders.length > 0
-                && <h4>Pick Streak Leaders: 
+                && <h4 style={{color: darkMode && "lightBlue"}}>Pick Streak Leaders: 
                     <div className={classes.AnimationContainer}>
                         <div className={classes.Animation}>
-                            <span>
-                                {pickStreakLeaders[0].name.substring(0, 10)} - {pickStreakLeaders[0].pickStreak}
-                            </span>
-                            <span>
-                                {pickStreakLeaders[1].name.substring(0, 10)} - {pickStreakLeaders[1].pickStreak}
-                            </span>
-                            <span>
-                                {pickStreakLeaders[2].name.substring(0, 10)} - {pickStreakLeaders[2].pickStreak}
-                            </span>
-                            <span>
-                                {pickStreakLeaders[3].name.substring(0, 10)} - {pickStreakLeaders[3].pickStreak}
-                            </span>
-                            <span>
-                                {pickStreakLeaders[4].name.substring(0, 10)} - {pickStreakLeaders[4].pickStreak}
-                            </span>
+                            {pickStreakLeaders.map(pickLeader => (
+                                <span key={pickLeader.userId} style={{color: darkMode && "lightgreen"}}>
+                                    {pickLeader.name.substring(0, 10)} - {pickLeader.pickStreak}
+                                </span>
+                            ))}
                         </div>
                     </div>
                 </h4>}

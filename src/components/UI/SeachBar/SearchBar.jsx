@@ -5,7 +5,7 @@ import SearchIcon from '@material-ui/icons/Search';
 
 import classes from "./SearchBar.module.css";
 
-const SearchBar = ({search, setSearch, stylesContainer, stylesInput}) => {
+const SearchBar = ({search, setSearch, stylesContainer, stylesIcon, stylesInput}) => {
     const [hasTyped, setHasTyped] = useState(false);
     
     if (search.length > 0 && !hasTyped) {
@@ -17,7 +17,7 @@ const SearchBar = ({search, setSearch, stylesContainer, stylesInput}) => {
     return (
         <div className={classes.SearchBar} style={stylesContainer}>
             <label htmlFor="search">
-                {!hasTyped ? <SearchIcon /> : <CloseIcon onClick={() => setSearch("")} />}
+                {!hasTyped ? <SearchIcon style={stylesIcon} /> : <CloseIcon onClick={() => setSearch("")} style={stylesIcon} />}
             </label>
             <input
                 autoComplete="off"

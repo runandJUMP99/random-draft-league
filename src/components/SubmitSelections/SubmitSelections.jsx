@@ -12,6 +12,7 @@ import classes from "./SubmitSelections.module.css";
 import {getSubmittedSelections} from "../../store/actions/submittedSelections";
 
 const SubmitSelections = () => {
+    const [darkMode, setDarkMode] = useState(false);
     const [modalContent, setModalContent] = useState(null);
     const [search, setSearch] = useState("");
     const [showModal, setShowModal] = useState(false);
@@ -29,14 +30,14 @@ const SubmitSelections = () => {
     }
     
     return (
-        <div className={classes.SubmitSelections}>
+        <div className={classes.SubmitSelections} style={{background: darkMode && "#3b3b3b"}}>
             <Backdrop showModal={showModal} setShowModal={setShowModal} />
             <Modal showModal={showModal}>
                 {modalContent}
             </Modal>
             <div className={classes.MainContent}>
-                <Header />
-                <SearchBar search={search} setSearch={setSearch} />
+                <Header darkMode={darkMode} setDarkMode={setDarkMode} />
+                <SearchBar search={search} setSearch={setSearch} stylesIcon={{fill: darkMode && "#eee"}} />
                 <SubmittedSelections
                     setModalContent={setModalContent}
                     setShowModal={setShowModal}

@@ -2,28 +2,18 @@ import React from "react";
 
 import classes from "./MostDrafted.module.css";
 
-const MostDrafted = ({pickLeaders}) => {
+const MostDrafted = ({darkMode, pickLeaders}) => {
     return (
         <div className={classes.MostDrafted}>
             {pickLeaders.length > 0
-                && <h4>Most Picked Drafters:
+                && <h4 style={{color: darkMode && "lightblue"}}>Most Picked Drafters:
                     <div className={classes.AnimationContainer}> 
                         <div className={classes.Animation}>
-                            <span>
-                                {pickLeaders[0].name.substring(0, 10)} - {pickLeaders[0].pickTotal}
-                            </span>
-                            <span>
-                                {pickLeaders[1].name.substring(0, 10)} - {pickLeaders[1].pickTotal}
-                            </span>
-                            <span>
-                                {pickLeaders[2].name.substring(0, 10)} - {pickLeaders[2].pickTotal}
-                            </span>
-                            <span>
-                                {pickLeaders[3].name.substring(0, 10)} - {pickLeaders[3].pickTotal}
-                            </span>
-                            <span>
-                                {pickLeaders[4].name.substring(0, 10)} - {pickLeaders[4].pickTotal}
-                            </span>
+                            {pickLeaders.map(pickLeader => (
+                                <span key={pickLeader.userId} style={{color: darkMode && "lightgreen"}}>
+                                    {pickLeader.name.substring(0, 10)} - {pickLeader.pickTotal}
+                                </span>
+                            ))}
                         </div>
                     </div>
                 </h4>}

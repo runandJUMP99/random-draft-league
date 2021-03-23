@@ -7,7 +7,7 @@ import Form from "../Form/Form";
 import classes from "./Header.module.css";
 import {getSelectionSubject, setSelectionSubject} from "../../../store/actions/selections";
 
-const Header = () => {
+const Header = ({darkMode, setDarkMode}) => {
     const [subject, setSubject] = useState({name: "Click to Enter Subject"});
     const [updating, setUpdating] = useState(false);
     const currentSubject = useSelector(state => state.selections.subject);
@@ -53,7 +53,7 @@ const Header = () => {
                 <div className={classes.Bg2}></div>
                 <div className={classes.Bg3}></div>
             </div>
-            <Banner />
+            <Banner darkMode={darkMode} setDarkMode={setDarkMode} />
             <div className={classes.Text}>
                 <h1>Random Draft League</h1>
                 <h2>This Week's Subject: 
@@ -77,7 +77,7 @@ const Header = () => {
                     <p className={classes.Facebook}><a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/RandomDraftLeague"><i className="fab fa-facebook"></i>Facebook</a></p>
                 </div>
             </div>
-            <Form />
+            <Form darkMode={darkMode}/>
         </div>
     );
 }

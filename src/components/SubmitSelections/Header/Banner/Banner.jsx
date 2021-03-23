@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 
+import DarkModeSlider from "./DarkModeSlider/DarkModeSlider";
 import LastWeekWinners from "./LastWeekWinners/LastWeekWinners";
 import MostDrafted from "./MostDrafted/MostDrafted";
 import PickStreakLeaders from "./PickStreakLeaders/PickStreakLeaders";
@@ -8,7 +9,7 @@ import PickStreakLeaders from "./PickStreakLeaders/PickStreakLeaders";
 import classes from "./Banner.module.css";
 import {getUsers} from "../../../../store/actions/users";
 
-const Banner = () => {
+const Banner = ({darkMode, setDarkMode}) => {
     const [currentDisplay, setCurrentDisplay] = useState(0);
     const [transitionStart, setTransitionStart] = useState(true);
     const [transitionEnd, setTransitionEnd] = useState(false);
@@ -18,9 +19,9 @@ const Banner = () => {
     const winners = users.filter(user => user.isWinner);
     const dispatch = useDispatch();
     const displays = [
-        <LastWeekWinners winners={winners} />,
-        <MostDrafted pickLeaders={pickLeaders} />,
-        <PickStreakLeaders pickStreakLeaders={pickStreakLeaders} />
+        <LastWeekWinners darkMode={darkMode} winners={winners} />,
+        <MostDrafted darkMode={darkMode} pickLeaders={pickLeaders} />,
+        <PickStreakLeaders darkMode={darkMode} pickStreakLeaders={pickStreakLeaders} />
     ];
 
     useEffect(() => {
@@ -54,13 +55,14 @@ const Banner = () => {
     }, [currentDisplay, displays.length]);
 
     return (
-        <div className={classes.Banner} style={{display: users.length === 0 && "none"}}>
+        <div className={classes.Banner} style={{background: darkMode && "#272727", display: users.length === 0 && "none"}}>
             <div className={classes.BannerContent} style={{
                         opacity: transitionStart && 1,
                         transform:  transitionStart ? "translateY(0)" : (transitionEnd && "translateY(2rem)")
                     }}>
                 {displays[currentDisplay]}
             </div>
+            <DarkModeSlider darkMode={darkMode} setDarkMode={setDarkMode} />
         </div>
     );
 }

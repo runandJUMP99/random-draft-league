@@ -5,8 +5,10 @@
 
 .PickStreakLeaders h4 {
     align-items: center;
+    color: blue;
     display: flex;
     font-size: 1.1rem;
+    font-weight: bold;
     justify-content: center;
 }
 

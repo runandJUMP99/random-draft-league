@@ -74,7 +74,7 @@ const Register = () => {
                                 onChange={(event) => setUserData({...userData, name: event.target.value})} 
                                 required
                                 value={userData.name}
-                                variant="outlined" 
+                                variant="outlined"
                             />
                         }
                         <TextField 
@@ -86,7 +86,7 @@ const Register = () => {
                             required
                             type="email"
                             value={userData.email}
-                            variant="outlined" 
+                            variant="outlined"
                         />
                         {!isResettingPassword && 
                             <TextField 
@@ -98,7 +98,7 @@ const Register = () => {
                                 required
                                 type="password"
                                 value={userData.password}
-                                variant="outlined" 
+                                variant="outlined"
                             />
                         }
                         <p className={classes.ForgotPassword} onClick={() => setIsResettingPassword(prevValue => !prevValue)}>

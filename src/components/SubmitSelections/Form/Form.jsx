@@ -9,13 +9,13 @@ import Start from "./Start/Start";
 import classes from "./Form.module.css";
 import {logout} from "../../../store/actions/auth";
 
-const Form = () => {
+const Form = ({darkMode}) => {
     const token = useSelector(state => state.auth.token);
     const dispatch = useDispatch();
 
     return (
         <Paper className={classes.Paper}>
-            {token ? <AddSelection /> : <Start />}
+            {token ? <AddSelection /> : <Start darkMode={darkMode} />}
             {token && <p className={classes.Logout} onClick={() => dispatch(logout())}>Logout</p>}
         </Paper>
     );
