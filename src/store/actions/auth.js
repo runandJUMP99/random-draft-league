@@ -1,7 +1,8 @@
 import * as actionTypes from "../actions/actionTypes";
 import * as api from "./api";
 import {editUser, deleteUser} from "../actions/users";
-import firebase from "firebase";
+import firebase from "firebase/app";
+import "firebase/auth";
 import {storage} from "../../services/firebase";
 
 export const register = (isNewUser, user) => async(dispatch) => {

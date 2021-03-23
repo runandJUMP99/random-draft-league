@@ -9,7 +9,6 @@ import GlobalLoader from "./components/UI/GlobalLoader/GlobalLoader";
 import SubmitSelections from"./components/SubmitSelections/SubmitSelections";
 
 import {authCheckState} from "./store/actions/auth";
-import firebase from "./services/firebase";
 
 // const Admin = React.lazy(() => {
 //   return import("./components/Admin/Admin");
