@@ -13,9 +13,6 @@ const Admin = () => {
     let users = useSelector(state => state.users);
     const order = users.sort((a, b) => b.order - a.order).slice(0, 1)[0].order + 1; //sorts users by their order number then slices highest user, targets 'order' then add 1 to assign the next order for franchises
     const dispatch = useDispatch();
-    const stylesContainer = { //styles for search bar
-        margin: 0
-    };
     const stylesInput = {
         width: "calc(100% - 45px)"
     };
@@ -37,7 +34,7 @@ const Admin = () => {
     return (
         <div className={classes.Admin}>
             <div className={classes.SearchBar}>
-                <SearchBar search={search} setSearch={setSearch} stylesContainer={stylesContainer} stylesInput={stylesInput} />
+                <SearchBar search={search} setSearch={setSearch} stylesInput={stylesInput} />
             </div>
             <Users order={order} users={users} />
         </div>

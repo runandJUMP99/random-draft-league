@@ -11,3 +11,10 @@
     flex-direction: column;
     margin: auto;
 }
+
+.Controls {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin: 1.5rem 1.5%;
+}

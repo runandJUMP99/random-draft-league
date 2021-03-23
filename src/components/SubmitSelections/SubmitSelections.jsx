@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 
 import Backdrop from "../UI/Backdrop/Backdrop";
+import DarkModeSlider from "./DarkModeSlider/DarkModeSlider";
 import Footer from "./Footer/Footer";
 import Header from "./Header/Header";
 import Modal from "../UI/Modal/Modal";
@@ -37,7 +38,10 @@ const SubmitSelections = () => {
             </Modal>
             <div className={classes.MainContent}>
                 <Header darkMode={darkMode} setDarkMode={setDarkMode} />
-                <SearchBar search={search} setSearch={setSearch} stylesIcon={{fill: darkMode && "#eee"}} />
+                <div className={classes.Controls}>
+                    <SearchBar search={search} setSearch={setSearch} stylesIcon={{fill: darkMode && "#eee"}} />
+                    <DarkModeSlider darkMode={darkMode} setDarkMode={setDarkMode} />
+                </div>
                 <SubmittedSelections
                     setModalContent={setModalContent}
                     setShowModal={setShowModal}

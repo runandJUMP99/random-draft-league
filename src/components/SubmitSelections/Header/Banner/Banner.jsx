@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 
-import DarkModeSlider from "./DarkModeSlider/DarkModeSlider";
 import LastWeekWinners from "./LastWeekWinners/LastWeekWinners";
 import MostDrafted from "./MostDrafted/MostDrafted";
 import PickStreakLeaders from "./PickStreakLeaders/PickStreakLeaders";
@@ -9,7 +8,7 @@ import PickStreakLeaders from "./PickStreakLeaders/PickStreakLeaders";
 import classes from "./Banner.module.css";
 import {getUsers} from "../../../../store/actions/users";
 
-const Banner = ({darkMode, setDarkMode}) => {
+const Banner = ({darkMode}) => {
     const [currentDisplay, setCurrentDisplay] = useState(0);
     const [transitionStart, setTransitionStart] = useState(true);
     const [transitionEnd, setTransitionEnd] = useState(false);
@@ -62,7 +61,6 @@ const Banner = ({darkMode, setDarkMode}) => {
                     }}>
                 {displays[currentDisplay]}
             </div>
-            <DarkModeSlider darkMode={darkMode} setDarkMode={setDarkMode} />
         </div>
     );
 }

@@ -1,17 +1,15 @@
 .DarkModeSlider {
-    background: #ebebeb;
+    background: #d8d8d8;
     border-radius: 32px;
+    cursor: pointer;
     height: 1.5rem;
-    position: absolute;
-    top: 0.6rem;
-    right: 1rem;
     transition: all 0.35s ease-out;
     width: 3rem;
 }
 
 .DarkModeSlider button {
     align-items: center;
-    background: #d8d8d8;
+    background: #acacac;
     border: none;
     border-radius: 50%;
     display: flex;

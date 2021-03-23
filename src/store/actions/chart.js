@@ -14,6 +14,7 @@ export const getRounds = (token) => async(dispatch) => {
 export const setRounds = (rounds, token) => async(dispatch) => {
     try {
         await api.setRounds(rounds, token);
+
         dispatch({type: actionTypes.SET_ROUNDS, payload: rounds});
     } catch(err) {
         console.log(err);

@@ -49,7 +49,7 @@ export const register = (isNewUser, user) => async(dispatch) => {
             token: token,
             uid: response.user.uid
         }
-        
+
         localStorage.setItem("rdlexpirationDate", expirationDate);
         localStorage.setItem("rdltoken", userData.token);
         
@@ -160,6 +160,8 @@ export const checkAuthTimeout = (expirationTime, refreshToken) => (dispatch) => 
 
             localStorage.setItem("rdlexpirationDate", data.expires_in * 1000);
             localStorage.setItem("rdltoken", data.id_token);
+
+            dispatch({type: actionTypes.AUTH_REFRESH, payload: data.id_token});
         } catch(err) {
             console.log(err);
             dispatch({type: actionTypes.AUTH_FAIL, payload: err.message});

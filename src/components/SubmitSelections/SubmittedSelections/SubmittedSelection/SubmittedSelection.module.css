@@ -3,7 +3,7 @@
     cursor: pointer;
     font-weight: bold;
     height: 14rem;
-    margin: 1rem 1.5%;
+    margin: 1rem 1.83%;
     overflow: hidden;
     padding: 0.25rem;
     position: relative;
@@ -34,6 +34,7 @@
 
 @media (max-width: 1200px) {
     .SubmittedSelection {
+        margin: 1rem 1.5%;
         width: 47%;
     }
 }

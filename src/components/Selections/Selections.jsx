@@ -16,7 +16,7 @@ const Selections = ({showModal, handleSelection}) => {
     const notSelectedSelections = selections.filter(selection => !selection.isSelected);
     
     useEffect(() => {
-        // dispatch(getSelections(token));
+        dispatch(getSelections(token));
     }, [dispatch, token]);
 
     selectedSelections.sort((a, b) => {

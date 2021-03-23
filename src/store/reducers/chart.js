@@ -1,7 +1,7 @@
 import * as actionTypes from "../actions/actionTypes";
 
 const initialState = {
-    rounds: ""
+    rounds: {rounds: ""}
 }
 
 const chart = (state = initialState, action) => {
@@ -9,7 +9,7 @@ const chart = (state = initialState, action) => {
         case actionTypes.SET_ROUNDS:
             return {
                 ...state,
-                rounds: action.payload.rounds
+                rounds: action.payload
             };
         case actionTypes.GET_ROUNDS:
             return {

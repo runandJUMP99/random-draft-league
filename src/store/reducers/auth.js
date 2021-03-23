@@ -28,6 +28,11 @@ const auth = (state = initialState, action) => {
                 error: null,
                 loading: true
             };
+        case actionTypes.AUTH_REFRESH:
+            return {
+                ...state,
+                token: action.payload
+            };
         case actionTypes.AUTH_UPDATE_PROFILE:
             return {
                 ...state, 

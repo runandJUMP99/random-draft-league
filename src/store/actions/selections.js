@@ -105,16 +105,16 @@ export const setSelectionId = (id) => (dispatch) => {
 export const getSelectionSubject = () => async(dispatch) => {
     try {
         const {data} = await api.getSelectionSubject();
-        let name;
+        let subject;
 
         for (let key in data) {
-            name = {
+            subject = {
                 ...data[key],
                 id: key
             };
         }
 
-        dispatch({type: actionTypes.SET_SELECTION_SUBJECT, payload: name});
+        dispatch({type: actionTypes.SET_SELECTION_SUBJECT, payload: subject});
     } catch(err) {
         console.log(err);
     }

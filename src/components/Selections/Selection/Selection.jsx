@@ -22,7 +22,7 @@ const Selection = ({selectionData, selectionSelected, lockInSelection, handleAdd
     const dispatch = useDispatch();
     const description = selectionData.description || "";
     const name = selectionData.name || "";
-    const totalSelections = players.length * totalRounds;
+    const totalSelections = players.length * totalRounds.rounds;
     const truncatedName = name.length > 12 ? name.substring(0, 12) + "..." : name;
     const selectedStyles = {
         background: selectionData.isSelected && "#000120",
