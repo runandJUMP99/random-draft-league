@@ -4,12 +4,12 @@ import {useDispatch, useSelector} from "react-redux";
 import classes from "./ConfirmDelete.module.css";
 import {removePlayer} from "../../../store/actions/players";
 
-const ConfirmDelete = ({item, playerId, setShowModal}) => {
+const ConfirmDelete = ({item, userId, setShowModal}) => {
     const token = useSelector(state => state.auth.token);
     const dispatch = useDispatch();
 
     function handleClick() {
-        dispatch(removePlayer(playerId, token));
+        dispatch(removePlayer(userId, token));
         setShowModal(false);
     }
 

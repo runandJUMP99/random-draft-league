@@ -5,8 +5,7 @@ import Round from "./Round/Round";
 
 import classes from "./Rounds.module.css";
 
-const Rounds = ({handleSelection, setModalContent, setShowModal}) => {
-    const chart = useSelector(state => state.selections.selections).filter(selection => (selection.isSelected && !selection.honorableMention));
+const Rounds = ({chart, handleSelection, setModalContent, setShowModal}) => {
     const customPlayers = useSelector(state => state.players.players); //players added by the admin
     const userPlayers = useSelector(state => state.users).filter(user => user.isFranchise); //players with accounts sorted by their order number
     const players = userPlayers.concat(customPlayers);
@@ -14,13 +13,12 @@ const Rounds = ({handleSelection, setModalContent, setShowModal}) => {
     let round = [];
     let roundCount = 1;
     let count = 0;
-
     chart.sort((a, b) => a.order - b.order); //put selections in the order that they were selected
-
+    
     chart.forEach(selection => { //sets up rounds for "snake" selection style
         round.push(selection);
         count++;
-
+        
         if (count === players.length) {
             round.push(roundCount);
             rounds.push(round);

@@ -33,7 +33,7 @@ const Selection = ({selectionData, selectionSelected, lockInSelection, handleAdd
         padding: !selectionSelected && "0.5rem",
         width: selectionSelected && "80%"
     };
-
+    
     useEffect(() => {
         dispatch(getRounds(token));
     }, [dispatch, token]);

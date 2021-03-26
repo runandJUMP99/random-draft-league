@@ -23,7 +23,7 @@ const Player = ({player, setModalContent, setShowModal}) => {
     }
 
     function handleEdit() {
-        dispatch(setPlayerId(player.playerId));
+        dispatch(setPlayerId(player.userId));
         setModalContent(<AddPlayer setShowModal={setShowModal} />);
         setShowModal(true);
     }
@@ -32,7 +32,7 @@ const Player = ({player, setModalContent, setShowModal}) => {
         setModalContent(
             <ConfirmDelete 
                 item="player" 
-                playerId={player.playerId} 
+                userId={player.userId} 
                 setShowModal={setShowModal}
             />
         );

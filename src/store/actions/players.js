@@ -7,7 +7,7 @@ export const addPlayer = (player, token) => async(dispatch) => {
 
         const newPlayer = {
             ...player,
-            playerId: data.name
+            userId: data.name
         }
         
         dispatch({type: actionTypes.ADD_PLAYER, payload: newPlayer});
@@ -24,7 +24,7 @@ export const getPlayers = (token) => async(dispatch) => {
         for (let key in data) {
             fetchedPlayers.push({
                 ...data[key],
-                playerId: key
+                userId: key
             });
         }
         
@@ -57,7 +57,7 @@ export const removePlayer = (id, token) => (dispatch) => {
 export const clearPlayers = (players, token) => (dispatch) => {
     try {
         players.forEach(player => {
-            api.removePlayer(player.playerId, token);
+            api.removePlayer(player.userId, token);
         });
 
         dispatch({type: actionTypes.CLEAR_PLAYERS});

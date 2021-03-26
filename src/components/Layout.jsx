@@ -31,57 +31,24 @@ const Layout = () => {
     const [selectionSelected, setSelectionSelected] = useState(false); //handle display of chart or board
     const [showModal, setShowModal] = useState(false);
     const chart = useSelector(state => state.selections.selections).filter(selection => selection.isSelected);
-    const isAuthenticated = useSelector(state =>  state.auth.token !== null);
+    const isAuthenticated = useSelector(state => state.auth.token !== null);
     const customPlayers = useSelector(state => state.players.players); //players added by the admin
     const userPlayers = useSelector(state => state.users).filter(user => user.isFranchise); //players with accounts sorted by their order number
     const players = userPlayers.concat(customPlayers);
     const selections = useSelector(state => state.selections.selections);
     const token = useSelector(state => state.auth.token);
     const dispatch = useDispatch();
-
+console.log(chart);
     useEffect(() => { //find what the current round is and who's turn it is if page reloads
         if (chart.length !== 0) {
             const currentRound = Math.floor(chart.length / players.length) + 1; //checks what round the game is currently on
             const currentPlayerTurn = chart.length % players.length; //checks which player's turn it is
-            
+
             setOrder(chart.length);
             setRound(currentRound);
 
             if (currentRound % 2 === 0) {
-                switch (currentPlayerTurn) {
-                    case 0:
-                        setPlayerTurn(players.length - 1);
-                        break;
-                    case 1:
-                        setPlayerTurn(players.length - 2);
-                        break;
-                    case 2:
-                        setPlayerTurn(players.length - 3);
-                        break;
-                    case 3:
-                        setPlayerTurn(players.length - 4);
-                        break;
-                    case 4:
-                        setPlayerTurn(players.length - 5);
-                        break;
-                    case 5:
-                        setPlayerTurn(players.length - 6);
-                        break;
-                    case 6:
-                        setPlayerTurn(players.length - 7);
-                        break;
-                    case 7:
-                        setPlayerTurn(players.length - 8);
-                        break;
-                    case 8:
-                        setPlayerTurn(players.length - 9);
-                        break;
-                    case 9:
-                        setPlayerTurn(players.length - 10);
-                        break;
-                    default:
-                        break;
-                }
+                setPlayerTurn(players.length - currentPlayerTurn - 1);
             } else {
                 setPlayerTurn(currentPlayerTurn);
             }
@@ -202,6 +169,7 @@ const Layout = () => {
             </div>
             <div style={{transform: display && "translateX(100%)", transition: "all 0.75s ease-in-out"}}>
                 <Chart 
+                    chart={chart}
                     fade={fade}
                     setFade={setFade}
                     handleSelection={handleSelection}

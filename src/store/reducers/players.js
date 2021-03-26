@@ -20,12 +20,12 @@ const players = (state = initialState, action) => {
         case actionTypes.EDIT_PLAYER:
             return {
                 ...state,
-                players: state.players.map(player => player.playerId === action.payload.playerId ? action.payload : player)
+                players: state.players.map(player => player.userId === action.payload.userId ? action.payload : player)
             };
         case actionTypes.REMOVE_PLAYER:
             return {
                 ...state,
-                players: state.players.filter(player => player.playerId !== action.payload)
+                players: state.players.filter(player => player.userId !== action.payload)
             };
         case actionTypes.CLEAR_PLAYERS:
             return {

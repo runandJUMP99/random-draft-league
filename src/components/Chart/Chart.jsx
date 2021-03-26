@@ -9,7 +9,7 @@ import Rounds from "./Rounds/Rounds";
 
 import classes from "./Chart.module.css";
 
-const Chart = ({fade, setFade, handleSelection, setModalContent, setShowModal, selectionContent, selectionSelected, setSelectionSelected}) => {
+const Chart = ({chart, fade, setFade, handleSelection, setModalContent, setShowModal, selectionContent, selectionSelected, setSelectionSelected}) => {
     const randomNumber = Math.floor(Math.random() * 10);
     
     function handleClick() {
@@ -29,7 +29,7 @@ const Chart = ({fade, setFade, handleSelection, setModalContent, setShowModal, s
                     : <>
                         <div className={classes.PlayersAndRounds}>
                             <Players setModalContent={setModalContent} setShowModal={setShowModal} />
-                            <Rounds handleSelection={handleSelection} setModalContent={setModalContent} setShowModal={setShowModal} />
+                            <Rounds chart={chart} handleSelection={handleSelection} setModalContent={setModalContent} setShowModal={setShowModal} />
                         </div>
                         <HonorableMentions handleSelection={handleSelection} setModalContent={setModalContent} setShowModal={setShowModal} />
                     </>
