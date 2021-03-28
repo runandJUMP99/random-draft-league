@@ -8,7 +8,8 @@ export const addSubmittedSelection = (selection, token) => async(dispatch) => {
             from: selection.from,
             id: data.name,
             isSelected: false,
-            name: selection.name
+            name: selection.name,
+            userId: selection.userId
         }
         
         dispatch({type: actionTypes.ADD_SUBMITTED_SELECTION, payload: newSelection});

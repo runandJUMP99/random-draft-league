@@ -38,7 +38,7 @@ const Layout = () => {
     const selections = useSelector(state => state.selections.selections);
     const token = useSelector(state => state.auth.token);
     const dispatch = useDispatch();
-console.log(chart);
+
     useEffect(() => { //find what the current round is and who's turn it is if page reloads
         if (chart.length !== 0) {
             const currentRound = Math.floor(chart.length / players.length) + 1; //checks what round the game is currently on

@@ -14,14 +14,14 @@ import {setPlayerId} from "../../../../store/actions/players";
 import logo from "../../../../assets/images/logo.png";
 
 const Player = ({player, setModalContent, setShowModal}) => {
-    const chart = useSelector(state => state.selections.selections.filter(selection => selection.player));
+    const chart = useSelector(state => state.selections.selections).filter(selection => selection.player);
     const dispatch = useDispatch();
 
     function handleClick() {
         setModalContent(<PlayerSummary player={player} />);
         setShowModal(true);
     }
-
+    
     function handleEdit() {
         dispatch(setPlayerId(player.userId));
         setModalContent(<AddPlayer setShowModal={setShowModal} />);

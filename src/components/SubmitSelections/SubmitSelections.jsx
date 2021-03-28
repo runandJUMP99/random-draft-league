@@ -21,8 +21,10 @@ const SubmitSelections = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getSubmittedSelections());
-    }, [dispatch]);
+        if (submittedSelections.length === 0) {
+            dispatch(getSubmittedSelections());
+        }
+    }, [dispatch, submittedSelections]);
 
     if (search.length > 0) {
         submittedSelections = submittedSelections.filter(selection => {

@@ -16,8 +16,10 @@ const Selections = ({showModal, handleSelection}) => {
     const notSelectedSelections = selections.filter(selection => !selection.isSelected);
     
     useEffect(() => {
-        dispatch(getSelections(token));
-    }, [dispatch, token]);
+        if (selections.length === 0) {
+            dispatch(getSelections(token));
+        }
+    }, [dispatch, selections, token]);
 
     selectedSelections.sort((a, b) => {
         return a.name.localeCompare(b.name, 'en', {'sensitivity': 'base'});

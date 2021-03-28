@@ -34,7 +34,8 @@ const AddSelection = ({submittedSelection, setShowModal}) => {
             setSelectionData({
                 name: "",
                 description: "",
-                img: ""
+                img: "",
+                userId: ""
             });
         }
     }, [selection, submittedSelection]);
