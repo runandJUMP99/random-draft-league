@@ -22,7 +22,7 @@ const Players = ({setModalContent, setShowModal}) => {
             <h2>Drafters</h2>
             {players.map(player => (
                 <Player 
-                    key={player.playerId ? player.playerId : player.name} 
+                    key={player.userId ? player.userId : player.name} 
                     player={player} 
                     setModalContent={setModalContent} 
                     setShowModal={setShowModal} 

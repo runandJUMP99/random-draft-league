@@ -27,7 +27,11 @@ const Admin = () => {
 
     if (search.length > 0) {
         users = users.filter(user => {
-            return user.name.toLowerCase().includes(search.toLowerCase()) || user.email.toLowerCase().includes(search.toLowerCase());
+            return (
+                user.name.toLowerCase().includes(search.toLowerCase())
+                || user.email.toLowerCase().includes(search.toLowerCase())
+                || user.userId.toLowerCase().includes(search.toLowerCase())
+            );
         });
     }
 

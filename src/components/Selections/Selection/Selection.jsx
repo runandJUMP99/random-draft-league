@@ -4,6 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import StarIcon from '@material-ui/icons/Star';
+import UndoIcon from '@material-ui/icons/Undo';
 
 import Button from "../../UI/Button/Button";
 
@@ -12,8 +13,8 @@ import {getRounds} from "../../../store/actions/chart";
 import {deleteSelection} from "../../../store/actions/selections";
 import logo from "../../../assets/images/logo.png";
 
-const Selection = ({selectionData, selectionSelected, lockInSelection, handleAddSelection, setShowModal}) => {
-    const chart = useSelector(state => state.selections.selections).filter(selection => selection.isSelected);
+const Selection = ({handleAddSelection, lockInSelection, selectionData, selectionSelected, setFade, setSelectionSelected}) => {
+    const chart = useSelector(state => state.selections.selections).filter(selection => selection.isSelected && !selection.honorableMention);
     const customPlayers = useSelector(state => state.players.players);
     const totalRounds = useSelector(state => state.chart.rounds);
     const token = useSelector(state => state.auth.token);
@@ -33,14 +34,22 @@ const Selection = ({selectionData, selectionSelected, lockInSelection, handleAdd
         padding: !selectionSelected && "0.5rem",
         width: selectionSelected && "80%"
     };
-    
+
     useEffect(() => {
-        dispatch(getRounds(token));
-    }, [dispatch, token]);
+        if (!totalRounds.rounds) {
+            dispatch(getRounds(token));
+        }
+    }, [dispatch, token, totalRounds]);
 
     function handleDelete() {
+        setFade(true);
+
+        setTimeout(() => {
+            setSelectionSelected(false)
+            setFade(false);
+        }, 500);
+
         dispatch(deleteSelection(selectionData.id, token));
-        setShowModal(false);
     }
 
     return (
@@ -64,6 +73,15 @@ const Selection = ({selectionData, selectionSelected, lockInSelection, handleAdd
                         position: "initial"
                     }}>
                         <StarIcon fontSize="small" />
+                    </Button>
+                    <Button onClick={() => lockInSelection(selectionData.id, false, true)} style={{
+                        background: "#01023a",
+                        display: !selectionData.isSelected && "none",
+                        margin: "0.25rem",
+                        padding: "0.25rem",
+                        position: "initial"
+                    }}>
+                        <UndoIcon fontSize="small" />
                     </Button>
                     <Button onClick={() => handleAddSelection(true)} style={{
                         background: "#01023a",

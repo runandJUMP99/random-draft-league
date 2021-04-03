@@ -7,15 +7,15 @@ import classes from "./PlayerSummary.module.css";
 import logo from "../../../../../assets/images/logo.png";
 
 const PlayerSummary = ({player}) => {
-    const chart = useSelector(state => state.selections.selections.filter(selection => selection.player));
-    const playerSummary = chart.filter(selection => selection.player === player.playerId);
+    const chart = useSelector(state => state.selections.selections).filter(selection => selection.player);
+    const playerSummary = chart.filter(selection => selection.player === player.userId);
     let round = 0;
 
     playerSummary.sort((a, b) => a.order - b.order);
 
     return (
         <div className={classes.PlayerSummary}>
-            <img src={player.img ? player.img : logo} alt="Player Logo"/>
+            <img className={classes.ProfilePicture} src={player.img ? player.img : logo} alt="Player Logo"/>
             <h3>{player.name}</h3>
             <div className={classes.Selections}>
                 {playerSummary.map(selection => {

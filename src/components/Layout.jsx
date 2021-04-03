@@ -30,10 +30,10 @@ const Layout = () => {
     const [selectionContent, setSelectionContent] = useState(null); //display approriate content board/chart
     const [selectionSelected, setSelectionSelected] = useState(false); //handle display of chart or board
     const [showModal, setShowModal] = useState(false);
-    const chart = useSelector(state => state.selections.selections).filter(selection => selection.isSelected);
+    const chart = useSelector(state => state.selections.selections).filter(selection => selection.isSelected && !selection.honorableMention);
     const isAuthenticated = useSelector(state => state.auth.token !== null);
     const customPlayers = useSelector(state => state.players.players); //players added by the admin
-    const userPlayers = useSelector(state => state.users).filter(user => user.isFranchise); //players with accounts sorted by their order number
+    const userPlayers = useSelector(state => state.users).filter(user => user.isFranchise).sort((a, b) => a.order - b.order); //players with accounts sorted by their order number
     const players = userPlayers.concat(customPlayers);
     const selections = useSelector(state => state.selections.selections);
     const token = useSelector(state => state.auth.token);
@@ -82,13 +82,14 @@ const Layout = () => {
                 lockInSelection={lockInSelection} 
                 selectionData={selectionData[0]}
                 selectionSelected={!selectionSelected}
-                showModal={!showModal} 
-                setShowModal={setShowModal}
+                showModal={!showModal}
+                setFade={setFade}
+                setSelectionSelected={setSelectionSelected}
             />
         );
     }
     
-    function lockInSelection(id, honorableMention) {
+    function lockInSelection(id, honorableMention, undo) {
         let newSelection = selections.find(selection => selection.id === id);
         
         if (honorableMention) {
@@ -99,6 +100,31 @@ const Layout = () => {
                 order: null,
                 player: null,
                 roundSelected: null
+            }
+        } else if (undo) {
+            newSelection = {
+                ...newSelection,
+                honorableMention: false,
+                isSelected: false,
+                order: null,
+                player: null,
+                roundSelected: null
+            }
+
+            if (!forward) {
+                if (playerTurn === 0) {
+                    setRound(prevRound => prevRound - 1);
+                    setForward(true);
+                } else {
+                    setPlayerTurn(prevTurn => prevTurn - 1);
+                }
+            } else {
+                if (playerTurn === players.length - 1) {
+                    setRound(prevRound => prevRound - 1);
+                    setForward(false);
+                } else {
+                    setPlayerTurn(prevTurn => prevTurn + 1);                
+                }
             }
         } else {
             const playerId = players[playerTurn].userId;

@@ -8,7 +8,7 @@
     text-align: center;
 }
 
-.PlayerSummary img {
+.ProfilePicture {
     border: 2px solid #ccc;
     border-radius: 50%;
     box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.5);
