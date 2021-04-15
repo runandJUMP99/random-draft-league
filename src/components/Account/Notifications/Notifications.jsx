@@ -14,7 +14,7 @@ const Notifications = () => {
 
     for (let key in notifications) {
         if (key !== "id") {
-            messages.push(notifications[key])
+            messages.push(notifications[key]);
         }
     }
 

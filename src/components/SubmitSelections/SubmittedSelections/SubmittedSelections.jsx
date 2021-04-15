@@ -48,6 +48,7 @@ const SubmittedSelections = ({setModalContent, setShowModal, submittedSelections
                         isSelected={submittedSelection.isSelected}
                         name={submittedSelection.name} 
                         onClick={handleClick}
+                        time={submittedSelection.time}
                     />
                 )
             })}

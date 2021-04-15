@@ -32,6 +32,14 @@
     font-size: 1.1rem;
 }
 
+.Time {
+    bottom: 0.25rem;
+    position: absolute;
+    opacity: 0;
+    transition: opacity 0.25s ease-out;
+    right: 0.5rem;
+}
+
 @media (max-width: 1200px) {
     .SubmittedSelection {
         margin: 1rem 1.5%;

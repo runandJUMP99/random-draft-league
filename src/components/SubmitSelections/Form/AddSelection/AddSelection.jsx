@@ -43,12 +43,14 @@ const AddSelection = () => {
         if (matched) {
             setError("Submission already exists. Try using a different name!");
         } else {
+            const currentDate = new Date();
             const selectionData = {
                 from: currentUser.name,
                 name: selection,
+                time: `${currentDate.getMonth() + 1}/${currentDate.getDate()} @ ${currentDate.getHours()}:${currentDate.getMinutes()}`,
                 userId: userId
             };
-            
+
             setError(null);
             dispatch(addSubmittedSelection(selectionData, token));
         }
