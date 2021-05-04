@@ -18,7 +18,9 @@ const Submissions = () => {
             {submittedSelections.map(submission => (
                 <Submission
                     key={submittedSelections.length === 1 ? submission.name : submission.id}
+                    draftId={submission.draftId}
                     id={submission.id}
+                    isSelected={submission.isSelected}
                     name={submission.name}
                 />
             ))}

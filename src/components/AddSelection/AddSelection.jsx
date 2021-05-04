@@ -6,7 +6,7 @@ import FileBase from "react-file-base64";
 
 import classes from "./AddSelection.module.css";
 import {addSelection, editSelection, setSelectionId} from "../../store/actions/selections";
-import {deleteSubmittedSelection, editSubmittedSelection} from "../../store/actions/submittedSelections";
+import {deleteSubmittedSelection} from "../../store/actions/submittedSelections";
 
 const AddSelection = ({submittedSelection, setShowModal}) => {
     const [selectionData, setSelectionData] = useState({
@@ -46,16 +46,16 @@ const AddSelection = ({submittedSelection, setShowModal}) => {
         if (selectionId) {
             dispatch(editSelection(selectionId, selectionData, token));
         } else {
+            let updatedSubmittedSelection;
+
             if (submittedSelection) {
-                const newSelection = {
+                updatedSubmittedSelection = {
                     ...submittedSelection,
                     isSelected: true
                 };
-
-                dispatch(editSubmittedSelection(newSelection.id, newSelection, token));
             }
 
-            dispatch(addSelection(selectionData, token));
+            dispatch(addSelection(selectionData, token, updatedSubmittedSelection));
         }
 
         clear();

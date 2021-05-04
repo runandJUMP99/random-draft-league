@@ -1,8 +1,9 @@
 import * as actionTypes from "../actions/actionTypes";
 import * as api from "./api";
+import {editSubmittedSelection} from "../actions/submittedSelections";
 import {updateUsers} from "../actions/users";
 
-export const addSelection = (selection, token) => async(dispatch) => {
+export const addSelection = (selection, token, submittedSelection) => async(dispatch) => {
     try {
         const {data} = await api.addSelection(selection, token);
 
@@ -11,7 +12,13 @@ export const addSelection = (selection, token) => async(dispatch) => {
             id: data.name,
             isSelected: false
         }
-        
+
+        submittedSelection = { //add new draft selection ID to submitted selection to clear selection off of board if user deletes before draft
+            ...submittedSelection,
+            draftId: newSelection.id
+        };
+
+        dispatch(editSubmittedSelection(submittedSelection.id, submittedSelection, token));
         dispatch({type: actionTypes.ADD_SELECTION, payload: newSelection});
     } catch(err) {
         console.log(err);

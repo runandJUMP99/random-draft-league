@@ -6,14 +6,19 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import Button from "../../../UI/Button/Button";
 
 import classes from "./Submission.module.css";
+import {deleteSelection} from "../../../../store/actions/selections";
 import {deleteSubmittedSelection} from "../../../../store/actions/submittedSelections";
 
-const Submission = ({id, name}) => {
+const Submission = ({draftId, id, isSelected, name}) => {
     const token = useSelector(state => state.auth.token);
     const dispatch = useDispatch();
 
     function handleDelete() {
         dispatch(deleteSubmittedSelection(id, token));
+
+        if (isSelected) {
+            dispatch(deleteSelection(draftId, token));
+        }
     }
     
     return (
