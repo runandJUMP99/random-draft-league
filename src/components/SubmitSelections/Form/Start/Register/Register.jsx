@@ -102,16 +102,17 @@ const Register = () => {
                             />
                         }
                         <p className={classes.ForgotPassword} onClick={() => setIsResettingPassword(prevValue => !prevValue)}>
-                            {isResettingPassword ? "Back to login" : "Forgot password?"}
+                            {isResettingPassword ? "Back to login" : (!isNewUser && "Forgot password?")}
                         </p>
                         <Button className={classes.ButtonSubmit} color="primary" fullWidth size="large" type="submit" variant="contained">Submit</Button>
                         <Button color="secondary" fullWidth onClick={handleClear} size="small" variant="contained">Clear</Button>
-                        <p className={classes.Switch}>
-                            {!isNewUser ? "Don't have an account? " : "Already signed up? "} 
-                            <span className={classes.SwitchClick} onClick={handleSwitch}>
-                                {!isNewUser ? "Register here." : "Login here."}
-                            </span>
-                        </p>
+                        {!isResettingPassword && //if user is resetting password, this text should not be displayed
+                            <p className={classes.Switch}>
+                                {!isNewUser ? "Don't have an account? " : "Already signed up? "} 
+                                <span className={classes.SwitchClick} onClick={handleSwitch}>
+                                    {!isNewUser ? "Register here." : "Login here."}
+                                </span>
+                            </p>}
                     </form>
                 </>
             }
