@@ -179,7 +179,7 @@ const Layout = () => {
         <div className={classes.Layout}>
             {!isAuthenticated && <Redirect to="/" />}
             <div className={classes.Background}></div>
-            <Backdrop showModal={showModal} setShowModal={setShowModal} />
+            <Backdrop clickable={true} showModal={showModal} setShowModal={setShowModal} />
             <Modal showModal={showModal}>
                 {modalContent}
             </Modal>
