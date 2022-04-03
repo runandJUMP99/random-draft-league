@@ -7,7 +7,7 @@ import Footer from "./Footer/Footer";
 import Header from "./Header/Header";
 import Modal from "../UI/Modal/Modal";
 import Over18Message from "./Over18Message/Over18Message";
-import SearchBar from "../UI/SeachBar/SearchBar";
+import SearchBar from "../UI/SearchBar/SearchBar";
 import SubmittedSelections from "./SubmittedSelections/SubmittedSelections";
 
 import classes from "./SubmitSelections.module.css";

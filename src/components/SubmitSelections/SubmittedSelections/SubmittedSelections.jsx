@@ -12,6 +12,7 @@ const SubmittedSelections = ({
   setShowModal,
   submittedSelections,
 }) => {
+  // filter out any blank submissions
   const filteredSubmittedSelections = submittedSelections.filter(
     selection => selection.name
   );
@@ -20,6 +21,10 @@ const SubmittedSelections = ({
   );
   const notSelectedSelections = filteredSubmittedSelections.filter(
     selection => !selection.isSelected
+  );
+  const isAdmin = useSelector(
+    // state => state.auth.userId === process.env.REACT_APP_FIREBASE_UID1
+    state => state.auth.userId === process.env.REACT_APP_FIREBASE_UID2
   );
   const token = useSelector(state => state.auth.token);
   let count = 0;
@@ -35,20 +40,28 @@ const SubmittedSelections = ({
   submittedSelections = notSelectedSelections.concat(selectedSelections);
 
   function handleClick(id) {
-    const selectedSubmission = submittedSelections.filter(
+    const selectedSubmission = submittedSelections.find(
       selection => selection.id === id
     );
 
-    if (!selectedSubmission[0].isSelected && token) {
+    if (!selectedSubmission.isSelected && token) {
       setModalContent(
         <AddSelection
           setShowModal={setShowModal}
-          submittedSelection={selectedSubmission[0]}
+          submittedSelection={selectedSubmission}
         />
       );
-
-      setShowModal(true);
+    } else {
+      setModalContent(
+        <SubmittedSelection
+          count={count}
+          onClick={handleClick}
+          selection={selectedSubmission}
+        />
+      );
     }
+
+    setShowModal(true);
   }
 
   return (
@@ -62,12 +75,8 @@ const SubmittedSelections = ({
             <SubmittedSelection
               key={submittedSelection.id}
               count={count}
-              from={submittedSelection.from}
-              id={submittedSelection.id}
-              isSelected={submittedSelection.isSelected}
-              name={submittedSelection.name}
               onClick={handleClick}
-              time={submittedSelection.time}
+              selection={submittedSelection}
             />
           );
         })

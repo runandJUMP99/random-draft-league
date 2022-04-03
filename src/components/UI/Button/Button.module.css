@@ -1,18 +1,17 @@
 .Button {
-    align-items: center;
-    background: #020264;
-    border: none;
-    border-radius: 50%;
-    bottom: 0.5rem;
-    color: white;
-    cursor: pointer;
-    display: inline-block;
-    margin: auto;
-    padding: 0.5rem;
-    position: absolute;
-    transition: all 0.3s ease-out;
+  background: #020264;
+  border: none;
+  border-radius: 50%;
+  bottom: 0.5rem;
+  color: white;
+  cursor: pointer;
+  display: inline-block;
+  margin: auto;
+  padding: 0.5rem;
+  position: absolute;
+  transition: all 0.3s ease-out;
 }
 
 .Button:hover {
-    box-shadow: 0 0 8px 4px rgba(0, 0, 0, 0.5) inset;
+  box-shadow: 0 0 8px 4px rgba(0, 0, 0, 0.5) inset;
 }

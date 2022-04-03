@@ -1,54 +1,48 @@
 .SubmittedSelection {
-    box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.3);
-    cursor: pointer;
-    font-weight: bold;
-    height: 14rem;
-    margin: 1rem 1.83%;
-    overflow: hidden;
-    padding: 0.25rem;
-    position: relative;
-    transition: all 0.25s ease-out;
-    width: 13%;
+  box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  font-weight: bold;
+  height: 14rem;
+  margin: 1rem auto;
+  width: 300px;
+  overflow: hidden;
+  padding: 0.25rem;
+  position: relative;
+  transition: all 0.25s ease-out;
 }
 
 .SubmittedSelection:hover {
-    box-shadow: 1px 1px 4px 2px rgba(0, 0, 0, 0.5);
-    transform: rotate(0deg) scale(1.25) !important;
-    z-index: 5;
+  box-shadow: 1px 1px 4px 2px rgba(0, 0, 0, 0.5);
+  transform: rotate(0deg) scale(1.25) !important;
+  z-index: 5;
 }
 
 .SubmittedSelection p {
-    margin-bottom: 0.25rem;
-    word-wrap: break-word
+  margin-bottom: 0.25rem;
+  word-wrap: break-word;
 }
 
 .From {
-    font-family: "Poppins";
-    font-size: 1.5rem;
+  font-family: "Poppins";
+  font-size: 1.5rem;
 }
 
 .Submission {
-    font-family: "Shadows Into Light";
-    font-size: 1.1rem;
+  font-family: "Shadows Into Light";
+  font-size: 1.1rem;
+}
+
+.VoteContainer {
+  bottom: 0.5rem;
+  display: flex;
+  position: absolute;
+  right: 0.5rem;
 }
 
 .Time {
-    bottom: 0.25rem;
-    position: absolute;
-    opacity: 0;
-    transition: opacity 0.25s ease-out;
-    right: 0.5rem;
-}
-
-@media (max-width: 1200px) {
-    .SubmittedSelection {
-        margin: 1rem 1.5%;
-        width: 47%;
-    }
-}
-
-@media (max-width: 585px) {
-    .SubmittedSelection {
-        width: 100%;
-    }
+  bottom: 0.25rem;
+  position: absolute;
+  opacity: 0;
+  transition: opacity 0.25s ease-out;
+  left: 0.5rem;
 }

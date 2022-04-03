@@ -1,5 +1,7 @@
 .SubmittedSelections {
-    display: flex;
-    flex-wrap: wrap;
-    position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0 1rem;
+  position: relative;
 }
