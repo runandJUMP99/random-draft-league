@@ -23,7 +23,6 @@ import Webcam from "./Webcam/Webcam";
 import classes from "./Layout.module.css";
 import { editSelection, setSelectionId } from "../store/actions/selections";
 import { setPlayerId } from "../store/actions/players";
-import { dummySelections } from "../dummySelections";
 
 const buttonStyles = {
   height: "2rem",
@@ -53,8 +52,7 @@ const Layout = () => {
     .filter(user => user.isFranchise)
     .sort((a, b) => a.order - b.order); //players with accounts sorted by their order number
   const players = userPlayers.concat(customPlayers);
-  // const selections = useSelector(state => state.selections.selections);
-  const selections = dummySelections;
+  const selections = useSelector(state => state.selections.selections);
   const token = useSelector(state => state.auth.token);
   const dispatch = useDispatch();
 
