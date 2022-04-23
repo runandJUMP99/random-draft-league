@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import AlignHorizontalLeftIcon from "@mui/icons-material/AlignHorizontalLeft";
-import ViewModuleIcon from "@mui/icons-material/ViewModule";
-
-import Button from "../UI/Button/Button";
 import GlobalLoader from "../UI/GlobalLoader/GlobalLoader";
-import SearchBar from "../UI/SearchBar/SearchBar";
 import Selection from "./Selection/Selection";
 
 import classes from "./Selections.module.css";
 import { getSelections } from "../../store/actions/selections";
+
+// import { dummySelections } from "../../dummySelections";
 
 const groups = [
   "Triple S Plus+++",
@@ -28,129 +25,229 @@ const sortingOrderedGroups = [
   "...Ok",
   "Untouchables",
 ];
-const buttonStyles = {
-  alignItems: "center",
-  background: "rgba(0, 0, 0, 0.3)",
-  display: "flex",
-  height: "1.75rem",
-  justifyContent: "center",
-  position: "initial",
-  width: "1.75rem",
-};
 
-const Selections = ({ showModal, handleSelection }) => {
-  const [search, setSearch] = useState("");
-  const [tieredView, setTieredView] = useState(false);
+const Selections = ({ handleSelection, search, showModal, tieredView }) => {
+  const [initialFetch, setInitialFetch] = useState(true);
   const token = useSelector(state => state.auth.token);
   let selections = useSelector(state => state.selections.selections);
+  // let selections = dummySelections;
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (selections.length === 0) {
+    if (initialFetch) {
+      setInitialFetch(false);
       dispatch(getSelections(token));
     }
-  }, [dispatch, selections, token]);
-
+  }, [dispatch, initialFetch, token]);
   const noVotes = [];
   const voted = [];
-  selections = selections.map(selection => ({
-    ...selection,
-    netLikes:
-      selection.thumbsUpVoters.length === 0 &&
-      selection.thumbsDownVoters.length === 0
-        ? "no-votes"
-        : selection.thumbsUpVoters.length - selection.thumbsDownVoters.length,
-  }));
   selections.forEach(selection => {
-    if (selection.netLikes === "no-votes") {
+    if (!selection.thumbsDownVoters && !selection.thumbsUpVoters) {
       noVotes.push(selection);
     } else {
       voted.push(selection);
     }
   });
 
-  voted.sort((a, b) => a.netLikes - b.netLikes);
-  console.log(selections, noVotes, voted);
+  voted.sort((a, b) => b.netLikes - a.netLikes);
 
-  const remainingSelections = voted.filter(
-    selection => selection.netLikes >= 5 && selection.netLikes <= -5
-  );
-  let groupedSelections = sortingOrderedGroups.map(group => {
-    let pickedSelections;
+  let remainingSelections = [...voted];
+  let groupedSelections =
+    remainingSelections.length > 0
+      ? sortingOrderedGroups.map(group => {
+          let pickedSelections = [];
+          let totalRemaining;
+          let count;
 
-    switch (group) {
-      case groups[0]:
-        pickedSelections = remainingSelections.splice(0, 5);
-        return {
-          name: group,
-          selectedSelections: pickedSelections.filter(
-            selection => selection.isSelected
-          ),
-          notSelectedSelections: pickedSelections.filter(
-            selection => !selection.isSelected
-          ),
-        };
-      case groups[1]:
-        const endIndex = remainingSelections.findIndex(
-          selection => selection.netLikes < 0
-        );
-        pickedSelections = remainingSelections.splice(0, endIndex - 1);
-        return {
-          name: group,
-          selectedSelections: pickedSelections.filter(
-            selection => selection.isSelected
-          ),
-          notSelectedSelections: pickedSelections.filter(
-            selection => !selection.isSelected
-          ),
-        };
-      case groups[2]:
-        return {
-          name: group,
-          selectedSelections: voted.filter(
-            selection =>
-              selection.netLikes <= 5 &&
-              selection.netLikes >= -5 &&
-              selection.isSelected
-          ),
-          notSelectedSelections: voted.filter(
-            selection =>
-              selection.netLikes <= 5 &&
-              selection.netLikes >= -5 &&
-              !selection.isSelected
-          ),
-        };
-      case groups[3]:
-        return {
-          name: group,
-          selectedSelections: remainingSelections.filter(
-            selection => selection.isSelected
-          ),
-          notSelectedSelections: remainingSelections.filter(
-            selection => !selection.isSelected
-          ),
-        };
-      case groups[4]:
-        pickedSelections = remainingSelections.splice(-5);
-        return {
-          name: group,
-          selectedSelections: pickedSelections.filter(
-            selection => selection.isSelected
-          ),
-          notSelectedSelections: pickedSelections.filter(
-            selection => !selection.isSelected
-          ),
-        };
-      default:
-        return {
-          name: group,
-          selectedSelections: noVotes.filter(selection => selection.isSelected),
-          notSelectedSelections: noVotes.filter(
-            selection => !selection.isSelected
-          ),
-        };
-    }
-  });
+          switch (group) {
+            // Triple S Plus+++
+            case groups[0]:
+              // this group goes first.
+              // idea is to find the higest rated selections with at least 15 net likes and remove those from remainingSelections and add them to pickedSelections
+              // console.log(("group name: ", groups[0]));
+              count = 0;
+
+              if (remainingSelections.length > 0) {
+                for (let i = 0; i < remainingSelections.length && i < 5; i++) {
+                  if (
+                    remainingSelections[i].netLikes !== "no-votes" &&
+                    remainingSelections[i].netLikes > 15
+                  ) {
+                    // console.log("picked selection: ", remainingSelections[i]);
+                    count++;
+                  }
+                }
+              }
+
+              if (count > 0) {
+                // console.log("before", pickedSelections, remainingSelections);
+                pickedSelections = remainingSelections.splice(0, count);
+                // console.log("after", pickedSelections, remainingSelections);
+              } else {
+                // console.log(
+                // "No selections picked",
+                // pickedSelections,
+                // remainingSelections
+                // );
+              }
+              // console.log("final: ", pickedSelections, remainingSelections);
+              return {
+                name: group,
+                selectedSelections: pickedSelections.filter(
+                  selection => selection.isSelected
+                ),
+                notSelectedSelections: pickedSelections.filter(
+                  selection => !selection.isSelected
+                ),
+              };
+            // Highly Above Average
+            case groups[1]:
+              // this group goes fourth.
+              // higest picks with netLikes over 15 (Triple S PLUS+++ - 1st) and netLikes between -5 and 5 (Acceptable - 3rd) are gone,
+              // so take the remaining selections with netLikes greater than 0
+              // since the selections are in order, it should be from the beginning of the array to the endIndex - 1
+              // console.log("group name: ", groups[1]);
+              const endIndex = remainingSelections.findIndex(
+                selection => selection.netLikes < 0
+              );
+              // console.log(
+              // "end index and selection: ",
+              // endIndex,
+              // remainingSelections[endIndex]
+              // );
+              if (remainingSelections.length > 0) {
+                // console.log("before", pickedSelections, remainingSelections);
+                pickedSelections = remainingSelections.splice(0, endIndex);
+                // console.log("after", pickedSelections, remainingSelections);
+              }
+              // console.log("final: ", pickedSelections, ...remainingSelections);
+              return {
+                name: group,
+                selectedSelections: pickedSelections.filter(
+                  selection => selection.isSelected
+                ),
+                notSelectedSelections: pickedSelections.filter(
+                  selection => !selection.isSelected
+                ),
+              };
+            // Acceptable
+            case groups[2]:
+              // this group goes third
+              // only the selections with net likes between -5 and 5 should be moved
+              // find the index where next likes is first between 5 and -5
+              // then count how many selections are between that startIndex and where netLikes is less than -5
+              // then move those selections
+              // console.log("group name: ", groups[2]);
+              count = 0;
+              const startIndex = remainingSelections.findIndex(
+                selection => selection.netLikes <= 5 && selection.netLikes >= -5
+              );
+              // console.log(
+              //   "start index and selection: ",
+              //   startIndex,
+              //   remainingSelections[startIndex]
+              // );
+
+              if (remainingSelections.length > 0) {
+                for (let i = startIndex; i < remainingSelections.length; i++) {
+                  if (
+                    remainingSelections[i].netLikes !== "no-votes" &&
+                    remainingSelections[i].netLikes >= -5
+                  ) {
+                    // console.log("picked selection: ", remainingSelections[i]);
+                    count++;
+                  }
+                }
+              }
+
+              pickedSelections = remainingSelections.splice(startIndex, count);
+              // console.log("final: ", pickedSelections, ...remainingSelections);
+              return {
+                name: group,
+                selectedSelections: pickedSelections.filter(
+                  selection => selection.isSelected
+                ),
+                notSelectedSelections: pickedSelections.filter(
+                  selection => !selection.isSelected
+                ),
+              };
+            // ...Ok
+            case groups[3]:
+              // this gorup goes fifth
+              // lowest picks with netLikes under 10 (Oh no... - 2nd) and netLikes between -5 and 5 (Acceptable - 3rd) are gone,
+              // so take the remaining selections with netLikes less than 0
+              // since the selections are in order, it should be from startI to the end
+              // console.log("group name: ", groups[3]);
+              const startI = remainingSelections.findIndex(
+                selection => selection.netLikes <= 0
+              );
+              pickedSelections = remainingSelections.splice(
+                startI,
+                remainingSelections.length - startI
+              );
+              // console.log("final: ", pickedSelections, remainingSelections);
+              return {
+                name: group,
+                selectedSelections: pickedSelections.filter(
+                  selection => selection.isSelected
+                ),
+                notSelectedSelections: pickedSelections.filter(
+                  selection => !selection.isSelected
+                ),
+              };
+            // Oh no...
+            case groups[4]:
+              // this group goes 2nd
+              // move the selections from the end that have 10 or less votes
+              // console.log(("group name: ", groups[4]));
+              totalRemaining = remainingSelections.length;
+              count = 0;
+
+              for (
+                let i = totalRemaining - 1;
+                i > totalRemaining - 5 && i >= 0;
+                i--
+              ) {
+                if (
+                  remainingSelections.length > 0 &&
+                  remainingSelections[i].netLikes !== "no-votes" &&
+                  remainingSelections[i].netLikes <= -10
+                ) {
+                  // console.log("picked selection: ", remainingSelections[i]);
+                  count++;
+                }
+              }
+              pickedSelections = remainingSelections.splice(
+                remainingSelections.length - count - 1
+              );
+              // console.log("final: ", pickedSelections, ...remainingSelections);
+              return {
+                name: group,
+                selectedSelections: pickedSelections.filter(
+                  selection => selection.isSelected
+                ),
+                notSelectedSelections: pickedSelections.filter(
+                  selection => !selection.isSelected
+                ),
+              };
+            // Untouchables
+            default:
+              // this group goes last
+              // this group has no votes, so just sort the noVotes array
+              // console.log("group name: ", groups[5]);
+              // console.log("final: ", pickedSelections, remainingSelections);
+              return {
+                name: group,
+                selectedSelections: noVotes.filter(
+                  selection => selection.isSelected
+                ),
+                notSelectedSelections: noVotes.filter(
+                  selection => !selection.isSelected
+                ),
+              };
+          }
+        })
+      : [];
 
   const selectedSelections = selections.filter(
     selection => selection.isSelected
@@ -195,19 +292,6 @@ const Selections = ({ showModal, handleSelection }) => {
 
   return (
     <div className={classes.Selections}>
-      <div className={classes.Toolbar}>
-        <SearchBar search={search} setSearch={setSearch} />
-        <div>
-          <Button onClick={() => setTieredView(true)} style={buttonStyles}>
-            <AlignHorizontalLeftIcon
-              style={{ marginRight: "1rem", transform: "rotateX(180deg)" }}
-            />
-          </Button>
-          <Button onClick={() => setTieredView(false)} style={buttonStyles}>
-            <ViewModuleIcon />
-          </Button>
-        </div>
-      </div>
       {selections.length === 0 ? (
         <GlobalLoader />
       ) : !tieredView ? (
@@ -216,18 +300,26 @@ const Selections = ({ showModal, handleSelection }) => {
             className={classes.Selection}
             key={selection.id}
             onClick={() => handleSelection(selection.id)}
+            style={{ flexGrow: 1 }}
           >
             <Selection selectionData={selection} showModal={showModal} />
           </div>
         ))
       ) : (
         <div>
-          {groups.map(group => {
+          {groups.map((group, index) => {
             const currentGroup = groupedSelections.find(g => g.name === group);
 
             return (
-              <div key={group} className={classes.Group}>
-                <h2 className={classes.GroupTitle}>{group}</h2>
+              <div
+                key={group}
+                className={classes.Group}
+                style={{
+                  marginBottom: index === groups.length - 1 ? 0 : "2rem",
+                }}
+              >
+                <h3 className={classes.GroupTitle}>{group}</h3>
+                <div className={classes.Divider}></div>
                 <div className={classes.GroupSelections}>
                   {currentGroup.selections.map(selection => (
                     <div

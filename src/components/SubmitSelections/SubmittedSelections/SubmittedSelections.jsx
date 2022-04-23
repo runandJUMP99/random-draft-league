@@ -1,4 +1,3 @@
-import React from "react";
 import { useSelector } from "react-redux";
 
 import AddSelection from "../../AddSelection/AddSelection";
@@ -21,10 +20,6 @@ const SubmittedSelections = ({
   );
   const notSelectedSelections = filteredSubmittedSelections.filter(
     selection => !selection.isSelected
-  );
-  const isAdmin = useSelector(
-    // state => state.auth.userId === process.env.REACT_APP_FIREBASE_UID1
-    state => state.auth.userId === process.env.REACT_APP_FIREBASE_UID2
   );
   const token = useSelector(state => state.auth.token);
   let count = 0;
@@ -53,11 +48,10 @@ const SubmittedSelections = ({
       );
     } else {
       setModalContent(
-        <SubmittedSelection
-          count={count}
-          onClick={handleClick}
-          selection={selectedSubmission}
-        />
+        <div>
+          <h4>{selectedSubmission.name}</h4>
+          <p>-{selectedSubmission.from}</p>
+        </div>
       );
     }
 

@@ -1,25 +1,34 @@
+.SubmittedSelectionContainer {
+  margin: 1rem auto;
+  position: relative;
+  transition: all 0.25s ease-out;
+}
+
 .SubmittedSelection {
   box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.3);
   cursor: pointer;
   font-weight: bold;
   height: 14rem;
-  margin: 1rem auto;
   width: 300px;
   overflow: hidden;
   padding: 0.25rem;
-  position: relative;
   transition: all 0.25s ease-out;
 }
 
 .SubmittedSelection:hover {
   box-shadow: 1px 1px 4px 2px rgba(0, 0, 0, 0.5);
-  transform: rotate(0deg) scale(1.25) !important;
   z-index: 5;
 }
 
 .SubmittedSelection p {
   margin-bottom: 0.25rem;
   word-wrap: break-word;
+}
+
+.Close {
+  position: absolute;
+  right: 0;
+  top: 0;
 }
 
 .From {
@@ -32,17 +41,38 @@
   font-size: 1.1rem;
 }
 
+.Time {
+  bottom: 0.25rem;
+  left: 0.5rem;
+  opacity: 0;
+  position: absolute;
+  transition: opacity 0.25s ease-out;
+}
+
 .VoteContainer {
   bottom: 0.5rem;
   display: flex;
   position: absolute;
   right: 0.5rem;
+  transition: opacity 0.25s ease-out;
 }
 
-.Time {
-  bottom: 0.25rem;
+.Delete {
+  background: rgba(0, 0, 0, 0.125);
+  border: none;
+  padding: 0.125rem;
   position: absolute;
-  opacity: 0;
-  transition: opacity 0.25s ease-out;
-  left: 0.5rem;
+  right: 0;
+  top: 0;
+  transition: all 0.25s ease-out;
+  z-index: 5;
+}
+
+.Delete:hover {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.HiddenMessage {
+  opacity: 0.2;
+  font-size: 1.5rem;
 }

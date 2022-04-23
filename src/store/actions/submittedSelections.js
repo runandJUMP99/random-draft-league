@@ -49,7 +49,10 @@ export const editSubmittedSelection =
     try {
       const { data } = await api.editSubmittedSelection(id, selection, token);
 
-      dispatch({ type: actionTypes.EDIT_SUBMITTED_SELECTION, payload: data });
+      dispatch({
+        type: actionTypes.EDIT_SUBMITTED_SELECTION,
+        payload: { id, data },
+      });
     } catch (err) {
       console.log(err);
     }

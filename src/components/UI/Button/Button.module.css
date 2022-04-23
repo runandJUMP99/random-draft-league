@@ -1,11 +1,13 @@
 .Button {
-  background: #020264;
+  align-items: center;
+  background: #0606d3;
   border: none;
   border-radius: 50%;
   bottom: 0.5rem;
   color: white;
   cursor: pointer;
-  display: inline-block;
+  display: flex;
+  justify-content: center;
   margin: auto;
   padding: 0.5rem;
   position: absolute;
@@ -13,5 +15,9 @@
 }
 
 .Button:hover {
-  box-shadow: 0 0 8px 4px rgba(0, 0, 0, 0.5) inset;
+  box-shadow: 0 0 8px 4px rgba(0, 0, 0, 0.3) inset;
+}
+
+.Button svg {
+  padding: 0;
 }

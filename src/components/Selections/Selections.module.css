@@ -2,13 +2,28 @@
   align-items: stretch;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: stretch;
   position: relative;
-  text-align: center;
 }
 
-.Toolbar {
-  align-items: center;
+.Group {
+  padding: 1rem;
+  text-align: left;
+}
+
+.GroupTitle {
+  color: #575757;
+  margin-bottom: 0sm;
+}
+
+.GroupSelections {
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.Divider {
+  background: linear-gradient(45deg, #575757, rgba(255, 255, 255, 0));
+  height: 1rem;
+  margin-bottom: 1rem;
+  width: 100%;
 }
