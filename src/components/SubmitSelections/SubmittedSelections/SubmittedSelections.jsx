@@ -21,7 +21,10 @@ const SubmittedSelections = ({
   const notSelectedSelections = filteredSubmittedSelections.filter(
     selection => !selection.isSelected
   );
-  const token = useSelector(state => state.auth.token);
+  const isAdmin = useSelector(
+    state => state.auth.userId === process.env.REACT_APP_FIREBASE_UID1,
+    state => state.auth.userId === process.env.REACT_APP_FIREBASE_UID2
+  );
   let count = 0;
 
   selectedSelections.sort((a, b) => {
@@ -38,8 +41,12 @@ const SubmittedSelections = ({
     const selectedSubmission = submittedSelections.find(
       selection => selection.id === id
     );
+    const width =
+      window.innerWidth ||
+      document.documentElement.clientWidth ||
+      document.body.clientWidth;
 
-    if (!selectedSubmission.isSelected && token) {
+    if (!selectedSubmission.isSelected && isAdmin) {
       setModalContent(
         <AddSelection
           setShowModal={setShowModal}
@@ -55,7 +62,9 @@ const SubmittedSelections = ({
       );
     }
 
-    setShowModal(true);
+    if (width > 800 || isAdmin) {
+      setShowModal(true);
+    }
   }
 
   return (
