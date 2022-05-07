@@ -34,11 +34,11 @@ const Selections = ({ handleSelection, search, showModal, tieredView }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (initialFetch) {
+    if (initialFetch && selections.length === 0) {
       setInitialFetch(false);
       dispatch(getSelections(token));
     }
-  }, [dispatch, initialFetch, token]);
+  }, [dispatch, initialFetch, selections, token]);
   const noVotes = [];
   const voted = [];
   selections.forEach(selection => {

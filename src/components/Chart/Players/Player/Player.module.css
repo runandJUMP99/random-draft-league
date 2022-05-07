@@ -1,36 +1,35 @@
 .Container {
-    cursor: pointer;
-    position: relative;
+  cursor: pointer;
+  position: relative;
 }
 
 .Player {
-    background: #7e7e7e;
-    border: 1px solid black;
-    height: 150px;
-    margin: 0.25rem 0;
-    overflow: hidden;
-    transition: all 0.25s ease-out;
+  background: #7e7e7e;
+  border: 1px solid black;
+  height: 150px;
+  overflow: hidden;
+  transition: all 0.25s ease-out;
 }
 
 .Player:hover {
-    background: #979797;
+  background: #979797;
 }
 
 .Player img {
-    border: 2px solid #eee;
-    border-radius: 50%;
-    box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.5);
-    float: left;
-    height: 4.5rem;
-    margin: 0.25rem;
-    object-fit: cover;
-    width: 4.5rem;
+  border: 2px solid #eee;
+  border-radius: 50%;
+  box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.5);
+  float: left;
+  height: 4.5rem;
+  margin: 0.25rem;
+  object-fit: cover;
+  width: 4.5rem;
 }
 
 .Player h4 {
-    font-family: 'Play', sans-serif;
-    font-size: 1.2rem;
-    font-weight: normal;
-    padding-left: 0.25rem;
-    word-break: break-word;
+  font-family: "Play", sans-serif;
+  font-size: 1.2rem;
+  font-weight: normal;
+  padding-left: 0.25rem;
+  word-break: break-word;
 }
