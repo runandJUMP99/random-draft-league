@@ -49,7 +49,6 @@ const Selections = ({ handleSelection, search, showModal, tieredView }) => {
     }
   });
   voted.sort((a, b) => b.netLikes - a.netLikes);
-  console.log(voted, noVotes, selections);
 
   let remainingSelections = [...voted];
   let groupedSelections =
