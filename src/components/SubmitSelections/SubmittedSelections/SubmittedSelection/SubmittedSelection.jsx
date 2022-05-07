@@ -25,12 +25,11 @@ const SubmittedSelection = ({ count, onClick, selection, styles }) => {
   const [isDeleted, setIsDeleted] = useState(false);
   const [isOver, setIsOver] = useState(false);
   const [showControls, setShowControls] = useState(false);
-  const isAdmin = useSelector(
-    state => state.auth.userId === process.env.REACT_APP_FIREBASE_UID1,
-    state => state.auth.userId === process.env.REACT_APP_FIREBASE_UID2
-  );
   const token = useSelector(state => state.auth.token);
   const userId = useSelector(state => state.auth.userId);
+  const isAdmin =
+    userId === process.env.REACT_APP_FIREBASE_UID1 ||
+    userId === process.env.REACT_APP_FIREBASE_UID2;
   const dispatch = useDispatch();
 
   function handleClick() {
@@ -38,16 +37,12 @@ const SubmittedSelection = ({ count, onClick, selection, styles }) => {
   }
 
   function handleMouseEnter() {
-    if (isAdmin) {
-      setShowControls(true);
-    }
+    setShowControls(true);
     setIsOver(true);
   }
 
   function handleMouseLeave() {
-    if (isAdmin) {
-      setShowControls(false);
-    }
+    setShowControls(false);
     setIsOver(false);
   }
 

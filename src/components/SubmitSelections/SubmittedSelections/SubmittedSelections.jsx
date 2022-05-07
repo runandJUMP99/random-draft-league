@@ -21,10 +21,10 @@ const SubmittedSelections = ({
   const notSelectedSelections = filteredSubmittedSelections.filter(
     selection => !selection.isSelected
   );
-  const isAdmin = useSelector(
-    state => state.auth.userId === process.env.REACT_APP_FIREBASE_UID1,
-    state => state.auth.userId === process.env.REACT_APP_FIREBASE_UID2
-  );
+  const userId = useSelector(state => state.auth.userId);
+  const isAdmin =
+    userId === process.env.REACT_APP_FIREBASE_UID1 ||
+    userId === process.env.REACT_APP_FIREBASE_UID2;
   let count = 0;
 
   selectedSelections.sort((a, b) => {

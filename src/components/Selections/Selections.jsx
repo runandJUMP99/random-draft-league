@@ -48,8 +48,8 @@ const Selections = ({ handleSelection, search, showModal, tieredView }) => {
       voted.push(selection);
     }
   });
-
   voted.sort((a, b) => b.netLikes - a.netLikes);
+  console.log(voted, noVotes, selections);
 
   let remainingSelections = [...voted];
   let groupedSelections =
@@ -89,6 +89,7 @@ const Selections = ({ handleSelection, search, showModal, tieredView }) => {
                 // pickedSelections,
                 // remainingSelections
                 // );
+                pickedSelections = [];
               }
               // console.log("final: ", pickedSelections, remainingSelections);
               return {
@@ -160,7 +161,14 @@ const Selections = ({ handleSelection, search, showModal, tieredView }) => {
                 }
               }
 
-              pickedSelections = remainingSelections.splice(startIndex, count);
+              if (count > 0) {
+                pickedSelections = remainingSelections.splice(
+                  startIndex,
+                  count
+                );
+              } else {
+                pickedSelections = [];
+              }
               // console.log("final: ", pickedSelections, ...remainingSelections);
               return {
                 name: group,
@@ -199,7 +207,7 @@ const Selections = ({ handleSelection, search, showModal, tieredView }) => {
             case groups[4]:
               // this group goes 2nd
               // move the selections from the end that have 10 or less votes
-              // console.log(("group name: ", groups[4]));
+              // console.log("group name: ", groups[4]);
               totalRemaining = remainingSelections.length;
               count = 0;
 
@@ -217,9 +225,14 @@ const Selections = ({ handleSelection, search, showModal, tieredView }) => {
                   count++;
                 }
               }
-              pickedSelections = remainingSelections.splice(
-                remainingSelections.length - count - 1
-              );
+
+              if (count > 0) {
+                pickedSelections = remainingSelections.splice(
+                  remainingSelections.length - count - 1
+                );
+              } else {
+                pickedSelections = [];
+              }
               // console.log("final: ", pickedSelections, ...remainingSelections);
               return {
                 name: group,
@@ -310,6 +323,13 @@ const Selections = ({ handleSelection, search, showModal, tieredView }) => {
           {groups.map((group, index) => {
             const currentGroup = groupedSelections.find(g => g.name === group);
 
+            if (!currentGroup) {
+              return (
+                <h3 className={classes.GroupTitle}>
+                  <em>Nothing to see here...</em>
+                </h3>
+              );
+            }
             return (
               <div
                 key={group}
