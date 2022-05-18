@@ -1,0 +1,31 @@
+.SearchBar {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.SearchBar label {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  margin: 0;
+}
+
+.SearchBar svg {
+  padding: 0;
+}
+
+.SearchBar input {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  outline: none;
+  padding: 0.25rem;
+  transition: background 0.25s linear;
+}
+
+.SearchBar input:focus {
+  background: #ccc;
+}

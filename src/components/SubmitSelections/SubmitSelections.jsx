@@ -7,7 +7,7 @@ import Footer from "./Footer/Footer";
 import Header from "./Header/Header";
 import Modal from "../UI/Modal/Modal";
 import Over18Message from "./Over18Message/Over18Message";
-import SearchBar from "../UI/SeachBar/SearchBar";
+import SearchBar from "../UI/SearchBar/SearchBar";
 import SubmittedSelections from "./SubmittedSelections/SubmittedSelections";
 
 import classes from "./SubmitSelections.module.css";
@@ -16,6 +16,7 @@ import { getSubmittedSelections } from "../../store/actions/submittedSelections"
 const SubmitSelections = () => {
   const [clickable, setClickable] = useState(false);
   const [darkMode, setDarkMode] = useState(true);
+  const [initialFetch, setInitialFetch] = useState(true);
   const [modalContent, setModalContent] = useState(null);
   const [over18Clicked, setOver18Clicked] = useState(false);
   const [search, setSearch] = useState("");
@@ -25,8 +26,9 @@ const SubmitSelections = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (submittedSelections.length === 0) {
+    if (initialFetch) {
       dispatch(getSubmittedSelections());
+      setInitialFetch(false);
     }
 
     // modal to notify users that website is for users 18 and up
@@ -40,6 +42,7 @@ const SubmitSelections = () => {
     }
   }, [
     dispatch,
+    initialFetch,
     over18Clicked,
     setModalContent,
     setShowModal,

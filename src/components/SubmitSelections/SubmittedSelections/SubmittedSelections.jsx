@@ -1,4 +1,3 @@
-import React from "react";
 import { useSelector } from "react-redux";
 
 import AddSelection from "../../AddSelection/AddSelection";
@@ -12,6 +11,7 @@ const SubmittedSelections = ({
   setShowModal,
   submittedSelections,
 }) => {
+  // filter out any blank submissions
   const filteredSubmittedSelections = submittedSelections.filter(
     selection => selection.name
   );
@@ -21,7 +21,10 @@ const SubmittedSelections = ({
   const notSelectedSelections = filteredSubmittedSelections.filter(
     selection => !selection.isSelected
   );
-  const token = useSelector(state => state.auth.token);
+  const userId = useSelector(state => state.auth.userId);
+  const isAdmin =
+    userId === process.env.REACT_APP_FIREBASE_UID1 ||
+    userId === process.env.REACT_APP_FIREBASE_UID2;
   let count = 0;
 
   selectedSelections.sort((a, b) => {
@@ -35,18 +38,31 @@ const SubmittedSelections = ({
   submittedSelections = notSelectedSelections.concat(selectedSelections);
 
   function handleClick(id) {
-    const selectedSubmission = submittedSelections.filter(
+    const selectedSubmission = submittedSelections.find(
       selection => selection.id === id
     );
+    const width =
+      window.innerWidth ||
+      document.documentElement.clientWidth ||
+      document.body.clientWidth;
 
-    if (!selectedSubmission[0].isSelected && token) {
+    if (!selectedSubmission.isSelected && isAdmin) {
       setModalContent(
         <AddSelection
           setShowModal={setShowModal}
-          submittedSelection={selectedSubmission[0]}
+          submittedSelection={selectedSubmission}
         />
       );
+    } else {
+      setModalContent(
+        <div>
+          <h4>{selectedSubmission.name}</h4>
+          <p>-{selectedSubmission.from}</p>
+        </div>
+      );
+    }
 
+    if (width > 800 || isAdmin) {
       setShowModal(true);
     }
   }
@@ -62,12 +78,8 @@ const SubmittedSelections = ({
             <SubmittedSelection
               key={submittedSelection.id}
               count={count}
-              from={submittedSelection.from}
-              id={submittedSelection.id}
-              isSelected={submittedSelection.isSelected}
-              name={submittedSelection.name}
               onClick={handleClick}
-              time={submittedSelection.time}
+              selection={submittedSelection}
             />
           );
         })

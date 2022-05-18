@@ -1,150 +1,158 @@
 import * as actionTypes from "../actions/actionTypes";
 import * as api from "./api";
-import {editSubmittedSelection} from "../actions/submittedSelections";
-import {updateUsers} from "../actions/users";
+import { editSubmittedSelection } from "../actions/submittedSelections";
+import { updateUsers } from "../actions/users";
 
-export const addSelection = (selection, token, submittedSelection) => async(dispatch) => {
+export const addSelection =
+  (selection, token, submittedSelection) => async dispatch => {
     try {
-        const {data} = await api.addSelection(selection, token);
+      const { data } = await api.addSelection(selection, token);
 
-        const newSelection = {
-            ...selection,
-            id: data.name,
-            isSelected: false
+      const newSelection = {
+        ...selection,
+        id: data.name,
+        isSelected: false,
+      };
+
+      submittedSelection = {
+        //add new draft selection ID to submitted selection to clear selection off of board if user deletes before draft
+        ...submittedSelection,
+        draftId: newSelection.id,
+      };
+
+      dispatch(
+        editSubmittedSelection(submittedSelection.id, submittedSelection, token)
+      );
+      dispatch({ type: actionTypes.ADD_SELECTION, payload: newSelection });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+export const getSelections = token => async dispatch => {
+  try {
+    const fetchedSelections = [];
+    const { data } = await api.getSelections(token);
+
+    for (let key in data) {
+      fetchedSelections.push({
+        ...data[key],
+        id: key,
+      });
+    }
+    dispatch({ type: actionTypes.GET_SELECTIONS, payload: fetchedSelections });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const editSelection = (id, selection, token) => async dispatch => {
+  try {
+    const { data } = await api.editSelection(id, selection, token);
+
+    dispatch({ type: actionTypes.EDIT_SELECTION, payload: data });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const deleteSelection = (id, token) => dispatch => {
+  try {
+    api.deleteSelection(id, token);
+
+    dispatch({ type: actionTypes.DELETE_SELECTION, payload: id });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const deleteSelections = (selections, token, users) => dispatch => {
+  try {
+    const updatedUsers = {};
+
+    selections.forEach(selection => {
+      if (selection.isSelected && !selection.honorableMention) {
+        const currentUser = users.find(
+          user => user.userId === selection.userId
+        );
+
+        if (currentUser) {
+          updatedUsers[selection.userId] = {
+            ...currentUser,
+            pickTotal: currentUser.pickTotal + 1,
+          };
+          currentUser.pickTotal++;
         }
+      }
 
-        submittedSelection = { //add new draft selection ID to submitted selection to clear selection off of board if user deletes before draft
-            ...submittedSelection,
-            draftId: newSelection.id
+      api.deleteSelection(selection.id, token);
+    });
+
+    users.forEach(user => {
+      if (updatedUsers.hasOwnProperty(user.userId)) {
+        updatedUsers[user.userId] = {
+          ...updatedUsers[user.userId],
+          pickStreak: updatedUsers[user.userId].pickStreak + 1,
         };
+      } else {
+        updatedUsers[user.userId] = {
+          ...user,
+          pickStreak: 0,
+        };
+      }
+    });
 
-        dispatch(editSubmittedSelection(submittedSelection.id, submittedSelection, token));
-        dispatch({type: actionTypes.ADD_SELECTION, payload: newSelection});
-    } catch(err) {
-        console.log(err);
-    }
+    dispatch(updateUsers(updatedUsers, token));
+    dispatch({ type: actionTypes.DELETE_SELECTIONS });
+  } catch (err) {
+    console.log(err);
+  }
 };
 
-export const getSelections = (token) => async(dispatch) => {
-    try {
-        const fetchedSelections = [];
-        const {data} = await api.getSelections(token);
-
-        for (let key in data) {
-            fetchedSelections.push({
-                ...data[key],
-                id: key
-            });
-        }
-        
-        dispatch({type: actionTypes.GET_SELECTIONS, payload: fetchedSelections});
-    } catch(err) {
-        console.log(err);
-    }
+export const setSelectionId = id => dispatch => {
+  try {
+    dispatch({ type: actionTypes.SET_SELECTION_ID, payload: id });
+  } catch (err) {
+    console.log(err);
+  }
 };
 
-export const editSelection = (id, selection, token) => async(dispatch) => {
-    try {
-        const {data} = await api.editSelection(id, selection, token);
+export const getSelectionSubject = () => async dispatch => {
+  try {
+    const { data } = await api.getSelectionSubject();
+    let subject;
 
-        dispatch({type: actionTypes.EDIT_SELECTION, payload: data});
-    } catch(err) {
-        console.log(err);
+    for (let key in data) {
+      subject = {
+        ...data[key],
+        id: key,
+      };
     }
+
+    dispatch({ type: actionTypes.SET_SELECTION_SUBJECT, payload: subject });
+  } catch (err) {
+    console.log(err);
+  }
 };
 
-export const deleteSelection = (id, token) => (dispatch) => {
-    try {
-        api.deleteSelection(id, token);
+export const setSelectionSubject = (id, subject, token) => async dispatch => {
+  try {
+    let response;
 
-        dispatch({type: actionTypes.DELETE_SELECTION, payload: id});
-    } catch(err) {
-        console.log(err);
+    if (id) {
+      const { data } = await api.setSelectionSubject(id, subject, token);
+      response = data;
+    } else {
+      const { data } = await api.addSelectionSubject(subject, token);
+
+      response = {
+        ...subject,
+        id: data.name,
+      };
     }
-};
 
-export const deleteSelections = (selections, token, users) => (dispatch) => {
-    try {
-        const updatedUsers = {};
-        
-        selections.forEach(selection => {
-            if (selection.isSelected && !selection.honorableMention) {
-                const currentUser = users.find(user => user.userId === selection.userId);
-
-                if (currentUser) {
-                    updatedUsers[selection.userId] = {...currentUser, pickTotal: currentUser.pickTotal + 1};
-                    currentUser.pickTotal++;
-                }
-            }
-
-            api.deleteSelection(selection.id, token);
-        });
-        
-        users.forEach(user => {
-            if (updatedUsers.hasOwnProperty(user.userId)) {
-                updatedUsers[user.userId] = {
-                    ...updatedUsers[user.userId],
-                    pickStreak: updatedUsers[user.userId].pickStreak + 1
-                };
-            } else {
-                updatedUsers[user.userId] = {
-                    ...user,
-                    pickStreak: 0
-                };
-            }
-        });
-
-        dispatch(updateUsers(updatedUsers, token));
-        dispatch({type: actionTypes.DELETE_SELECTIONS});
-    } catch(err) {
-        console.log(err);
-    }
-};
-
-export const setSelectionId = (id) => (dispatch) => {
-    try {
-        dispatch({type: actionTypes.SET_SELECTION_ID, payload: id});
-    } catch(err) {
-        console.log(err);
-    }
-}
-
-export const getSelectionSubject = () => async(dispatch) => {
-    try {
-        const {data} = await api.getSelectionSubject();
-        let subject;
-
-        for (let key in data) {
-            subject = {
-                ...data[key],
-                id: key
-            };
-        }
-
-        dispatch({type: actionTypes.SET_SELECTION_SUBJECT, payload: subject});
-    } catch(err) {
-        console.log(err);
-    }
-};
-
-export const setSelectionSubject = (id, subject, token) => async(dispatch) => {
-    try {
-        let response;
-        
-        if (id) {   
-            const {data} = await api.setSelectionSubject(id, subject, token);
-            response = data;
-        } else {  
-            const {data} = await api.addSelectionSubject(subject, token);
-
-            response = {
-                ...subject,
-                id: data.name
-            };
-        }
-
-        dispatch({type: actionTypes.SET_SELECTION_SUBJECT, payload: response});
-    } catch(err) {
-        console.log(err);
-    }
+    dispatch({ type: actionTypes.SET_SELECTION_SUBJECT, payload: response });
+  } catch (err) {
+    console.log(err);
+  }
 };
