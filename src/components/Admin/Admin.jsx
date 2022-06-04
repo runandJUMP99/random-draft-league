@@ -10,7 +10,7 @@ import { getUsers } from "../../store/actions/users";
 const Admin = () => {
   const [search, setSearch] = useState("");
   const token = useSelector(state => state.auth.token);
-  let users = useSelector(state => state.users);
+  let users = useSelector(state => state.users).filter(user => !!user.name);
   const order =
     users.sort((a, b) => b.order - a.order).slice(0, 1)[0].order + 1; //sorts users by their order number then slices highest user, targets 'order' then add 1 to assign the next order for franchises
   const dispatch = useDispatch();
